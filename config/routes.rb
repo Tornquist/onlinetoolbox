@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  resources :student_instruments
+
+  resources :ensembles
+
+  resources :fields
+
+  resources :instruments
+
   resources :students
 
   devise_for :users

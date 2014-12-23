@@ -11,7 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223190708) do
+ActiveRecord::Schema.define(version: 20141223192348) do
+
+  create_table "ensembles", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fields", force: true do |t|
+    t.string   "name"
+    t.integer  "index"
+    t.integer  "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "instruments", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "student_instruments", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "instrument_id"
+    t.integer  "ensemble_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "students", force: true do |t|
     t.string   "first_name"

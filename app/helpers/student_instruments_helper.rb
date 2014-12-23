@@ -1,0 +1,2 @@
+module StudentInstrumentsHelper
+end

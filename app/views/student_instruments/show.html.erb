@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @student_instrument.student_id %>
+</p>
+
+<p>
+  <strong>Instrument:</strong>
+  <%= @student_instrument.instrument_id %>
+</p>
+
+<p>
+  <strong>Ensemble:</strong>
+  <%= @student_instrument.ensemble_id %>
+</p>
+
+<%= link_to 'Edit', edit_student_instrument_path(@student_instrument) %> |
+<%= link_to 'Back', student_instruments_path %>
