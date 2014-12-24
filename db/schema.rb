@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223192348) do
+ActiveRecord::Schema.define(version: 20141224001512) do
+
+  create_table "addresses", force: true do |t|
+    t.integer  "student_id"
+    t.integer  "field_id"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.integer  "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "ensembles", force: true do |t|
     t.string   "name"
@@ -29,6 +41,13 @@ ActiveRecord::Schema.define(version: 20141223192348) do
 
   create_table "instruments", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "states", force: true do |t|
+    t.string   "name"
+    t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

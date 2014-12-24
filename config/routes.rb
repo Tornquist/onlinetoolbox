@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :states
+
+  resources :addresses
+
   resources :student_instruments
 
   resources :ensembles
