@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :texts
-
   resources :fields
+
+  resources :options
+
+  resources :texts
 
   resources :states
 

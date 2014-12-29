@@ -4,8 +4,12 @@ one:
   name: MyString
   index: 1
   group: 1
+  description: MyString
+  options: MyString
 
 two:
   name: MyString
   index: 1
   group: 1
+  description: MyString
+  options: MyString

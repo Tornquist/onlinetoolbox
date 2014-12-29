@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @option.student_id %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @option.field_id %>
+</p>
+
+<p>
+  <strong>Choice:</strong>
+  <%= @option.choice %>
+</p>
+
+<%= link_to 'Edit', edit_option_path(@option) %> |
+<%= link_to 'Back', options_path %>

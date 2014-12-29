@@ -6,6 +6,8 @@
       <th>Name</th>
       <th>Index</th>
       <th>Group</th>
+      <th>Description</th>
+      <th>Options</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +18,8 @@
         <td><%= field.name %></td>
         <td><%= field.index %></td>
         <td><%= field.group %></td>
+        <td><%= field.description %></td>
+        <td><%= field.options %></td>
         <td><%= link_to 'Show', field %></td>
         <td><%= link_to 'Edit', edit_field_path(field) %></td>
         <td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>

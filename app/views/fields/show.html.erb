@@ -15,5 +15,15 @@
   <%= @field.group %>
 </p>
 
+<p>
+  <strong>Description:</strong>
+  <%= @field.description %>
+</p>
+
+<p>
+  <strong>Options:</strong>
+  <%= @field.options %>
+</p>
+
 <%= link_to 'Edit', edit_field_path(@field) %> |
 <%= link_to 'Back', fields_path %>
