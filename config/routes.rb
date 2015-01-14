@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "static#index" 
 
+  get 'student_information/new' => 'student_information#new'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with 'rake routes'.
 

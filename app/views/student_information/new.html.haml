@@ -1,0 +1,19 @@
+= form_tag do
+  %div.field
+    = label_tag :first_name
+    = text_field_tag :first_name
+  %div.field
+    = label_tag :last_name
+    = text_field_tag :last_name
+  %div.field
+    = label_tag :email
+    = text_field_tag :email
+  %div.field
+    = label_tag :recruit
+    = check_box_tag :recruit
+  - Field.order(:index).each do |field|
+    %br
+    =field.name
+
+  %div.actions
+    = submit_tag
