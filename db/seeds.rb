@@ -1,4 +1,5 @@
 #Instrument Choices
+Instrument.create(name: "Unknown")
 Instrument.create(name: "Alto Sax")
 Instrument.create(name: "Baritone")
 Instrument.create(name: "Baritone Sax")
