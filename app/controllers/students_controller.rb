@@ -77,6 +77,8 @@ class StudentsController < ApplicationController
                                       student_instruments_attributes:
                                         [:student_id,
                                          :ensemble_id,
-                                         :instrument_id])
+                                         :instrument_id,
+                                         :id,
+                                         :_destroy])
     end
 end
