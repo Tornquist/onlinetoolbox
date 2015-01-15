@@ -15,6 +15,7 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    1.times { @student.student_instruments.build }
   end
 
   # GET /students/1/edit
@@ -69,6 +70,13 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :email, :recruit)
+      params.require(:student).permit(:first_name,
+                                      :last_name,
+                                      :email,
+                                      :recruit,
+                                      student_instruments_attributes:
+                                        [:student_id,
+                                         :ensemble_id,
+                                         :instrument_id])
     end
 end

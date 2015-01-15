@@ -5,6 +5,9 @@ class Student < ActiveRecord::Base
   has_many :addresses
   has_many :texts
   has_many :options
+
+  accepts_nested_attributes_for :student_instruments
+
   def fields
     (addresses + texts + options).map { |o| o.field }
   end

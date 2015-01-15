@@ -27,6 +27,19 @@
     <%= f.label :recruit %><br>
     <%= f.check_box :recruit %>
   </div>
+
+
+  <%= f.fields_for :student_instruments do |builder| %>
+    <div class="field">
+      <%= builder.label :instrument_id %>
+      <%= builder.collection_select(:instrument_id, Instrument.all, :id, :name)  %>
+
+      <%= builder.label :ensemble_id %>
+      <%= builder.collection_select(:ensemble_id, Ensemble.all, :id, :name) %>
+    </div>
+  <% end %>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>
