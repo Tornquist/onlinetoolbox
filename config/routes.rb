@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :fields
 
+  resources :groups
+
   resources :options
 
   resources :texts
