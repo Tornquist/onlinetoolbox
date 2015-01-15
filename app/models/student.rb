@@ -15,11 +15,11 @@ class Student < ActiveRecord::Base
   def field(i)
     f = Field.find(i)
     case f.group
-    when 1 #Addresses Table
+    when Group.where(name: "Address").first
       return addresses.where(field_id: i).first
-    when 2 #Text Table
+    when Group.where(name: "Text").first
       return texts.where(field_id: i).first
-    when 3 #Options Table
+    when Group.where(name: "Options").first
       return options.where(field_id: i).first
     end
   end

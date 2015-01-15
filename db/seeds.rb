@@ -35,6 +35,7 @@ Instrument.create(name: "Viola")
 Instrument.create(name: "Violin")
 
 #Ensemble Choices
+Ensemble.create(name: "Unknown")
 Ensemble.create(name: "AAMB")
 Ensemble.create(name: "Big Ten Flags")
 Ensemble.create(name: "Concert")
@@ -44,6 +45,11 @@ Ensemble.create(name: "Jazz")
 Ensemble.create(name: "Orchestra")
 Ensemble.create(name: "Percussion")
 Ensemble.create(name: "Twirlers")
+
+#Field Types
+Group.create(name: "Address")
+Group.create(name: "Text")
+Group.create(name: "Options")
 
 #States
 #

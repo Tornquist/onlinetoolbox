@@ -36,6 +36,17 @@
     <%= link_to_add_association 'add instrument', f, :student_instruments %>
   </div>
 
+  <% Field.order(:index).each do |field| %>
+    <% case field.group %>
+    <% when Group.where(name: "Address").first %>
+      ADDRESS
+    <% when Group.where(name: "Text").first %>
+      TEXT
+    <% when Group.where(name: "Options").first %>
+      OPTIONS
+    <% end %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

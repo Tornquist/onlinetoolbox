@@ -1,4 +1,4 @@
 class Field < ActiveRecord::Base
   serialize :options
-  has_one :group
+  belongs_to :group
 end
