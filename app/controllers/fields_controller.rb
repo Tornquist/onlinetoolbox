@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.all
+    @fields = Field.order(:index)
   end
 
   # GET /fields/1

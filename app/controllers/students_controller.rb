@@ -16,6 +16,9 @@ class StudentsController < ApplicationController
   def new
     @student = Student.new
     1.times { @student.student_instruments.build }
+    Field.where(group_id: Group.where(name: "Text").first).each do |f|
+      @student.texts.build(field_id: f.id)
+    end
   end
 
   # GET /students/1/edit
@@ -79,6 +82,12 @@ class StudentsController < ApplicationController
                                          :ensemble_id,
                                          :instrument_id,
                                          :id,
-                                         :_destroy])
+                                         :_destroy],
+                                     texts_attributes:
+                                        [:student_id,
+                                         :field_id,
+                                         :id,
+                                         :content]
+                                     )
     end
 end

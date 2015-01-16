@@ -39,11 +39,19 @@
   <% Field.order(:index).each do |field| %>
     <% case field.group %>
     <% when Group.where(name: "Address").first %>
-      ADDRESS
+      ADDRESS</br>
     <% when Group.where(name: "Text").first %>
-      TEXT
+      <%= f.fields_for :texts do |builder| %>
+        <% if builder.object.field_id == field.id %>
+          <%=field.name%></br>
+          <div class="field">
+            <%= builder.hidden_field :field_id, :value => field.id %>
+            <%= builder.text_field :content %>
+          </div>
+        <% end %>
+      <% end %>
     <% when Group.where(name: "Options").first %>
-      OPTIONS
+      OPTIONS</br>
     <% end %>
   <% end %>
 
