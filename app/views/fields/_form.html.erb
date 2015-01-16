@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :group_id %><br>
-    <%= f.number_field :group_id %>
+    <%= f.collection_select(:group_id, Group.all, :id, :name) %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
@@ -30,6 +30,10 @@
   <div class="field">
     <%= f.label :options %><br>
     <%= f.text_field :options %>
+  </div>
+  <div class="field">
+    <%= f.label :hidden %><br>
+    <%= f.check_box :hidden %>
   </div>
   <div class="actions">
     <%= f.submit %>

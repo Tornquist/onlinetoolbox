@@ -5,6 +5,7 @@ class CreateStudents < ActiveRecord::Migration
       t.string :last_name
       t.string :email
       t.boolean :recruit, default: true
+      t.boolean :archive, default: false
 
       t.timestamps
     end

@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.order(:index)
+    @fields = Field.all
   end
 
   # GET /fields/1
@@ -69,6 +69,6 @@ class FieldsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
-      params.require(:field).permit(:name, :index, :group_id, :description, :options)
+      params.require(:field).permit(:name, :index, :group_id, :description, :options, :hidden)
     end
 end

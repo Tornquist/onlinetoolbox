@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150115044026) do
+ActiveRecord::Schema.define(version: 20150116204916) do
 
   create_table "addresses", force: true do |t|
     t.integer  "student_id"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20150115044026) do
     t.integer  "group_id"
     t.string   "description"
     t.string   "options"
+    t.boolean  "hidden"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 20150115044026) do
     t.string   "last_name"
     t.string   "email"
     t.boolean  "recruit",    default: true
+    t.boolean  "archive",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -19,6 +19,9 @@ class StudentsController < ApplicationController
     Field.where(group_id: Group.where(name: "Text").first).each do |f|
       @student.texts.build(field_id: f.id)
     end
+    Field.where(group_id: Group.where(name: "Address").first).each do |f|
+      @student.addresses.build(field_id: f.id)
+    end
   end
 
   # GET /students/1/edit
@@ -26,6 +29,11 @@ class StudentsController < ApplicationController
     Field.where(group_id: Group.where(name: "Text").first).each do |f|
       if !@student.fields.include?(f)
         @student.texts.build(field_id: f.id)
+      end
+    end
+    Field.where(group_id: Group.where(name: "Address").first).each do |f|
+      if !@student.fields.include?(f)
+        @student.addresses.build(field_id: f.id)
       end
     end
   end

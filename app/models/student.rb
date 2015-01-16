@@ -8,6 +8,7 @@ class Student < ActiveRecord::Base
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }
+  accepts_nested_attributes_for :addresses
 
   def fields
     (addresses + texts + options).map { |o| o.field }

@@ -55,6 +55,10 @@ Group.create(name: "Options")
 #
 State.create([
   {
+    name: "",
+    abbreviation: ""
+  },
+  {
     name: "Alabama",
     abbreviation: "AL"
   },

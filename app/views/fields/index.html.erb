@@ -8,6 +8,7 @@
       <th>Group</th>
       <th>Description</th>
       <th>Options</th>
+      <th>Hidden</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= field.group_id %></td>
         <td><%= field.description %></td>
         <td><%= field.options %></td>
+        <td><%= field.hidden %></td>
         <td><%= link_to 'Show', field %></td>
         <td><%= link_to 'Edit', edit_field_path(field) %></td>
         <td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
