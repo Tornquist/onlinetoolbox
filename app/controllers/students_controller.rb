@@ -23,6 +23,11 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+    Field.where(group_id: Group.where(name: "Text").first).each do |f|
+      if !@student.fields.include?(f)
+        @student.texts.build(field_id: f.id)
+      end
+    end
   end
 
   # POST /students
@@ -83,7 +88,7 @@ class StudentsController < ApplicationController
                                          :instrument_id,
                                          :id,
                                          :_destroy],
-                                     texts_attributes:
+                                      texts_attributes:
                                         [:student_id,
                                          :field_id,
                                          :id,
