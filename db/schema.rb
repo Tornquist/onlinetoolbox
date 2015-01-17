@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150116204916) do
   create_table "options", force: true do |t|
     t.integer  "student_id"
     t.integer  "field_id"
-    t.integer  "choice"
+    t.string   "choice"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

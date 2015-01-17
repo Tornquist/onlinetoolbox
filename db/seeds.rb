@@ -49,7 +49,7 @@ Ensemble.create(name: "Twirlers")
 #Field Types
 Group.create(name: "Address")
 Group.create(name: "Text")
-Group.create(name: "Options")
+Group.create(name: "Option")
 
 #States
 #

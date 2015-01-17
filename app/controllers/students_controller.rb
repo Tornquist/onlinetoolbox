@@ -22,6 +22,9 @@ class StudentsController < ApplicationController
     Field.where(group_id: Group.where(name: "Address").first).each do |f|
       @student.addresses.build(field_id: f.id)
     end
+    Field.where(group_id: Group.where(name: "Option").first).each do |f|
+      @student.options.build(field_id: f.id)
+    end
   end
 
   # GET /students/1/edit
@@ -36,8 +39,10 @@ class StudentsController < ApplicationController
         @student.addresses.build(field_id: f.id)
       end
     end
-    @student.addresses.each do |a|
-      puts a.id.to_s + " " + a.field_id.to_s
+    Field.where(group_id: Group.where(name: "Option").first).each do |f|
+      if !@student.fields.include?(f)
+        @student.options.build(field_id: f.id)
+      end
     end
   end
 
@@ -112,7 +117,12 @@ class StudentsController < ApplicationController
                                          :address_2,
                                          :city,
                                          :state_id,
-                                         :zip]
+                                         :zip],
+                                     options_attributes:
+                                      [:id,
+                                       :student_id,
+                                       :field_id,
+                                       :choice]
                                      )
     end
 end

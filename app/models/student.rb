@@ -9,6 +9,7 @@ class Student < ActiveRecord::Base
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }
   accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :options
 
   def fields
     (addresses + texts + options).map { |o| o.field }
@@ -21,7 +22,7 @@ class Student < ActiveRecord::Base
       return addresses.where(field_id: i).first
     when Group.where(name: "Text").first
       return texts.where(field_id: i).first
-    when Group.where(name: "Options").first
+    when Group.where(name: "Option").first
       return options.where(field_id: i).first
     end
   end

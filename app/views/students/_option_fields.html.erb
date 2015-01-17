@@ -1,0 +1,7 @@
+<% if f.object.field_id == field.id && !field.hidden %>
+  <%=field.name%></br>
+  <div class="field">
+    <%= f.hidden_field :field_id, :value => field.id %>
+    <%= f.select :choice, options_for_select(field.choices(f.object.choice), f.object.choice), :include_blank => true %>
+  </div>
+<% end %>

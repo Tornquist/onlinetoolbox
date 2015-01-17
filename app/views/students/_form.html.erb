@@ -46,8 +46,10 @@
       <%= f.fields_for :texts do |builder| %>
         <%= render 'text_fields', :field => field, :f => builder %>
       <% end %>
-    <% when Group.where(name: "Options").first %>
-      OPTIONS</br>
+    <% when Group.where(name: "Option").first %>
+      <%= f.fields_for :options do |builder| %>
+        <%= render 'option_fields', :field => field, :f => builder %>
+      <% end %>
     <% end %>
   <% end %>
 
