@@ -40,21 +40,7 @@
     <% case field.group %>
     <% when Group.where(name: "Address").first %>
       <%= f.fields_for :addresses do |builder| %>
-        <% if builder.object.field_id == field.id && !field.hidden %>
-          <%=field.name%></br>
-          <div class="field">
-            <%= builder.label :address_1 %><br>
-            <%= builder.text_field :address_1 %> </br>
-            <%= builder.label :address_2 %><br>
-            <%= builder.text_field :address_2 %> </br>
-            <%= builder.label :city %><br>
-            <%= builder.text_field :city %> </br>
-            <%= builder.label :state_id %><br>
-            <%= builder.collection_select(:state_id, State.all, :id, :name) %> </br>
-            <%= builder.label :zip %><br>
-            <%= builder.number_field :zip %> </br>
-          </div>
-        <% end %>
+        <%= render 'address_fields', :field => field, :f => builder %>
       <% end %>
     <% when Group.where(name: "Text").first %>
       <%= f.fields_for :texts do |builder| %>

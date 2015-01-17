@@ -36,6 +36,9 @@ class StudentsController < ApplicationController
         @student.addresses.build(field_id: f.id)
       end
     end
+    @student.addresses.each do |a|
+      puts a.id.to_s + " " + a.field_id.to_s
+    end
   end
 
   # POST /students
@@ -100,7 +103,16 @@ class StudentsController < ApplicationController
                                         [:student_id,
                                          :field_id,
                                          :id,
-                                         :content]
+                                         :content],
+                                      addresses_attributes:
+                                        [:id,
+                                         :student_id,
+                                         :field_id,
+                                         :address_1,
+                                         :address_2,
+                                         :city,
+                                         :state_id,
+                                         :zip]
                                      )
     end
 end

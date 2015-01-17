@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150116204916) do
     t.string   "address_2"
     t.string   "city"
     t.integer  "state_id"
-    t.integer  "zip"
+    t.string   "zip"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
