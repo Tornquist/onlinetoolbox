@@ -1,0 +1,20 @@
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  %div.container
+    %div.navbar-header
+      %button.navbar-toggle.collapsed{"data-target" => "#navbar", "data-toggle" => "collapse", type: "button", "aria-expanded" => "false", "aria-controls" => "navbar"}
+        %span.sr-only
+          Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      =link_to "Online Toolbox", "#", class: "navbar-brand"
+    %div.collapse.navbar-collapse#navbar
+      %ul.nav.navbar-nav
+        %li.active
+          %a{href: "#"} Home
+        %li
+          %a{href: "#"} Recruitment
+        %li
+          %a{href: "#"} GDS
+        %li
+          %a{href: "#"} Gigs
