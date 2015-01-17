@@ -51,6 +51,19 @@ Group.create(name: "Address")
 Group.create(name: "Text")
 Group.create(name: "Option")
 
+#Fields
+Field.create(name: "Gender", index: 0, group_id: 3, description: "", options: "Male\nFemale", hidden: false)
+Field.create(name: "Home Phone", index: 1, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false)
+Field.create(name: "Cell Phone", index: 2, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false)
+Field.create(name: "Address", index: 3, group_id: 1, description: "", options: "", hidden: false)
+Field.create(name: "Major", index: 4, group_id: 2, description: "", options: "", hidden: false)
+Field.create(name: "Engineer", index: 5, group_id: 3, description: "", options: "Yes\nNo", hidden: false)
+Field.create(name: "High School", index: 6, group_id: 2, description: "", options: "", hidden: false)
+Field.create(name: "Contact", index: 7, group_id: 3, description: "", options: "Yes\nNo", hidden: false)
+Field.create(name: "Parent Names", index: 8, group_id: 2, description: "", options: "", hidden: false)
+Field.create(name: "Parent Address", index: 9, group_id: 1, description: "", options: "", hidden: false)
+Field.create(name: "Parent Email", index: 10, group_id: 2, description: "", options: "", hidden: false)
+
 #States
 #
 State.create([
