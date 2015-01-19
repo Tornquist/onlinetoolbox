@@ -1,0 +1,10 @@
+%div.row.bottom-spacer
+  %div.col-sm-12
+    = form_for(@student) do |f|
+      = render 'errors'
+      = render 'student', f: f
+      = render 'instruments', f: f
+      = render 'fields', f: f
+
+      - if @show_buttons
+        = f.submit class: "btn btn-success"

@@ -1,0 +1,9 @@
+%div.field.bottom-spacer
+  %div.row
+    %div.col-sm-5
+      = f.collection_select(:instrument_id, Instrument.all, :id, :name, {}, {class: "form-control"})
+    %div.col-sm-5
+      = f.collection_select(:ensemble_id, Ensemble.all, :id, :name, {}, {class: "form-control"})
+    - if @show_buttons
+      %div.col-sm-2
+        = link_to_remove_association "Remove", f, {wrapper_class: 'field', class: "btn btn-danger btn-block"}

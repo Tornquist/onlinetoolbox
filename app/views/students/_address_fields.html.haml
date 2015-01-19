@@ -1,0 +1,15 @@
+- if f.object.field_id == field.id && !field.hidden
+  %div.col-sm-2.control-label
+    =field.name
+  %div.col-sm-10
+    = f.hidden_field :field_id, :value => field.id
+    = f.label :address_1
+    = f.text_field :address_1, class: "form-control"
+    = f.label :address_2
+    = f.text_field :address_2, class: "form-control"
+    = f.label :city
+    = f.text_field :city, class: "form-control"
+    = f.label :state_id
+    = f.collection_select(:state_id, State.all, :id, :name, {}, {class: "form-control"})
+    = f.label :zip
+    = f.text_field :zip, class: "form-control"

@@ -16,3 +16,10 @@
 //= require cocoon
 //= require bootstrap-sprockets
 //= require_tree .
+var ready;
+ready = function() {
+  $('#disabled-forms').find('input, textarea, button, select').attr('disabled','disabled');
+};
+
+$(document).ready(ready);
+$(document).on('page:load', ready);

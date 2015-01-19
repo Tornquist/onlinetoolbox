@@ -1,0 +1,20 @@
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Student Profile
+      %div.panel-body
+        %div.row
+          %div.col-sm-4
+            = f.label :first_name
+            %br
+            = f.text_field :first_name, class: "form-control"
+          %div.col-sm-4
+            = f.label :last_name
+            %br
+            = f.text_field :last_name, class: "form-control"
+          %div.col-sm-4
+            = f.label :email
+            %br
+            = f.text_field :email, class: "form-control"

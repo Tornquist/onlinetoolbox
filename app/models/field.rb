@@ -3,7 +3,7 @@ class Field < ActiveRecord::Base
   belongs_to :group
 
   def choices(extra)
-    o = options.split()
+    o = options.split("\n")
     if !o.include?(extra) && !extra.blank?
       o.push(extra)
     end

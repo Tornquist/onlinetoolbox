@@ -1,0 +1,20 @@
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Additional Information
+      %div.panel-body
+        %div.form-horizontal
+          - Field.order(:index).each do |field|
+            %div.form-group
+              - case field.group
+              - when Group.where(name: "Address").first
+                = f.fields_for :addresses do |builder|
+                  = render 'address_fields', :field => field, :f => builder
+              - when Group.where(name: "Text").first
+                = f.fields_for :texts do |builder|
+                  = render 'text_fields', :field => field, :f => builder
+              - when Group.where(name: "Option").first
+                = f.fields_for :options do |builder|
+                  = render 'option_fields', :field => field, :f => builder

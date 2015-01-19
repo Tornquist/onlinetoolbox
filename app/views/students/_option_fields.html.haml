@@ -1,0 +1,6 @@
+- if f.object.field_id == field.id && !field.hidden
+  %div.col-sm-2.control-label
+    = field.name
+  %div.col-sm-10
+    = f.hidden_field :field_id, :value => field.id
+    = f.select :choice, options_for_select(field.choices(f.object.choice), f.object.choice), {:include_blank => true}, {:class => "form-control"}

@@ -1,0 +1,12 @@
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Instrument Interests
+      %div.panel-body
+        = f.fields_for :student_instruments do |builder|
+          = render 'student_instrument_fields', :f => builder
+        - if @show_buttons
+          %div.links
+            = link_to_add_association 'Add Instrument', f, :student_instruments, class: "btn btn-success"

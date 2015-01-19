@@ -10,6 +10,7 @@ class StudentsController < ApplicationController
   # GET /students/1
   # GET /students/1.json
   def show
+    @show_buttons = false
   end
 
   # GET /students/new
@@ -25,6 +26,8 @@ class StudentsController < ApplicationController
     Field.where(group_id: Group.where(name: "Option").first).each do |f|
       @student.options.build(field_id: f.id)
     end
+
+    @show_buttons = true
   end
 
   # GET /students/1/edit
@@ -44,6 +47,8 @@ class StudentsController < ApplicationController
         @student.options.build(field_id: f.id)
       end
     end
+
+    @show_buttons = true
   end
 
   # POST /students
