@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :comments
+
+  resources :contact_types
+
+  resources :recruit_statuses
+
   resources :fields
 
   resources :ensembles

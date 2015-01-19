@@ -1,0 +1,43 @@
+%div.row.bottom-spacer
+  %div.col-sm-12
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              New Comment
+          %div.panel-body
+            = form_for(@comment) do |f|
+              - if @comment.errors.any?
+                %div#error_explanation
+                  %h2
+                    = pluralize(@comment.errors.count, "error")
+                    prohibited this contact from being saved:
+
+                  %ul
+                    - @comment.errors.full_messages.each do |message|
+                      %li
+                        = message
+
+              = f.hidden_field :user_id, value: current_user.id
+              - if params.has_key? :student_id
+                = f.hidden_field :student_id, value: params[:student_id]
+              - else
+                %div.row.form-group
+                  %div.col-sm-12
+                    = f.label :student_id
+                    = f.collection_select(:student_id, Student.order(:last_name).order(:first_name), :id, :full_name, {}, {class: "form-control"})
+              %div.row.form-group
+                %div.col-sm-6
+                  = f.label :contact_type_id, "Contact Type:"
+                  = f.collection_select(:contact_type_id, ContactType.all, :id, :name, {}, {class: "form-control"})
+                %div.col-sm-6
+                  = f.label :recruit_status_id, "Recruit Status:"
+                  = f.collection_select(:recruit_status_id, RecruitStatus.all, :id, :name, {}, {class: "form-control"})
+              %div.row.form-group
+                %div.col-sm-12
+                  = f.label :content
+                  = f.text_area :content, class: "form-control"
+              %div.row
+                %div.col-sm-12
+                  = f.submit class: "btn btn-success pull-right"

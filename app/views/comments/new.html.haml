@@ -1,0 +1,14 @@
+%div.jumbotron
+  %h1
+    - if params.has_key? :student_id
+      %span
+        Contacting
+        = Student.find(params[:student_id]).first_name
+    - else
+      Contacting Recruit
+
+= render 'form'
+- if params.has_key? :student_id
+  = render 'comments'
+
+= link_to 'Back', students_path, class: "btn btn-danger"

@@ -51,6 +51,26 @@ Group.create(name: "Address")
 Group.create(name: "Text")
 Group.create(name: "Option")
 
+#Contact Types
+ContactType.create(name: "Email")
+ContactType.create(name: "Phone")
+ContactType.create(name: "Web Inquiry")
+ContactType.create(name: "Event")
+ContactType.create(name: "Visit or Tour")
+ContactType.create(name: "Postcard")
+ContactType.create(name: "Other")
+
+#Recruit Statuses
+RecruitStatus.create(name: "N/A")
+RecruitStatus.create(name: "No Answer")
+RecruitStatus.create(name: "Still Undecided")
+RecruitStatus.create(name: "Confirmed Yes [AAMB]")
+RecruitStatus.create(name: "Confirmed Yes [AAMB] (Cut from Auditions)")
+RecruitStatus.create(name: "Confirmed Yes [Concert]")
+RecruitStatus.create(name: "Confirmed Yes [Jazz]")
+RecruitStatus.create(name: "Not Interested in PU Bands")
+RecruitStatus.create(name: "Not Attending Purdue")
+
 #Fields
 Field.create(name: "Gender", index: 0, group_id: 3, description: "", options: "Male\nFemale", hidden: false)
 Field.create(name: "Home Phone", index: 1, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false)

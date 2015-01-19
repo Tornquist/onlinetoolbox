@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150116204916) do
+ActiveRecord::Schema.define(version: 20150119175518) do
 
   create_table "addresses", force: true do |t|
     t.integer  "student_id"
@@ -21,6 +21,23 @@ ActiveRecord::Schema.define(version: 20150116204916) do
     t.string   "city"
     t.integer  "state_id"
     t.string   "zip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "student_id"
+    t.string   "content"
+    t.integer  "contact_type_id"
+    t.integer  "recruit_status_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "contact_types", force: true do |t|
+    t.string   "name"
+    t.boolean  "hidden",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -58,6 +75,13 @@ ActiveRecord::Schema.define(version: 20150116204916) do
     t.integer  "student_id"
     t.integer  "field_id"
     t.string   "choice"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recruit_statuses", force: true do |t|
+    t.string   "name"
+    t.boolean  "hidden",     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

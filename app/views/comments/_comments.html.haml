@@ -1,0 +1,24 @@
+- Student.find(params[:student_id]).comments.order('created_at DESC').each do |comment|
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %div.panel-title
+            %span
+              Contacted by
+              = comment.user.full_name
+              on
+              = comment.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+        %div.panel-body
+          %div.row
+            %div.col-sm-6
+              %span
+                %strong
+                  Contact type:
+                = comment.contact_type.name
+            %div.col-sm-6
+              %span
+                %strong
+                  Recruit Status:
+                = comment.recruit_status.name
+          = simple_format(comment.content)
