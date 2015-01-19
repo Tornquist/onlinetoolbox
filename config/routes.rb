@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :comments
+  get '/comments/new', to: 'comments#new', as: 'new_comment'
+  post '/comments/', to: 'comments#create', as: 'comments'
 
   resources :contact_types
 
