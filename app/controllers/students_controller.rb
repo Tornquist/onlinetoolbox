@@ -5,7 +5,8 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @students = Student.all
+    @claimed_students = current_user.students
+    @unclaimed_students = Student.all - ClaimedStudent.first.claimed
   end
 
   # GET /students/1

@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
+  has_many :claimed_students
+  has_many :students, through: :claimed_students
 
   def full_name
     first_name.to_s + " " + last_name.to_s

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @claimed_student.student_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @claimed_student.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_claimed_student_path(@claimed_student) %> |
+<%= link_to 'Back', claimed_students_path %>

@@ -6,6 +6,7 @@ class Student < ActiveRecord::Base
   has_many :texts
   has_many :options
   has_many :comments
+  has_many :claimed_students
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }
@@ -28,7 +29,11 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def full_name()
+  def full_name_inversed
+    last_name + ", " + first_name
+  end
+
+  def full_name
     first_name + " " + last_name
   end
 end
