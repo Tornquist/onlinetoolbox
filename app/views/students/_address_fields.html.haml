@@ -1,6 +1,6 @@
 - if f.object.field_id == field.id && !field.hidden
   %div.col-sm-2.control-label
-    =field.name
+    = field.name
   %div.col-sm-10
     = f.hidden_field :field_id, :value => field.id
     = f.label :address_1

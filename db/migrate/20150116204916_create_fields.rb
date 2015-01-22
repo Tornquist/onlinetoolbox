@@ -7,6 +7,7 @@ class CreateFields < ActiveRecord::Migration
       t.string :description
       t.string :options
       t.boolean :hidden
+      t.boolean :locked, default: false
 
       t.timestamps
     end

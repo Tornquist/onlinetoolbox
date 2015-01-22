@@ -19,6 +19,10 @@ class FieldsController < ApplicationController
 
   # GET /fields/1/edit
   def edit
+    if @field.locked
+      flash[:error] = "That field is locked.  It cannot be modified"
+      redirect_to request.referer
+    end
   end
 
   # POST /fields
@@ -40,6 +44,7 @@ class FieldsController < ApplicationController
   # PATCH/PUT /fields/1
   # PATCH/PUT /fields/1.json
   def update
+    puts field_params
     respond_to do |format|
       if @field.update(field_params)
         format.html { redirect_to @field, notice: 'Field was successfully updated.' }
@@ -69,6 +74,6 @@ class FieldsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
-      params.require(:field).permit(:name, :index, :group_id, :description, :options, :hidden)
+      params.require(:field).permit(:name, :index, :group_id, :description, :options, :hidden, :locked)
     end
 end

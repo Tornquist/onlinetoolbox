@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20150121223615) do
     t.string   "description"
     t.string   "options"
     t.boolean  "hidden"
+    t.boolean  "locked",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
