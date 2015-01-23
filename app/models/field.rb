@@ -5,9 +5,9 @@ class Field < ActiveRecord::Base
   ranks :index
 
   def choices(extra)
-    o = options.split("\n")
-    if !o.include?(extra) && !extra.blank?
-      o.push(extra)
+    o = options.split("\n").map { |i| i.strip }
+    if !o.include?(extra.strip) && !extra.blank?
+      o.push(extra.strip)
     end
     o.map { |a| [a,a] }
   end

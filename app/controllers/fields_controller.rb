@@ -73,7 +73,6 @@ class FieldsController < ApplicationController
   end
 
   def toggle_hidden
-    puts params
     f = Field.find(params["field_id"])
     f.hidden = !f.hidden
     f.save

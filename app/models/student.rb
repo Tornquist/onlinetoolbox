@@ -36,4 +36,21 @@ class Student < ActiveRecord::Base
   def full_name
     first_name + " " + last_name
   end
+
+  def major
+    field(Field.where(name: "Major").first.id).content
+  end
+
+  def hometown
+    f = field(Field.where(name: "Address").first.id)
+    f.city + ", " + f.state.abbreviation
+  end
+
+  def instrument_list
+    instruments.uniq.map { |i| i.name}.join(", ")
+  end
+
+  def ensemble_list
+    ensembles.uniq.map { |i| i.name}.join(", ")
+  end
 end

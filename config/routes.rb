@@ -17,7 +17,10 @@ Rails.application.routes.draw do
 
   resources :instruments
 
-  resources :students
+  resources :students do
+    put :claim
+    put :unclaim
+  end
 
   devise_for :users
   root to: "static#index"

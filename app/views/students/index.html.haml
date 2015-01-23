@@ -1,7 +1,7 @@
 %h1
   Claimed Students
 
-%div.responsive-table
+%div.table-responsive
   %table.table
     %thead
       %tr
@@ -15,7 +15,15 @@
         %th
           Email
         %th
-          Recruit
+          Hometown
+        %th.text-center
+          Details
+        %th.text-center
+          Archive
+        %th.text-center
+          Comment
+        %th.text-center
+          Unclaim
     %tbody
       - @claimed_students.each_with_index do |student, i|
         %tr
@@ -24,19 +32,57 @@
           %td
             = student.full_name_inversed
           %td
-            = student.field(Field.where(name: "Major").first.id).content
+            = student.major
           %td
             = student.email
           %td
-            = student.recruit
+            = student.hometown
+          %td.text-center
+            = link_to (fa_icon "desktop"), student, class: "btn btn-success"
+          %td.text-center
+            = link_to (fa_icon "archive"), student, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+          %td.text-center
+            = link_to (fa_icon "comments-o"), new_comment_path(student_id: student.id), class: "btn btn-primary"
+          %td.text-center
+            = link_to (fa_icon "remove"), student_unclaim_path(student), method: :put, remote: true, class: "btn btn-warning"
+
+%h1
+  Unclaimed Students
+%div.table-responsive
+  %table.table
+    %thead
+      %tr
+        %th
+          :plain
+            #
+        %th
+          Name
+        %th
+          Hometown
+        %th
+          Instuments
+        %th
+          Ensembles
+        %th.text-center
+          Details
+        %th.text-center
+          Claim
+    %tbody
+      - @unclaimed_students.each_with_index do |student, i|
+        %tr
+          %th.row
+            = i + 1
           %td
-            = link_to 'Show', student
+            = student.full_name_inversed
           %td
-            = link_to 'Edit', edit_student_path(student)
+            = student.hometown
           %td
-            = link_to 'Destroy', student, method: :delete, data: { confirm: 'Are you sure?' }
+            = student.instrument_list
           %td
-            = link_to 'Comment', new_comment_path(student_id: student.id)
-%br
+            = student.ensemble_list
+          %td.text-center
+            = link_to (fa_icon "desktop"), student, class: "btn btn-success"
+          %td.text-center
+            = link_to (fa_icon "plus"), student_claim_path(student), method: :put, remote: true, class: "btn btn-warning"
 
 = link_to 'New Student', new_student_path, class: "btn btn-success"

@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @claimed_students = current_user.students
-    @unclaimed_students = StudentsHelper.UnclaimedStudents
+    @unclaimed_students = StudentsHelper.UnclaimedRecruits
   end
 
   # GET /students/1
@@ -91,6 +91,16 @@ class StudentsController < ApplicationController
       format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def claim
+    ClaimedStudent.create(student_id: params["student_id"], user_id: current_user.id)
+    render nothing: true
+  end
+
+  def unclaim
+    ClaimedStudent.where(student_id: params["student_id"], user_id: current_user.id).destroy_all
+    render nothing: true
   end
 
   private
