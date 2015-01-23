@@ -53,4 +53,14 @@ class Student < ActiveRecord::Base
   def ensemble_list
     ensembles.uniq.map { |i| i.name}.join(", ")
   end
+
+  def cell_phone
+    f = field(Field.where(name: "Cell Phone").first.id)
+    f.content
+  end
+
+  def home_phone
+    f = field(Field.where(name: "Home Phone").first.id)
+    f.content
+  end
 end

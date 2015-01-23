@@ -73,8 +73,8 @@ RecruitStatus.create(name: "Not Attending Purdue")
 
 #Fields
 Field.create(name: "Gender", index: 0, group_id: 3, description: "", options: "Male\nFemale", hidden: false)
-Field.create(name: "Home Phone", index: 1, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false)
-Field.create(name: "Cell Phone", index: 2, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false)
+Field.create(name: "Home Phone", index: 1, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false, locked: true)
+Field.create(name: "Cell Phone", index: 2, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false, locked: true)
 Field.create(name: "Address", index: 3, group_id: 1, description: "", options: "", hidden: false, locked: true)
 Field.create(name: "Major", index: 4, group_id: 2, description: "", options: "", hidden: false, locked: true)
 Field.create(name: "Engineer", index: 5, group_id: 3, description: "", options: "Yes\nNo", hidden: false)
