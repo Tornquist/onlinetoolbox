@@ -6,7 +6,7 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @claimed_students = current_user.students
-    @unclaimed_students = StudentsHelper.UnclaimedRecruits
+    @unclaimed_students = StudentsHelper.UnclaimedRecruits - Student.where(archive: true)
   end
 
   # GET /students/1
@@ -95,12 +95,18 @@ class StudentsController < ApplicationController
 
   def claim
     ClaimedStudent.create(student_id: params["student_id"], user_id: current_user.id)
-    render nothing: true
+    redirect_to students_path
   end
 
   def unclaim
     ClaimedStudent.where(student_id: params["student_id"], user_id: current_user.id).destroy_all
-    render nothing: true
+    redirect_to students_path
+  end
+
+  def archive
+    Student.update(params["student_id"], archive: true)
+    ClaimedStudent.where(student_id: params["student_id"], user_id: current_user.id).destroy_all
+    redirect_to students_path
   end
 
   private

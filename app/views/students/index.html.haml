@@ -40,11 +40,11 @@
           %td.text-center
             = link_to (fa_icon "desktop"), student, class: "btn btn-success"
           %td.text-center
-            = link_to (fa_icon "archive"), student, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+            = link_to (fa_icon "archive"), student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }, class: "btn btn-danger"
           %td.text-center
             = link_to (fa_icon "comments-o"), new_comment_path(student_id: student.id), class: "btn btn-primary"
           %td.text-center
-            = link_to (fa_icon "remove"), student_unclaim_path(student), method: :put, remote: true, class: "btn btn-warning"
+            = link_to (fa_icon "remove"), student_unclaim_path(student), method: :put, class: "btn btn-warning"
 
 %h1
   Unclaimed Students
@@ -83,6 +83,6 @@
           %td.text-center
             = link_to (fa_icon "desktop"), student, class: "btn btn-success"
           %td.text-center
-            = link_to (fa_icon "plus"), student_claim_path(student), method: :put, remote: true, class: "btn btn-warning"
+            = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-warning"
 
 = link_to 'New Student', new_student_path, class: "btn btn-success"

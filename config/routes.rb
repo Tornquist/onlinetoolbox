@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :students do
     put :claim
     put :unclaim
+    delete :archive
   end
 
   devise_for :users
