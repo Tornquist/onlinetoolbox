@@ -3,47 +3,46 @@
     = value
 
 %h1
-  Listing fields
+  Listing Fields
 
 %div.table-responsive
   %table.table#sortableFieldList
     %thead
       %tr
         %th
-        %th
+        %th.text-center
           Name
-        %th
-          Index
-        %th
+        %th.text-center
           Group
-        %th
+        %th.text-center
           Description
-        %th
+        %th.text-center
           Options
-        %th
-          Hidden
+        %th.text-center
+          Edit
+        %th.text-center
+          Show/Hide
 
     %tbody
       - @fields.each do |field|
-        %tr{ :class => "item", 'data-item-id' => field.id }
+        %tr{ :class => "item text-center" + (field.hidden ? " danger" : ""), 'data-item-id' => field.id }
           %td.bars
             = fa_icon "bars"
           %td
             = field.name
           %td
-            = field.index
-          %td
-            = field.group_id
+            = field.group.name
           %td
             = field.description
           %td
             = field.options
           %td
-            = field.hidden
-          %td
-            = link_to 'Show', field
-          %td
-            = link_to 'Edit', edit_field_path(field)
-          =#<td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            - if !field.locked
+              = link_to (fa_icon "pencil"), edit_field_path(field)
+          %td.eyecon
+            - if field.hidden
+              = link_to (fa_icon "eye"), field_toggle_hidden_path(field), method: :put, remote: true
+            - else
+              = link_to (fa_icon "eye-slash"), field_toggle_hidden_path(field), method: :put, remote: true
 
-= link_to 'New Field', new_field_path
+= link_to 'New Field', new_field_path, class: "btn btn-success"

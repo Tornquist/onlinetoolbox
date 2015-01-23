@@ -1,0 +1,32 @@
+%div.row.bottom-spacer
+  %div.col-sm-12
+    = form_for(@field) do |f|
+      - if @field.errors.any?
+        %div.error_explanation
+          %h2
+            = pluralize(@field.errors.count, "error")
+            prohibited this field from being saved:
+
+          %ul
+          - @field.errors.full_messages.each do |message|
+            %li
+              = message
+
+      = f.hidden_field :locked, value: @field.locked
+      %div.field
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      %div{ class: "field", id: (@field.group.nil? ? "" : "disabled-forms") }
+        = f.label :group_id
+        = f.collection_select(:group_id, Group.all, :id, :name, {}, {class: "form-control"})
+      %div.field
+        = f.label :description
+        = f.text_field :description, class: "form-control"
+      %div.field
+        = f.label :options
+        %div.row
+          %div.col-sm-12
+            Note: Options are only used for the "Option" group.  Please put each dropdown item on its own line.
+        = f.text_area :options, class: "form-control", rows: 5
+      %div.actions
+        = f.submit class: "btn btn-success"

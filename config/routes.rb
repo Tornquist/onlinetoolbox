@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   resources :fields do
     post :update_row_order, on: :collection
+    put :toggle_hidden
   end
 
   resources :ensembles

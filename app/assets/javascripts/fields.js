@@ -34,6 +34,12 @@ var fields_ready = function(){
       }
     });
   }
+
+  $(".eyecon").on("ajax:complete", function(){
+    $(this).parent().toggleClass('danger');
+    $(this).find('i').toggleClass('fa-eye');
+    $(this).find('i').toggleClass('fa-eye-slash');
+  })
 };
 
 

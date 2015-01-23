@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.rank(:index).all
+    @fields = all_fields
   end
 
   # GET /fields/1
@@ -29,10 +29,10 @@ class FieldsController < ApplicationController
   # POST /fields.json
   def create
     @field = Field.new(field_params)
-
+    @field.update_attribute :index_position, :last
     respond_to do |format|
       if @field.save
-        format.html { redirect_to @field, notice: 'Field was successfully created.' }
+        format.html { redirect_to fields_path, notice: 'Field was successfully created.' }
         format.json { render :show, status: :created, location: @field }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class FieldsController < ApplicationController
     puts field_params
     respond_to do |format|
       if @field.update(field_params)
-        format.html { redirect_to @field, notice: 'Field was successfully updated.' }
+        format.html { redirect_to fields_path, notice: 'Field was successfully updated.' }
         format.json { render :show, status: :ok, location: @field }
       else
         format.html { render :edit }
@@ -72,7 +72,19 @@ class FieldsController < ApplicationController
     render nothing: true
   end
 
+  def toggle_hidden
+    puts params
+    f = Field.find(params["field_id"])
+    f.hidden = !f.hidden
+    f.save
+    render :nothing => true
+  end
+
   private
+    def all_fields
+      Field.rank(:index).all
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_field
       @field = Field.find(params[:id])
