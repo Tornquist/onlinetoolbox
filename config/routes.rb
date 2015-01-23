@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   resources :recruit_statuses
 
-  resources :fields
+  resources :fields do
+    post :update_row_order, on: :collection
+  end
 
   resources :ensembles
 

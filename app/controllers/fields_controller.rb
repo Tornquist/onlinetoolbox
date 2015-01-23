@@ -4,7 +4,7 @@ class FieldsController < ApplicationController
   # GET /fields
   # GET /fields.json
   def index
-    @fields = Field.all
+    @fields = Field.rank(:index).all
   end
 
   # GET /fields/1
@@ -64,6 +64,12 @@ class FieldsController < ApplicationController
       format.html { redirect_to fields_url, notice: 'Field was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def update_row_order
+    f = Field.find(params["field"]["field_id"])
+    f.update_attribute :index_position, params["field"]["row_order_position"]
+    render nothing: true
   end
 
   private

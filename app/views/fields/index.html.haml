@@ -1,0 +1,49 @@
+- flash.each do |key, value|
+  %div{ :class => flash_class(key) }
+    = value
+
+%h1
+  Listing fields
+
+%div.table-responsive
+  %table.table#sortableFieldList
+    %thead
+      %tr
+        %th
+        %th
+          Name
+        %th
+          Index
+        %th
+          Group
+        %th
+          Description
+        %th
+          Options
+        %th
+          Hidden
+
+    %tbody
+      - @fields.each do |field|
+        %tr{ :class => "item", 'data-item-id' => field.id }
+          %td.bars
+            = fa_icon "bars"
+          %td
+            = field.name
+          %td
+            = field.index
+          %td
+            = field.group_id
+          %td
+            = field.description
+          %td
+            = field.options
+          %td
+            = field.hidden
+          %td
+            = link_to 'Show', field
+          %td
+            = link_to 'Edit', edit_field_path(field)
+          =#<td><%= link_to 'Destroy', field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+= link_to 'New Field', new_field_path
