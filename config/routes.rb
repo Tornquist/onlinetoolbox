@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :favorite_instruments
+
   resources :claimed_students
 
   get '/comments/new', to: 'comments#new', as: 'new_comment'
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
 
   resources :instruments
 
+  get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'
   resources :students do
     put :claim
     put :unclaim
@@ -24,5 +27,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  get 'users/favorite_instruments/', to: 'favorite_instruments#user', as: 'user_favorite_instruments'
+  post 'users/favorite_instruments/', to: 'favorite_instruments#create_multiple', as: 'create_multiple_user_favorite_instruments'
+
   root to: "static#index"
 end

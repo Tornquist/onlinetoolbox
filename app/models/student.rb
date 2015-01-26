@@ -43,7 +43,9 @@ class Student < ActiveRecord::Base
 
   def hometown
     f = field(Field.where(name: "Address").first.id)
-    f.city + ", " + f.state.abbreviation
+    arr = [f.city, f.state.abbreviation]
+    arr.reject! { |c| c.empty? }
+    arr.join(", ")
   end
 
   def instrument_list

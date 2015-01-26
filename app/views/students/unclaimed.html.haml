@@ -1,0 +1,18 @@
+%div.row
+  %h1
+    %div.col-sm-6
+      Unclaimed Students
+
+%div.bottom-spacer
+  - if @unclaimed_students.size != 0
+    = render 'unclaimed_students'
+  - else
+    %div.row
+      %div.col-sm-12
+        %h3.alert.alert-danger
+          Error: No Unclaimed Students Found
+
+%div.row
+  %div.col-sm-12
+    %div.btn-group
+      = link_to "Return to Claimed Students", students_path, class: "btn btn-success"

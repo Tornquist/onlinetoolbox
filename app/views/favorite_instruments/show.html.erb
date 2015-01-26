@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @favorite_instrument.user_id %>
+</p>
+
+<p>
+  <strong>Instrument:</strong>
+  <%= @favorite_instrument.instrument_id %>
+</p>
+
+<%= link_to 'Edit', edit_favorite_instrument_path(@favorite_instrument) %> |
+<%= link_to 'Back', favorite_instruments_path %>

@@ -1,0 +1,37 @@
+%div.row
+  %div.table-responsive
+    %table.table
+      %thead
+        %tr
+          %th
+            :plain
+              #
+          %th
+            Name
+          %th
+            Hometown
+          %th
+            Instuments
+          %th
+            Ensembles
+          %th.text-center
+            Details
+          %th.text-center
+            Claim
+      %tbody
+        - @unclaimed_students.each_with_index do |student, i|
+          %tr
+            %th.row
+              = i + 1
+            %td
+              = student.full_name_inversed
+            %td
+              = student.hometown
+            %td
+              = student.instrument_list
+            %td
+              = student.ensemble_list
+            %td.text-center
+              = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
+            %td.text-center
+              = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-warning"

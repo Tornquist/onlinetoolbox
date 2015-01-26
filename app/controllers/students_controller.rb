@@ -6,7 +6,11 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @claimed_students = current_user.students
-    @unclaimed_students = StudentsHelper.UnclaimedRecruits - Student.where(archive: true)
+    @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true)).select { |student| (current_user.instruments - student.instruments).size != current_user.instruments.size }
+  end
+
+  def unclaimed
+    @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true))
   end
 
   # GET /students/1
@@ -60,7 +64,7 @@ class StudentsController < ApplicationController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to @student, notice: 'Student was successfully created.' }
+        format.html { redirect_to students_path, notice: 'Student was successfully created.' }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new }
@@ -74,7 +78,7 @@ class StudentsController < ApplicationController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to @student, notice: 'Student was successfully updated.' }
+        format.html { redirect_to students_path, notice: 'Student was successfully updated.' }
         format.json { render :show, status: :ok, location: @student }
       else
         format.html { render :edit }

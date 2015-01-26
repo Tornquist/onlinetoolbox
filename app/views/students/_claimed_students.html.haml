@@ -1,0 +1,46 @@
+%div.row
+  %div.table-responsive
+    %table.table
+      %thead
+        %tr
+          %th
+            :plain
+              #
+          %th
+            Name
+          %th
+            Major
+          %th
+            Email
+          %th
+            Hometown
+          %th.text-center
+            Details
+          %th.text-center
+            Archive
+          %th.text-center
+            Comment
+          %th.text-center
+            Unclaim
+      %tbody
+        - @claimed_students.each_with_index do |student, i|
+          %tr
+            %th.row
+              = i + 1
+            %td
+              = student.full_name_inversed
+            %td
+              = student.major
+            %td
+              = student.email
+            %td
+              = student.hometown
+            %td.text-center
+              = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
+            %td.text-center
+              = link_to (fa_icon "archive"), student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }, class: "btn btn-danger"
+            %td.text-center
+              = link_to (fa_icon "comments-o"), new_comment_path(student_id: student.id), class: "btn btn-primary"
+            %td.text-center
+              = link_to (fa_icon "remove"), student_unclaim_path(student), method: :put, class: "btn btn-warning"
+
