@@ -11,8 +11,10 @@ class FavoriteInstrumentsController < ApplicationController
 
   def create_multiple
     current_user.favorite_instruments.destroy_all
-    params["instruments"].each do |key, value|
-      FavoriteInstrument.create(user_id: current_user.id, instrument_id: value)
+    if !params["instruments"].nil?
+      params["instruments"].each do |key, value|
+        FavoriteInstrument.create(user_id: current_user.id, instrument_id: value)
+      end
     end
 
     redirect_to students_path
