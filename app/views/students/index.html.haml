@@ -1,9 +1,11 @@
 %div.row
-  %div.col-sm-6
-    %h1
+  %h1
+    %div.col-sm-6
       Claimed Students
   %div.col-sm-6
-    = link_to 'New Student', new_student_path, class: "btn btn-success pull-right"
+    %div.btn-group.pull-right
+      = link_to 'New Student', new_student_path, class: "btn btn-success"
+      = link_to 'Import Students', "#", class: "btn btn-success", id: "student_upload"
 
 - if @claimed_students.size != 0
   = render 'claimed_students'
@@ -30,3 +32,8 @@
     %div.col-sm-12
       %h3
         = link_to "Error: No Students Found, change filter to find more.", user_favorite_instruments_path, class: "btn btn-danger"
+
+= form_tag import_students_path, multipart: true do
+  = file_field_tag :file, { onchange: "this.form.submit()",
+    :accept => 'text/csv', label: "Import Students",
+    style: "width: 0px; height: 0px"}

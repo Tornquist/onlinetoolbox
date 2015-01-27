@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require cocoon
 //= require bootstrap-sprockets
+//= require bootstrap
 //= require_tree .
 var ready;
 ready = function() {

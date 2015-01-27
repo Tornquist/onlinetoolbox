@@ -44,5 +44,7 @@ gem 'font-awesome-rails'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+#gem 'pry', group: :development
+#gem 'pry-byebug', group: :development
+#gem 'awesome_print', :require => 'ap'
 

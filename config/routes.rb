@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     put :claim
     put :unclaim
     delete :archive
+    collection { post :import }
   end
 
   devise_for :users
