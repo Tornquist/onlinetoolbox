@@ -1,5 +1,4 @@
 class FavoriteInstrumentsController < ApplicationController
-  before_action :set_favorite_instrument, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
   respond_to :html
@@ -20,44 +19,7 @@ class FavoriteInstrumentsController < ApplicationController
     redirect_to students_path
   end
 
-  def index
-    @favorite_instruments = FavoriteInstrument.all
-    respond_with(@favorite_instruments)
-  end
-
-  def show
-    respond_with(@favorite_instrument)
-  end
-
-  def new
-    @favorite_instrument = FavoriteInstrument.new
-    respond_with(@favorite_instrument)
-  end
-
-  def edit
-  end
-
-  def create
-    @favorite_instrument = FavoriteInstrument.new(favorite_instrument_params)
-    @favorite_instrument.save
-    respond_with(@favorite_instrument)
-  end
-
-  def update
-    @favorite_instrument.update(favorite_instrument_params)
-    respond_with(@favorite_instrument)
-  end
-
-  def destroy
-    @favorite_instrument.destroy
-    respond_with(@favorite_instrument)
-  end
-
   private
-    def set_favorite_instrument
-      @favorite_instrument = FavoriteInstrument.find(params[:id])
-    end
-
     def favorite_instrument_params
       params.require(:favorite_instrument).permit(:user_id, :instrument_id)
     end

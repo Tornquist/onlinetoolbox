@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :favorite_instruments
-
   resources :claimed_students
 
   get '/comments/new', to: 'comments#new', as: 'new_comment'
