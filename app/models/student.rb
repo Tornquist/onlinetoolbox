@@ -30,11 +30,15 @@ class Student < ActiveRecord::Base
   end
 
   def full_name_inversed
-    last_name + ", " + first_name
+    arr = [last_name, first_name]
+    arr.reject! { |c| c.empty? }
+    arr.join(", ")
   end
 
   def full_name
-    first_name + " " + last_name
+    arr = [first_name, last_name]
+    arr.reject! { |c| c.empty? }
+    arr.join(", ")
   end
 
   def major
@@ -127,7 +131,19 @@ class Student < ActiveRecord::Base
       student_hash["addresses_attributes"] = addresses_attributes
       student_hash["options_attributes"] = options_attributes
       student_hash["texts_attributes"] = texts_attributes
-      Student.create(student_hash)
+      s = Student.create(student_hash)
+      Field.all.each do |f|
+        if s.field(f.id).nil?
+          case f.group
+          when Group.where(name: "Address").first
+            Address.create({field_id: f.id, student_id: s.id})
+          when Group.where(name: "Text").first
+            Text.create({field_id: f.id, student_id: s.id})
+          when Group.where(name: "Option").first
+            Option.create({field_id: f.id, student_id: s.id})
+          end
+        end
+      end
     end
   end
 end

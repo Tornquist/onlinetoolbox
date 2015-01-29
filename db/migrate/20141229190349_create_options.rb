@@ -3,7 +3,7 @@ class CreateOptions < ActiveRecord::Migration
     create_table :options do |t|
       t.integer :student_id
       t.integer :field_id
-      t.string :choice
+      t.string :choice, default: ""
 
       t.timestamps
     end

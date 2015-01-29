@@ -3,7 +3,7 @@ class CreateTexts < ActiveRecord::Migration
     create_table :texts do |t|
       t.integer :student_id
       t.integer :field_id
-      t.string :content
+      t.string :content, default: ""
 
       t.timestamps
     end
