@@ -47,4 +47,4 @@ gem 'font-awesome-rails'
 gem 'pry', group: :development
 gem 'pry-byebug', group: :development
 gem 'awesome_print', :require => 'ap'
-
+gem 'quiet_assets', group: :development
