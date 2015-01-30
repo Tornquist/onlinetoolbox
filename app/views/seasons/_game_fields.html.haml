@@ -7,4 +7,5 @@
       = f.label :played_on
       = f.date_select :played_on, {order: [:month, :day, :year]}, {class: "form-control"}
     %div.col-sm-2
+      = f.label " "
       = link_to_remove_association "Remove", f, {wrapper_class: 'field', class: "btn btn-danger btn-block"}
