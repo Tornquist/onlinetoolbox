@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  season_id: 1
+  name: MyString
+  played_on: 2015-01-29
+
+two:
+  season_id: 1
+  name: MyString
+  played_on: 2015-01-29

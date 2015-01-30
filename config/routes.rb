@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :games
+
+  resources :seasons
+
   resources :claimed_students
 
   get '/comments/new', to: 'comments#new', as: 'new_comment'

@@ -34,6 +34,7 @@ gem 'haml'
 gem 'cocoon'
 gem 'ranked-model'
 gem 'font-awesome-rails'
+gem 'bootstrap-datepicker-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -44,7 +45,7 @@ gem 'font-awesome-rails'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-#gem 'pry', group: :development
-#gem 'pry-byebug', group: :development
-#gem 'awesome_print', :require => 'ap'
+gem 'pry', group: :development
+gem 'pry-byebug', group: :development
+gem 'awesome_print', :require => 'ap'
 

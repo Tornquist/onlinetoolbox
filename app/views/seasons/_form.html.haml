@@ -1,0 +1,47 @@
+%div.row
+  %div.col-sm-12
+    = form_for(@season) do |f|
+      - if @season.errors.any?
+        %div#error_explanation
+          %h2
+            = pluralize(@season.errors.count, "error")
+            prohibited this season from being saved:
+
+          %ul
+            - @season.errors.full_messages.each do |message|
+              %li
+                = message
+
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            Season Details
+        %div.panel-body
+          %div.row
+            %div.col-sm-6
+              = f.label :name
+              = f.text_field :name, class: "form-control"
+            %div.col-sm-6#season-container
+              %div.input-daterange.input-group#datepicker
+                = f.text_field :start_date, class: "input-sm form-control",
+                  value: ( @season.start.strftime('%m/%d/%Y') unless @season.start.blank?)
+                %span.input-group-addon
+                  to
+                = f.text_field :end_date, class: "input-sm form-control",
+                  value: ( @season.end.strftime('%m/%d/%Y') unless @season.end.blank?)
+
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            Games
+        %div.panel-body
+          = f.fields_for :games do |builder|
+            = render 'game_fields', f: builder
+          %div.links
+            = link_to_add_association 'Add Game', f, :games, class: "btn btn-success"
+
+      %div.actions
+        = f.submit class: "btn btn-success"
+
+
+
