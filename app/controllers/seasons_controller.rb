@@ -23,12 +23,12 @@ class SeasonsController < ApplicationController
   def create
     @season = Season.new(season_params)
     @season.save
-    respond_with(@season)
+    redirect_to seasons_path
   end
 
   def update
     @season.update(season_params)
-    respond_with(@season)
+    redirect_to seasons_path
   end
 
   def destroy
@@ -43,12 +43,12 @@ class SeasonsController < ApplicationController
 
     def season_params
       params.require(:season).permit(:name,
-                                     :start_date,
-                                     :end_date,
+                                     :start,
+                                     :end,
                                     games_attributes:
                                       [:name,
                                        :id,
-                                       :game_date,
+                                       :played_on,
                                        :season_id,
                                        :_destroy])
     end

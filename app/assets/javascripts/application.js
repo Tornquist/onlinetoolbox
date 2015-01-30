@@ -17,7 +17,6 @@
 //= require cocoon
 //= require bootstrap-sprockets
 //= require bootstrap
-//= require bootstrap-datepicker
 //= require_tree .
 var ready;
 ready = function() {

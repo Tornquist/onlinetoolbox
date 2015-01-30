@@ -3,12 +3,8 @@
     %div.col-sm-5
       = f.label :name
       = f.text_field :name, class: "form-control"
-    %div.col-sm-5#game-container
-      %div.input-group.date
-        = f.label :game_date
-        = f.text_field :game_date, class: "form-control",
-          value: ( f.object.played_on.strftime('%m/%d/%Y') unless f.object.played_on.blank?)
-        %span.input-group-addon
-          =fa_icon "calendar"
+    %div.col-sm-5
+      = f.label :played_on
+      = f.date_select :played_on, {order: [:month, :day, :year]}, {class: "form-control"}
     %div.col-sm-2
       = link_to_remove_association "Remove", f, {wrapper_class: 'field', class: "btn btn-danger btn-block"}

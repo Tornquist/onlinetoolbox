@@ -1,4 +1,4 @@
-%div.row
+%div.row.bottom-spacer
   %div.col-sm-12
     = form_for(@season) do |f|
       - if @season.errors.any?
@@ -18,17 +18,15 @@
             Season Details
         %div.panel-body
           %div.row
-            %div.col-sm-6
+            %div.col-sm-4
               = f.label :name
               = f.text_field :name, class: "form-control"
-            %div.col-sm-6#season-container
-              %div.input-daterange.input-group#datepicker
-                = f.text_field :start_date, class: "input-sm form-control",
-                  value: ( @season.start.strftime('%m/%d/%Y') unless @season.start.blank?)
-                %span.input-group-addon
-                  to
-                = f.text_field :end_date, class: "input-sm form-control",
-                  value: ( @season.end.strftime('%m/%d/%Y') unless @season.end.blank?)
+            %div.col-sm-4
+              = f.label :start
+              = f.date_select :start, {order: [:month, :day, :year]}, {class: "form-control"}
+            %div.col-sm-4
+              = f.label :end
+              = f.date_select :end, {order: [:month, :day, :year]}, {class: "form-control"}
 
       %div.panel.panel-primary
         %div.panel-heading
@@ -40,8 +38,4 @@
           %div.links
             = link_to_add_association 'Add Game', f, :games, class: "btn btn-success"
 
-      %div.actions
-        = f.submit class: "btn btn-success"
-
-
-
+      = f.submit class: "btn btn-success"
