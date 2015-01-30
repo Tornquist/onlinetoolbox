@@ -10,3 +10,19 @@ body {
 .bottom-spacer {
   padding-bottom: 15px
 }
+
+.form-control-date {
+  @extend .form-control;
+  @media (min-width: 768px) {
+    width: 33%;
+  }
+}
+
+.input-group-date {
+  @extend .input-group;
+  @media(min-width: 768px) {
+    .form-control-date {
+      width: 33%;
+    }
+  }
+}

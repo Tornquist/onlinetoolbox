@@ -1,0 +1,19 @@
+%div.panel.panel-primary
+  %div.panel-heading
+    %h3.panel-title
+      Season Details
+  %div.panel-body
+    %div.row
+      %div.col-sm-4
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      %div.col-sm-4
+        = f.label :start
+        %div.row
+          %div.col-sm-12
+            = f.date_select :start, {order: [:month, :day, :year]}, {class: "form-control-date col-sm-4"}
+      %div.col-sm-4
+        = f.label :end
+        %div.row
+          %div.col-sm-12
+            = f.date_select :end, {order: [:month, :day, :year]}, {class: "form-control-date col-sm-4"}

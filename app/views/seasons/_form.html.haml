@@ -12,30 +12,17 @@
               %li
                 = message
 
-      %div.panel.panel-primary
-        %div.panel-heading
-          %h3.panel-title
-            Season Details
-        %div.panel-body
-          %div.row
-            %div.col-sm-4
-              = f.label :name
-              = f.text_field :name, class: "form-control"
-            %div.col-sm-4
-              = f.label :start
-              = f.date_select :start, {order: [:month, :day, :year]}, {class: "form-control"}
-            %div.col-sm-4
-              = f.label :end
-              = f.date_select :end, {order: [:month, :day, :year]}, {class: "form-control"}
+      = render 'season', f: f
+      = render 'games', f: f
 
       %div.panel.panel-primary
         %div.panel-heading
           %h3.panel-title
-            Games
+            Sections
         %div.panel-body
-          = f.fields_for :games do |builder|
-            = render 'game_fields', f: builder
-          %div.links
-            = link_to_add_association 'Add Game', f, :games, class: "btn btn-success"
+          = f.fields_for :sections do |builder|
+            = render 'section_fields', f: builder
+          %div.col-sm-4
+            = link_to_add_association 'Add Section', f, :sections, class: "btn btn-success btn-block"
 
       = f.submit class: "btn btn-success"

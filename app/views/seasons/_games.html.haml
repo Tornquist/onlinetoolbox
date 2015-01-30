@@ -1,0 +1,9 @@
+%div.panel.panel-primary
+  %div.panel-heading
+    %h3.panel-title
+      Games
+  %div.panel-body
+    = f.fields_for :games do |builder|
+      = render 'game_fields', f: builder
+    %div.links
+      = link_to_add_association 'Add Game', f, :games, class: "btn btn-success"

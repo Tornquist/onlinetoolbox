@@ -1,11 +1,14 @@
 %div.field.bottom-spacer
   %div.row
-    %div.col-sm-5
-      = f.label :name
-      = f.text_field :name, class: "form-control"
-    %div.col-sm-5
-      = f.label :played_on
-      = f.date_select :played_on, {order: [:month, :day, :year]}, {class: "form-control"}
-    %div.col-sm-2
-      = f.label " "
-      = link_to_remove_association "Remove", f, {wrapper_class: 'field', class: "btn btn-danger btn-block"}
+    %div.col-sm-4
+      %div.input-group
+        %span.input-group-addon
+          Name:
+        = f.text_field :name, class: "form-control"
+    %div.col-sm-7
+      %div.input-group-date
+        %span.input-group-addon
+          On:
+        = f.date_select :played_on, {order: [:month, :day, :year]}, {class: "form-control-date"}
+    %div.col-sm-1
+      = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger btn-block"}

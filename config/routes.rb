@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sections
+
   resources :games
 
   resources :seasons

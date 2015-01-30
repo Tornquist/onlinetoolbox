@@ -1,0 +1,5 @@
+%div.col-sm-4.field.bottom-spacer
+  %div.input-group
+    = f.text_field :name, class: "form-control"
+    %span.input-group-btn
+      = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger"}
