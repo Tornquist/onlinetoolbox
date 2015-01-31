@@ -39,12 +39,6 @@ class SeasonsController < ApplicationController
     respond_with(@season)
   end
 
-  def sections
-    respond_to do |format|
-      format.json { render :json => @season.sections.to_json(except: [:season_id, :created_at, :updated_at]) }
-    end
-  end
-
   private
     def default_section_names
       ["Piccolo","Clarinet","Saxophone", "Trumpet", "Mellophone",

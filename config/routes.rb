@@ -5,9 +5,7 @@ Rails.application.routes.draw do
 
   resources :games
 
-  resources :seasons do
-    get :sections, on: :member
-  end
+  resources :seasons
 
   resources :claimed_students
 

@@ -1,14 +1,6 @@
-%div.field.bottom-spacer
-  %div.row
-    %div.col-sm-6
-      %div.input-group
-        %span.input-group-addon
-          Season:
-        = select_tag('season_id', content_tag(:option,'Select Season...',:value=>"")+options_from_collection_for_select(Season.all, :id, :name, include_blank: true),  {class: "form-control"})
-    %div.col-sm-6
-      %div.input-group
-        %span.input-group-addon
-          Section:
-        = select_tag 'section_id', 'section_id[]', {class: "form-control", disabled: true}
-        %span.input-group-btn
-          = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger"}
+%div.field
+  %div.col-sm-6.bottom-spacer
+    %div.input-group
+      = f.collection_select(:section_id, Section.all.sort_by {|section| section.season.start}.reverse, :id, :display_name, {}, {class: "form-control"})
+      %span.input-group-btn
+        = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger"}
