@@ -7,11 +7,14 @@ class Student < ActiveRecord::Base
   has_many :options
   has_many :comments
   has_many :claimed_students
+  has_many :section_members
+  has_many :sections, through: :section_members
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }
   accepts_nested_attributes_for :addresses
   accepts_nested_attributes_for :options
+  accepts_nested_attributes_for :section_members, :allow_destroy => true
 
   def fields
     (addresses + texts + options).map { |o| o.field }
@@ -38,7 +41,7 @@ class Student < ActiveRecord::Base
   def full_name
     arr = [first_name, last_name]
     arr.reject! { |c| c.empty? }
-    arr.join(", ")
+    arr.join(" ")
   end
 
   def major
@@ -68,6 +71,11 @@ class Student < ActiveRecord::Base
   def home_phone
     f = field(Field.where(name: "Home Phone").first.id)
     f.content
+  end
+
+  def status
+    first = comments.order('created_at DESC').first
+    first.nil? ? "Unknown" : first.recruit_status.name
   end
 
   def self.import(file)

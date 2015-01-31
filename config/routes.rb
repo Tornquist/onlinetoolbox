@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
+  resources :section_members
+
   resources :sections
 
   resources :games
 
-  resources :seasons
+  resources :seasons do
+    get :sections, on: :member
+  end
 
   resources :claimed_students
 
@@ -29,6 +33,7 @@ Rails.application.routes.draw do
     put :unclaim
     delete :archive
     collection { post :import }
+    get :sections, on: :member
   end
 
   devise_for :users

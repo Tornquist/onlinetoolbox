@@ -4,6 +4,11 @@ student_ready = function() {
     e.preventDefault();
     $('#file').click();
   });
+
+  $('#file').change(function() {
+    $('#student_upload').prop('disabled', true);
+    $('#student_upload').text('Uploading');
+  });
 };
 
 $(document).ready(student_ready);

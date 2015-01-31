@@ -1,5 +1,5 @@
 class SeasonsController < ApplicationController
-  before_action :set_season, only: [:show, :edit, :update, :destroy]
+  before_action :set_season, only: [:show, :edit, :update, :destroy, :sections]
 
   respond_to :html
 
@@ -37,6 +37,12 @@ class SeasonsController < ApplicationController
   def destroy
     @season.destroy
     respond_with(@season)
+  end
+
+  def sections
+    respond_to do |format|
+      format.json { render :json => @season.sections.to_json(except: [:season_id, :created_at, :updated_at]) }
+    end
   end
 
   private

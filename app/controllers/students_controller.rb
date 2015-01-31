@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: [:show, :edit, :update, :destroy]
+  before_action :set_student, only: [:show, :edit, :update, :destroy, :sections]
 
   # GET /students
   # GET /students.json
@@ -97,6 +97,9 @@ class StudentsController < ApplicationController
     end
   end
 
+  def sections
+  end
+
   def claim
     ClaimedStudent.create(student_id: params["student_id"], user_id: current_user.id)
     redirect_to students_path
@@ -154,7 +157,12 @@ class StudentsController < ApplicationController
                                       [:id,
                                        :student_id,
                                        :field_id,
-                                       :choice]
+                                       :choice],
+                                     section_members_attributes:
+                                      [:id,
+                                       :student_id,
+                                       :section_id,
+                                       :_destroy]
                                      )
     end
 end
