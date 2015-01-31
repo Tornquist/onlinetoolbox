@@ -1,0 +1,13 @@
+= form_for(@section_note) do |f|
+  %div.panel.panel-primary
+    %div.panel-heading
+      %div.panel-title
+        New Note
+    %div.panel-body
+      %div.row.bottom-spacer
+        %div.col-sm-12
+          = f.hidden_field :section_id, value: @section.id
+          = f.text_area :content, class: "form-control"
+      %div.row
+        %div.col-sm-12
+          = f.submit class: "btn btn-primary"

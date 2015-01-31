@@ -1,0 +1,15 @@
+%div.jumbotron
+  %h1
+    = @section.season.name
+    |
+    = @section.name
+
+= render 'form'
+
+- @section.section_notes.order('created_at DESC').each do |note|
+  %div.panel.panel-primary
+    %div.panel-heading
+      %div.panel-title
+        = note.created_at.strftime("%B %e, %Y")
+    %div.panel-body
+      = simple_format(note.content)
