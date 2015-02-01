@@ -1,6 +1,7 @@
-%div.field
-  %div.col-sm-6.bottom-spacer
-    %div.input-group
-      = f.collection_select(:section_id, Section.all.sort_by {|section| section.season.start}.reverse, :id, :display_name, {}, {class: "form-control"})
-      %span.input-group-btn
-        = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger"}
+%div.field.bottom-spacer
+  %div.row
+    %div.col-sm-12
+      %div.input-group
+        = f.collection_select(:section_id, Section.all.sort_by {|section| section.season.start}.reverse, :id, :display_name, {}, {class: "form-control dependent-collection fifty-percent-width"})
+        %span.input-group-btn
+          = link_to_remove_association (fa_icon "close"), f, {wrapper_class: 'field', class: "btn btn-danger"}

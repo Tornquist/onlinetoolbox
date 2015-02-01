@@ -13,7 +13,7 @@
         %div.panel-body
           = f.fields_for :section_members do |builder|
             = render 'section_member_fields', f: builder
-          %div.col-sm-4
+          %div.links
             = link_to_add_association 'Add Section', f, :section_members, class: "btn btn-success", id: "add_section_btn"
   = f.submit "Update Student Sections", class: "btn btn-success"
   = link_to 'Back', students_path, class: "btn btn-danger"

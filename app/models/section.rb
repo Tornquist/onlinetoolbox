@@ -4,7 +4,7 @@ class Section < ActiveRecord::Base
   has_many :section_notes
 
   def display_name
-    season.name + " - " + name
+    season.name + " > " + name
   end
 
   def returning_members
