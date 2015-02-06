@@ -10,6 +10,7 @@ class SectionsController < ApplicationController
 
   def show
     @ranks = @section.ranks.order(:index)
+    @unranked = students_without_rank
     respond_with(@section)
   end
 
@@ -39,6 +40,12 @@ class SectionsController < ApplicationController
   end
 
   private
+    def students_without_rank
+      rankless = @section.students.order(:last_name, :first_name)
+      @section.ranks.each { |rank| rankless -= rank.students }
+      rankless
+    end
+
     def set_section
       @section = Section.find(params[:id])
     end

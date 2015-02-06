@@ -13,9 +13,8 @@
         %div.panel-body
           = f.fields_for :ranks, @ranks do |builder|
             = render 'rank_fields', f: builder
-          %div.links.bottom-spacer
-            %div.col-sm-12
-              = link_to_add_association 'Add Rank', f, :ranks, class: "btn btn-success"
+          %div.links
+            = link_to_add_association 'Add Rank', f, :ranks, class: "btn btn-success"
 
     = f.submit class: "btn btn-success"
 

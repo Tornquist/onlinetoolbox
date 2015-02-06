@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :rank_members
+
   resources :ranks
 
   #resources :section_notes

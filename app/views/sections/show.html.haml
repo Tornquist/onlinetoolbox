@@ -14,6 +14,19 @@
               Rank:
               = rank.name
         %div.panel-body
+          - rank.students.each do |student|
+            = render 'student_row', student: student
+
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-danger
+      %div.panel-heading
+        %h3.panel-title
+          %span
+            Students Not Assigned to a Rank
+      %div.panel-body
+        - @unranked.each do |student|
+          = render 'student_row', student: student
 
 = link_to 'Edit', edit_section_path(@section), class: "btn btn-success"
 = link_to 'Back', sections_path, class: "btn btn-danger"

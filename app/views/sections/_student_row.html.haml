@@ -1,0 +1,6 @@
+%div.row
+  %div.col-sm-12
+    %div.form-group
+      = student.first_name
+      = student.last_name
+      = collection_select(student, :rank, @section.ranks.all, :id, :name, { class: "form-control"} )
