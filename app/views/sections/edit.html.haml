@@ -1,0 +1,23 @@
+%div.row
+  %div.jumbotron
+    %h1
+      Editing Section
+
+%div.bottom-spacer
+  = form_for(@section) do |f|
+    %div.row
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            Sections
+        %div.panel-body
+          = f.fields_for :ranks, @ranks do |builder|
+            = render 'rank_fields', f: builder
+          %div.links.bottom-spacer
+            %div.col-sm-12
+              = link_to_add_association 'Add Rank', f, :ranks, class: "btn btn-success"
+
+    = f.submit class: "btn btn-success"
+
+= link_to 'Show', @section, class: "btn btn-primary"
+= link_to 'Back', sections_path, class: "btn btn-danger"

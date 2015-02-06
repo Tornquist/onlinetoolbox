@@ -13,3 +13,5 @@
         = note.created_at.strftime("%B %e, %Y")
     %div.panel-body
       = simple_format(note.content)
+
+= link_to "Back", section_path(@section), class: "btn btn-danger"

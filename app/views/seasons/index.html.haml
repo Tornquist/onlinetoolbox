@@ -1,34 +1,43 @@
-%h1
-  Listing Seasons
+%div.row
+  %h1
+    %div.col-sm-6
+      Listing Seasons
+  %div.col-sm-6
+    %div.button-group.pull-right-cond
+      = link_to 'New Season', new_season_path, class: "btn btn-success"
 
-%table
-  %thead
-    %tr
-      %th
-        Name
-      %th
-        Start
-      %th
-        End
-      %th
-      %th
-      %th
+%div.bottom-spacer
+  %div.row
+    %div.table-responsive
+      %table.table.table-hover.table-condensed
+        %thead
+          %tr
+            %th
+              Name
+            %th
+              Start
+            %th
+              End
+            %th
+              Members
+            %th
+              Show
+            %th
+              Edit
 
-  %tbody>
-    - @seasons.each do |season|
-      %tr
-        %td
-          = season.name
-        %td
-          = season.start
-        %td
-          = season.end
-        %td
-          = link_to 'Show', season
-        %td
-          = link_to 'Edit', edit_season_path(season)
-        %td
-          = link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' }
-<br>
-
-= link_to 'New Season', new_season_path
+        %tbody>
+          - @seasons.order(:start).reverse.each do |season|
+            %tr
+              %td
+                = season.name
+              %td
+                = season.start.strftime("%B %e, %Y")
+              %td
+                = season.end.strftime("%B %e, %Y")
+              %td
+                = season.members
+              %td
+                = link_to (fa_icon "desktop"), season, class: "btn btn-primary"
+              %td
+                = link_to (fa_icon "edit"), edit_season_path(season), class: "btn btn-success"
+                =# link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' }

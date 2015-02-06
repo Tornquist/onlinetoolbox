@@ -1,0 +1,19 @@
+%div.jumbotron
+  %h1
+    = @section.season.name
+    |
+    = @section.name
+
+- @ranks.each do |rank|
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            %span
+              Rank:
+              = rank.name
+        %div.panel-body
+
+= link_to 'Edit', edit_section_path(@section), class: "btn btn-success"
+= link_to 'Back', sections_path, class: "btn btn-danger"

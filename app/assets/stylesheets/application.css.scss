@@ -32,3 +32,10 @@ body {
     width: 50%;
   }
 }
+
+.pull-right-cond {
+  @extend .pull-right;
+  @media(max-width: 768px) {
+    float: left !important; //This is only here because the original style used important. Don't hate me.
+  }
+}

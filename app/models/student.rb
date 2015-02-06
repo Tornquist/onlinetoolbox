@@ -78,6 +78,10 @@ class Student < ActiveRecord::Base
     first.nil? ? "Unknown" : first.recruit_status.name
   end
 
+  def column_color
+    section_members.size == 0 ? "" : "success"
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = {}

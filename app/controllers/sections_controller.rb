@@ -9,6 +9,7 @@ class SectionsController < ApplicationController
   end
 
   def show
+    @ranks = @section.ranks.order(:index)
     respond_with(@section)
   end
 
@@ -18,6 +19,7 @@ class SectionsController < ApplicationController
   end
 
   def edit
+    @ranks = @section.ranks.order(:index)
   end
 
   def create
@@ -42,6 +44,11 @@ class SectionsController < ApplicationController
     end
 
     def section_params
-      params.require(:section).permit(:name, :season_id)
+      params.require(:section).permit(:name, :season_id,
+                                     ranks_attributes:
+                                     [ :id,
+                                       :_destroy,
+                                       :index,
+                                       :name])
     end
 end

@@ -19,7 +19,7 @@
       %div.panel.panel-primary
         %div.panel-heading
           %div.panel-title
-            = section.name
+            = link_to section.name, section_path(section)
         %div.panel-body
           %div.row
             %div.col-sm-6
@@ -46,5 +46,5 @@
                       = simple_format(note.content)
 
 
-= link_to 'Edit', edit_season_path(@season)
-= link_to 'Back', seasons_path
+= link_to 'Edit', edit_season_path(@season), class: "btn btn-success"
+= link_to 'Back', seasons_path, class: "btn btn-danger"
