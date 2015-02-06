@@ -34,7 +34,7 @@ class Student < ActiveRecord::Base
     end
   end
 
-  def full_name_inversed
+  def full_name_reversed
     arr = [last_name, first_name]
     arr.reject! { |c| c.empty? }
     arr.join(", ")
@@ -82,6 +82,16 @@ class Student < ActiveRecord::Base
 
   def column_color
     section_members.size == 0 ? "" : "success"
+  end
+
+  def rank(section)
+    arr = ranks.where(:section_id => section.id)
+    if (arr.size == 0)
+      RankMember.new(student_id: id)
+    else
+      rank = arr.first
+      RankMember.where(student_id: id, rank_id: rank.id).first
+    end
   end
 
   def self.import(file)

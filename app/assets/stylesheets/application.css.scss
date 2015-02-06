@@ -11,6 +11,11 @@ body {
   padding-bottom: 15px
 }
 
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
 .form-control-date {
   @extend .form-control;
   @media (min-width: 768px) {

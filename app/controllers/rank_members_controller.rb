@@ -23,17 +23,24 @@ class RankMembersController < ApplicationController
   def create
     @rank_member = RankMember.new(rank_member_params)
     @rank_member.save
-    respond_with(@rank_member)
+    redirect_to section_path(@rank_member.rank.section)
   end
 
   def update
+    rank_id = rank_member_params[:rank_id]
+    section = nil
+    if rank_id.blank?
+      section = @rank_member.rank.section
+    else
+      section = Rank.find(rank_id).section
+    end
     @rank_member.update(rank_member_params)
-    respond_with(@rank_member)
+    redirect_to section_path(section)
   end
 
   def destroy
     @rank_member.destroy
-    respond_with(@rank_member)
+    redirect_to section_path(@rank_member.rank.section)
   end
 
   private

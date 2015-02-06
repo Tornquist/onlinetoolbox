@@ -1,6 +1,30 @@
 %div.row
-  %div.col-sm-12
+  %div.col-sm-2
+    %div.form-group.text-center
+      = student.full_name_reversed
+  %div.col-sm-3
+    = form_for(student.rank(@section)) do |f|
+      %div.form-group
+        %div.input-group
+          %div.input-group-addon
+            Rank
+          = f.collection_select(:rank_id, @section.ranks.all.order(:index), :id, :name,
+            { include_blank: "Unnassigned" },
+            {class: "form-control", onchange: "this.form.submit()"})
+        = f.hidden_field :student_id, value: student.id
+  %div.col-sm-2
     %div.form-group
-      = student.first_name
-      = student.last_name
-      = collection_select(student, :rank, @section.ranks.all, :id, :name, { class: "form-control"} )
+      %div.input-group
+        %div.input-group-addon
+          Gigs
+        = text_field_tag :gig_count, 0, {class: "form-control"}
+  %div.col-sm-2
+    %div.form-group
+      %div.input-group
+        %div.input-group-addon
+          GDS
+        = text_field_tag :gds_count, 0, {class: "form-control"}
+  %div.col-sm-3.text-center
+    = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
+    = link_to (fa_icon "check"), sections_student_path(student), class: "btn btn-info"
+    = link_to (fa_icon "archive"), student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }, class: "btn btn-danger"
