@@ -2,7 +2,7 @@
   %div.col-sm-2
     %div.form-group.text-center
       = student.full_name_reversed
-  %div.col-sm-3
+  %div.col-sm-2
     = form_for(student.rank(@section)) do |f|
       %div.form-group
         %div.input-group
@@ -15,16 +15,19 @@
   %div.col-sm-2
     %div.form-group
       %div.input-group
-        %div.input-group-addon
-          Gigs
+        = link_to "Gigs", "#", class: "input-group-addon btn-primary btn"
         = text_field_tag :gig_count, 0, {class: "form-control"}
   %div.col-sm-2
     %div.form-group
       %div.input-group
-        %div.input-group-addon
-          GDS
+        = link_to "GDS", "#", class: "input-group-addon btn-primary btn"
         = text_field_tag :gds_count, 0, {class: "form-control"}
-  %div.col-sm-3.text-center
+  %div.col-sm-2
+    %div.form-group
+      %div.input-group
+        = link_to "Score", "#", class: "input-group-addon btn-primary btn"
+        = text_field_tag :gds_count, 0, {class: "form-control"}
+  %div.col-sm-2.text-center
     = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
     = link_to (fa_icon "check"), sections_student_path(student), class: "btn btn-info"
     = link_to (fa_icon "archive"), student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }, class: "btn btn-danger"
