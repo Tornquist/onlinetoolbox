@@ -1,0 +1,44 @@
+%div.jumbotron
+  %h1
+    = @student.full_name
+  %div.lead
+    = @season.name
+    |
+    GDS Scores
+
+- @games.each do |game|
+  - score = game.scores.where(student_id: @student.id).first
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %div.panel-title
+            %span
+              = game.name
+              on
+              = game.played_on.to_time.strftime('%b %d, %Y')
+            - if !score.nil?
+              %span.pull-right
+                = link_to "Edit", { controller: :scores, action: :edit, id: score.id, student_id: params[:student_id], season_id: params[:season_id]} , class: "btn btn-success btn-xs"
+        %div.panel-body
+          - if score.nil?
+            = link_to "Record Scores", { controller: "scores", action: "new", student_id: params[:student_id], season_id: params[:season_id]} , class: "btn btn-success"
+          - else
+            %div.alert{class: "#{alert_color(score.total)}"}
+              %div.row
+                %div.col-sm-12
+                  %strong
+                    = "Total Score: #{score.total}"
+            %div.row
+              %div.col-sm-12
+                - score.scoring_symbols.each do |symbol|
+                  %div.btn.bottom-margin{class: "#{badge_color(score.send(symbol))}"}
+                    = symbol.to_s.titleize
+                    %span.badge
+                      = score.send(symbol)
+            - if !score.comment.empty?
+              %div.row
+                %div.col-sm-12
+                  %strong
+                    Note:
+                  = score.comment

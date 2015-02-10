@@ -1,0 +1,8 @@
+%div.jumbotron
+  %h1
+    Editing Score
+
+= render 'form'
+
+= link_to 'Show', { controller: "scores", action: "show", student_id: params[:student_id], season_id: params[:season_id], score_id: @score.id}
+= link_to 'Back', scores_path

@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_id: 1
+  user_id: 1
+  game_id: 1
+  memorization: 1
+  music_effort: 1
+  marching_fundamentals: 1
+  marching_precision: 1
+  marching_effort: 1
+  rehearsal_etiquette: 1
+  preparedness: 1
+  punctuality: 1
+  gameday_enthusiasm: 1
+  gameday_professionalism: 1
+  comment: MyString
+
+two:
+  student_id: 1
+  user_id: 1
+  game_id: 1
+  memorization: 1
+  music_effort: 1
+  marching_fundamentals: 1
+  marching_precision: 1
+  marching_effort: 1
+  rehearsal_etiquette: 1
+  preparedness: 1
+  punctuality: 1
+  gameday_enthusiasm: 1
+  gameday_professionalism: 1
+  comment: MyString

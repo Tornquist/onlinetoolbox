@@ -1,0 +1,1 @@
+json.extract! @score, :id, :student_id, :user_id, :game_id, :memorization, :music_effort, :marching_fundamentals, :marching_precision, :marching_effort, :rehearsal_etiquette, :preparedness, :punctuality, :gameday_enthusiasm, :gameday_professionalism, :comment, :created_at, :updated_at

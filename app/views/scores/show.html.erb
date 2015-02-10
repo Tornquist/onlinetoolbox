@@ -1,0 +1,74 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @score.student_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @score.user_id %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @score.game_id %>
+</p>
+
+<p>
+  <strong>Memorization:</strong>
+  <%= @score.memorization %>
+</p>
+
+<p>
+  <strong>Music effort:</strong>
+  <%= @score.music_effort %>
+</p>
+
+<p>
+  <strong>Marching fundamentals:</strong>
+  <%= @score.marching_fundamentals %>
+</p>
+
+<p>
+  <strong>Marching precision:</strong>
+  <%= @score.marching_precision %>
+</p>
+
+<p>
+  <strong>Marching effort:</strong>
+  <%= @score.marching_effort %>
+</p>
+
+<p>
+  <strong>Rehearsal etiquette:</strong>
+  <%= @score.rehearsal_etiquette %>
+</p>
+
+<p>
+  <strong>Preparedness:</strong>
+  <%= @score.preparedness %>
+</p>
+
+<p>
+  <strong>Punctuality:</strong>
+  <%= @score.punctuality %>
+</p>
+
+<p>
+  <strong>Gameday enthusiasm:</strong>
+  <%= @score.gameday_enthusiasm %>
+</p>
+
+<p>
+  <strong>Gameday professionalism:</strong>
+  <%= @score.gameday_professionalism %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @score.comment %>
+</p>
+
+<%= link_to 'Edit', edit_score_path(@score) %> |
+<%= link_to 'Back', scores_path %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :scores, path: "seasons/:season_id/scores/:student_id"
+
   resources :rank_members
 
   resources :ranks
