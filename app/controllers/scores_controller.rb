@@ -54,11 +54,6 @@ class ScoresController < ApplicationController
     redirect_to season_student_scores_path(@season, @student)
   end
 
-  def destroy
-    @score.destroy
-    respond_with(@score)
-  end
-
   private
     def score_params
       params.require(:score).permit(:student_id, :user_id, :game_id, :memorization, :music_effort, :marching_fundamentals, :marching_precision, :marching_effort, :rehearsal_etiquette, :preparedness, :punctuality, :gameday_enthusiasm, :gameday_professionalism, :comment)

@@ -9,7 +9,8 @@
             %div.panel-title
               Game
           %div.panel-body
-            = f.collection_select(:game_id, @season.games, :id, :name, {}, {:disabled=>true, class: "form-control"})
+            = f.hidden_field :game_id
+            = f.collection_select(:game_id_visible, @season.games, :id, :name, {:selected => @score.game_id}, {disabled: true, class: "form-control"})
     %div.row
       %div.col-sm-12
         %div.panel.panel-primary
