@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :rank_members
+  resources :rank_members, only: [:index, :show, :update, :create]
 
   resources :ranks
 
