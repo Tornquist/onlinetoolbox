@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   #resources :section_notes
 
-  resources :section_members
+  #resources :section_members
 
   get 'sections/:id/notes', to: 'section_notes#notes', as: 'section_notes'
   post 'sections/:id/notes', to: 'section_notes#create'
