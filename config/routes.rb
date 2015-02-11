@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :rank_members, only: [:index, :show, :update, :create]
 
-  resources :ranks
+  #resources :ranks
 
   #resources :section_notes
 
