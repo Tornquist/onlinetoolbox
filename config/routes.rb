@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   #resources :scores, path: "seasons/:season_id/scores/:student_id"
-  resources :seasons do
-    resources :students do
+  resources :seasons, except: [:destroy] do
+    resources :students, only: [] do
       resources :scores, except: [:destroy, :show]
     end
   end
@@ -20,8 +20,6 @@ Rails.application.routes.draw do
   resources :sections
 
   resources :games
-
-  resources :seasons
 
   resources :claimed_students
 

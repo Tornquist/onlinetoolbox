@@ -34,11 +34,6 @@ class SeasonsController < ApplicationController
     redirect_to seasons_path
   end
 
-  def destroy
-    @season.destroy
-    respond_with(@season)
-  end
-
   private
     def default_section_names
       ["Piccolo","Clarinet","Saxophone", "Trumpet", "Mellophone",
