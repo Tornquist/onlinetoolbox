@@ -25,8 +25,8 @@
   %div.col-sm-2
     %div.form-group
       %div.input-group
-        = link_to "Score", "#", class: "input-group-addon btn-primary btn"
-        = text_field_tag :gds_count, 0, {class: "form-control"}
+        = link_to "Score", season_student_scores_path(@section.season, student), class: "input-group-addon btn-primary btn"
+        = text_field_tag :gds_count, student.gdsScore(@section), {class: "form-control"}
   %div.col-sm-2.text-center
     = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
     = link_to (fa_icon "check"), sections_student_path(student), class: "btn btn-info"

@@ -1,7 +1,11 @@
 %div.jumbotron
   %h1
-    New Score
+    = @student.full_name
+  %div.lead
+    = @season.name
+    |
+    GDS Scores
 
 = render 'form'
 
-= link_to 'Back', scores_path
+= link_to 'Back', season_student_scores_path, class: "btn btn-danger"

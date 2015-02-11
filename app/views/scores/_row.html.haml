@@ -1,0 +1,15 @@
+= f.label symbol, "#{symbol.to_s.titleize}"
+%div.help-blockj
+  = "#{@score.scoring_text[@score.scoring_symbols.index(symbol)]}"
+%div.form-group.center
+  = f.label symbol, "1", class: "radio-inline"
+  = f.radio_button symbol, "1", class: "radio-inline"
+  = f.label symbol, "2", class: "radio-inline"
+  = f.radio_button symbol, "2", class: "radio-inline"
+  = f.label symbol, "3", class: "radio-inline"
+  = f.radio_button symbol, "3", class: "radio-inline"
+  = f.label symbol, "4", class: "radio-inline"
+  = f.radio_button symbol, "4", class: "radio-inline"
+  = f.label symbol, "5", class: "radio-inline"
+  = f.radio_button symbol, "5", class: "radio-inline"
+

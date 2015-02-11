@@ -1,8 +1,11 @@
 %div.jumbotron
   %h1
-    Editing Score
+    = @student.full_name
+  %div.lead
+    = @season.name
+    |
+    GDS Scores
 
 = render 'form'
 
-= link_to 'Show', { controller: "scores", action: "show", student_id: params[:student_id], season_id: params[:season_id], score_id: @score.id}
-= link_to 'Back', scores_path
+= link_to 'Back', season_student_scores_path, class: "btn btn-danger"

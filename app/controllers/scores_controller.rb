@@ -12,26 +12,46 @@ class ScoresController < ApplicationController
   end
 
   def new
+    @season = Season.find(params[:season_id])
+    @student = Student.find(params[:student_id])
     @score = Score.new
     @score.user_id = current_user.id
-    @score.student_id = params[:student_id]
-    @season = Season.find(params[:season_id])
-    respond_with(@score)
+    @score.student_id = @student.id
+    if (params[:game_id])
+      @score.game_id = params[:game_id]
+      score = Score.where(:student_id => @student.id,
+                          :game_id => @score.game_id)
+      if (score.empty?)
+        respond_with(@score)
+      else
+        redirect_to edit_season_student_score_path(@season, @student, score.first)
+      end
+    else
+      flash[:error] = "Warning: No Game ID Provided. Please click a link below."
+      redirect_to season_student_scores_path(@season, @student)
+    end
   end
 
   def edit
+    @season = Season.find(params[:season_id])
+    @student = Student.find(params[:student_id])
     @score = Score.find(params[:id])
   end
 
   def create
+    @season = Season.find(params[:season_id])
+    @student = Student.find(params[:student_id])
     @score = Score.new(score_params)
     @score.save
-    respond_with(@score)
+    redirect_to season_student_scores_path(@season, @student)
   end
 
   def update
+    @season = Season.find(params[:season_id])
+    @student = Student.find(params[:student_id])
+    @score = Score.find(params[:id])
     @score.update(score_params)
-    respond_with(@score)
+    redirect_to season_student_scores_path(@season, @student)
   end
 
   def destroy

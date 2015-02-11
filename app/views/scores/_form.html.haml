@@ -1,31 +1,59 @@
-= form_for(@score) do |f|
-  = f.label :student_id
-  = f.number_field :student_id
-  = f.label :user_id
-  = f.number_field :user_id
-  = f.label :game_id
-  = f.number_field :game_id
-  = f.collection_select(:game_id, @season.games, :id, :name, {}, {class: "form-control"})
-  = f.label :memorization
-  = f.number_field :memorization
-  = f.label :music_effort
-  = f.number_field :music_effort
-  = f.label :marching_fundamentals
-  = f.number_field :marching_fundamentals
-  = f.label :marching_precision
-  = f.number_field :marching_precision
-  = f.label :marching_effort
-  = f.number_field :marching_effort
-  = f.label :rehearsal_etiquette
-  = f.number_field :rehearsal_etiquette
-  = f.label :preparedness
-  = f.number_field :preparedness
-  = f.label :punctuality
-  = f.number_field :punctuality
-  = f.label :gameday_enthusiasm
-  = f.number_field :gameday_enthusiasm
-  = f.label :gameday_professionalism
-  = f.number_field :gameday_professionalism
-  = f.label :comment
-  = f.text_field :comment
-  = f.submit
+%div.bottom-spacer
+  = form_for([@season, @student, @score]) do |f|
+    = f.hidden_field :student_id
+    = f.hidden_field :user_id
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Game
+          %div.panel-body
+            = f.collection_select(:game_id, @season.games, :id, :name, {}, {:disabled=>true, class: "form-control"})
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Music / Performance
+          %div.panel-body
+            = render 'row', f: f, symbol: :memorization
+            = render 'row', f: f, symbol: :music_effort
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Marching
+          %div.panel-body
+            = render 'row', f: f, symbol: :marching_fundamentals
+            = render 'row', f: f, symbol: :marching_precision
+            = render 'row', f: f, symbol: :marching_effort
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Focus and Preparation
+          %div.panel-body
+            = render 'row', f: f, symbol: :rehearsal_etiquette
+            = render 'row', f: f, symbol: :preparedness
+            = render 'row', f: f, symbol: :punctuality
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Gameday
+          %div.panel-body
+            = render 'row', f: f, symbol: :gameday_enthusiasm
+            = render 'row', f: f, symbol: :gameday_professionalism
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              Comments
+          %div.panel-body
+            = f.text_area :comment, class: "form-control"
+    = f.submit class: "btn btn-success"

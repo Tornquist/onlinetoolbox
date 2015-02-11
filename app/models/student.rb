@@ -95,6 +95,13 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def gdsScore(section)
+    scores = Score.where(game_id: section.season.games, student_id: id)
+    sum = 0
+    scores.each { |score| sum += score.total }
+    sum
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = {}

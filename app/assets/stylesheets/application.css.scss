@@ -48,3 +48,11 @@ body {
     float: left !important; //This is only here because the original style used important. Don't hate me.
   }
 }
+
+.center {
+    text-align:center;
+}
+
+.center form {
+    display:inline-block;
+}
