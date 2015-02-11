@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   #resources :games
 
-  resources :claimed_students
+  #resources :claimed_students
 
   get '/comments/new', to: 'comments#new', as: 'new_comment'
   post '/comments/', to: 'comments#create', as: 'comments'
