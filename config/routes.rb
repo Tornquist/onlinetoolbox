@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   resources :sections, except: [:index, :destroy]
 
-  resources :games
+  #resources :games
 
   resources :claimed_students
 
