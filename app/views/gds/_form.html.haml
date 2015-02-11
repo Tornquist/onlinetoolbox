@@ -1,0 +1,38 @@
+%div.bottom-spacer
+  = form_for([@season, @student, @gds]) do |f|
+    = f.hidden_field :student_id
+    = f.hidden_field :user_id
+    = f.hidden_field :game_id
+    %div.row
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %div.panel-title
+              GDS Assignment
+          %div.panel-body
+            %div.form-horizontal
+              %div.form-group
+                %div.col-sm-2.control-label
+                  Game
+                %div.col-sm-10
+                  = f.hidden_field :game_id
+                  = f.collection_select(:game_id_visible, @season.games, :id, :name, {:selected => @gds.game_id}, {disabled: true, class: "form-control"})
+              %div.form-group
+                %div.col-sm-2.control-label
+                  Duration
+                %div.col-sm-10
+                  = f.collection_select(:gds_type_id, GdsType.all, :id, :name, {}, {class: "form-control"})
+              %div.form-group
+                %div.col-sm-2.control-label
+                  Assign GDS Duties?
+                %div.col-sm-10
+                  %span.form-control
+                    = f.check_box :available
+                    
+                    (Uncheck if student is absent or unable work)
+              %div.form-group
+                %div.col-sm-2.control-label
+                  Comments
+                %div.col-sm-10
+                  = f.text_area :comment, class: "form-control"
+    = f.submit class: "btn btn-success"

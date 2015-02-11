@@ -1,0 +1,11 @@
+%div.jumbotron
+  %h1
+    = @student.full_name
+  %div.lead
+    = @season.name
+    |
+    GDS Assignment
+
+= render 'form'
+
+= link_to 'Back', season_student_gds_index_path, class: "btn btn-danger"
