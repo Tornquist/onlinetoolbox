@@ -12,6 +12,7 @@ class Student < ActiveRecord::Base
   has_many :rank_members
   has_many :ranks, through: :rank_members
   has_many :scores
+  has_many :gds
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }
@@ -100,6 +101,11 @@ class Student < ActiveRecord::Base
     sum = 0
     scores.each { |score| sum += score.total }
     sum
+  end
+
+  def gdsCount(section)
+    gdsGames = Gds.where(game_id: section.season.games, student_id: id)
+    gdsGames.size
   end
 
   def self.import(file)

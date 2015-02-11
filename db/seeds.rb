@@ -71,6 +71,11 @@ RecruitStatus.create(name: "Confirmed Yes [Jazz]")
 RecruitStatus.create(name: "Not Interested in PU Bands")
 RecruitStatus.create(name: "Not Attending Purdue")
 
+#GDS Types
+GdsType.create(name: "Fulltime")
+GdsType.create(name: "Pregame")
+GdsType.create(name: "Halftime")
+
 #Fields
 Field.create(name: "Gender", index: 0, group_id: 3, description: "", options: "Male\nFemale", hidden: false)
 Field.create(name: "Home Phone", index: 1, group_id: 2, description: "[xxx.xxx.xxxx]", options: "", hidden: false, locked: true)
