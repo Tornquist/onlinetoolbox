@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   get 'sections/:id/notes', to: 'section_notes#notes', as: 'section_notes'
   post 'sections/:id/notes', to: 'section_notes#create'
 
-  resources :sections
+  resources :sections, except: [:index, :destroy]
 
   resources :games
 
