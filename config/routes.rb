@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   resources :instruments
 
   get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'
-  resources :students do
+  resources :students, except: :destroy do
     put :claim
     put :unclaim
     delete :archive

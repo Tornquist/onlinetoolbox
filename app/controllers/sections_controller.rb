@@ -11,6 +11,7 @@ class SectionsController < ApplicationController
   def show
     @ranks = @section.ranks.order(:index)
     @unranked = students_without_rank
+    session[:return_to] ||= request.referer
     respond_with(@section)
   end
 
@@ -41,7 +42,7 @@ class SectionsController < ApplicationController
 
   private
     def students_without_rank
-      rankless = @section.students.order(:last_name, :first_name)
+      rankless = @section.students.where(:archive => false).order(:last_name, :first_name)
       @section.ranks.each { |rank| rankless -= rank.students }
       rankless
     end

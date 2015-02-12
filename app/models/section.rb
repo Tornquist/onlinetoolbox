@@ -11,10 +11,10 @@ class Section < ActiveRecord::Base
   end
 
   def returning_members
-    section_members.reject{ |i| i.student.recruit }.size
+    section_members.reject{ |i| i.student.recruit || i.student.archive }.size
   end
 
   def rookies
-    section_members.reject{ |i| !i.student.recruit }.size
+    section_members.reject{ |i| !i.student.recruit || i.student.archive }.size
   end
 end

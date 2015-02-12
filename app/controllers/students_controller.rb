@@ -7,6 +7,7 @@ class StudentsController < ApplicationController
   def index
     @claimed_students = current_user.students
     @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true)).select { |student| (current_user.instruments - student.instruments).size != current_user.instruments.size }
+    session[:return_to] ||= request.referer
   end
 
   def unclaimed
@@ -87,16 +88,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  # DELETE /students/1
-  # DELETE /students/1.json
-  def destroy
-    @student.destroy
-    respond_to do |format|
-      format.html { redirect_to students_url, notice: 'Student was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   def sections
   end
 
@@ -113,7 +104,7 @@ class StudentsController < ApplicationController
   def archive
     Student.update(params["student_id"], archive: true)
     ClaimedStudent.where(student_id: params["student_id"], user_id: current_user.id).destroy_all
-    redirect_to students_path
+    redirect_to session.delete(:return_to)
   end
 
   def import

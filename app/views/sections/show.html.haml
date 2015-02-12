@@ -14,7 +14,7 @@
               Rank:
               = rank.name
         %div.panel-body
-          - rank.students.each do |student|
+          - rank.students.where(:archive => false).order(:last_name, :first_name).each do |student|
             = render 'student_row', student: student
 
 - if @unranked.size != 0
