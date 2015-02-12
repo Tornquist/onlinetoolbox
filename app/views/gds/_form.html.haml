@@ -32,6 +32,14 @@
                     (Uncheck if student is absent or unable work)
               %div.form-group
                 %div.col-sm-2.control-label
+                  Automatic GDS
+                %div.col-sm-10
+                  %span.form-control
+                    = f.check_box :automatic
+                    
+                    (Checking this counts as punishment served)
+              %div.form-group
+                %div.col-sm-2.control-label
                   Comments
                 %div.col-sm-10
                   = f.text_area :comment, class: "form-control"

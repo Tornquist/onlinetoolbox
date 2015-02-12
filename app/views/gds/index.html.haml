@@ -25,6 +25,12 @@
           - if gds.nil?
             = link_to "Assign GDS", new_season_student_gds_path(@season, @student, :game_id => game.id), class: "btn btn-success"
           - else
+            - if gds.automatic
+              %div.row
+                %div.col-sm-12
+                  %div.progress
+                    %div.progress-bar.progress-bar-danger{style: "width: 100%"}
+                      Automatic GDS
             %div.row
               %div.col-sm-6
                 %div.alert{class: "#{gds.pregame_color}"}

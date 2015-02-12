@@ -91,9 +91,10 @@ ActiveRecord::Schema.define(version: 20150211214734) do
     t.integer  "game_id"
     t.integer  "gds_type_id"
     t.boolean  "available",   default: true
+    t.boolean  "automatic",   default: false
     t.string   "comment"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "gds_types", force: :cascade do |t|

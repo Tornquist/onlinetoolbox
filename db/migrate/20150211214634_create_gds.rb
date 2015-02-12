@@ -6,6 +6,7 @@ class CreateGds < ActiveRecord::Migration
       t.integer :game_id
       t.integer :gds_type_id
       t.boolean :available, default: true
+      t.boolean :automatic, default: false
       t.string :comment
 
       t.timestamps null: false
