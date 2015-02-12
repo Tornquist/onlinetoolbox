@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  #resources :scores, path: "seasons/:season_id/scores/:student_id"
   resources :seasons, except: [:destroy] do
     resources :students, only: [] do
       resources :scores, except: [:destroy, :show]
       resources :gds, except: :show
+      get '/gigs/', to: 'gigs#student_view'
     end
+    resources :gigs
   end
 
   resources :rank_members, only: [:index, :show, :update, :create]

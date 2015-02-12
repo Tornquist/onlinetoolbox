@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @gig.student_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @gig.user_id %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @gig.game_id %>
+</p>
+
+<p>
+  <strong>Offense:</strong>
+  <%= @gig.offense %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @gig.value %>
+</p>
+
+<%= link_to 'Edit', edit_gig_path(@gig) %> |
+<%= link_to 'Back', gigs_path %>

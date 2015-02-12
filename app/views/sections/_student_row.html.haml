@@ -15,7 +15,7 @@
   %div.col-sm-2
     %div.form-group
       %div.input-group
-        = link_to "Gigs", "#", class: "input-group-addon btn-primary btn"
+        = link_to "Gigs", season_student_gigs_path(@section.season, student), class: "input-group-addon btn-primary btn"
         = text_field_tag :gig_count, 0, {class: "form-control"}
   %div.col-sm-2
     %div.form-group

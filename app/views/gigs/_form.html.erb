@@ -1,0 +1,37 @@
+<%= form_for(@gig) do |f| %>
+  <% if @gig.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gig.errors.count, "error") %> prohibited this gig from being saved:</h2>
+
+      <ul>
+      <% @gig.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :student_id %><br>
+    <%= f.number_field :student_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :game_id %><br>
+    <%= f.number_field :game_id %>
+  </div>
+  <div class="field">
+    <%= f.label :offense %><br>
+    <%= f.text_field :offense %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.number_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

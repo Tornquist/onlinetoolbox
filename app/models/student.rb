@@ -13,6 +13,7 @@ class Student < ActiveRecord::Base
   has_many :ranks, through: :rank_members
   has_many :scores
   has_many :gds
+  has_many :gigs
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }

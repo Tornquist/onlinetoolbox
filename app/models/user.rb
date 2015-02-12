@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :instruments, through: :favorite_instruments
   has_many :scores
   has_many :gds
+  has_many :gigs
 
   def full_name
     first_name.to_s + " " + last_name.to_s
