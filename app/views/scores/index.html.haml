@@ -42,3 +42,6 @@
                   %strong
                     Note:
                   = score.comment
+%div.row
+  %div.col-sm-12
+    = link_to "Back", section_path(@season.sections.where(id: @student.section_members.map { |s| s.section_id }).first), class: "btn btn-danger"

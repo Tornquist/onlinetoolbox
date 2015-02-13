@@ -1,0 +1,22 @@
+%div.row
+  %div.col-sm-12
+    %div.jumbotron
+      %h1
+        = @season.name
+      %div.lead
+        GDS Assignments
+        %div.progress
+          %div.progress-bar.progress-bar-info{style: "width: 33%"}
+            Automatic
+          %div.progress-bar.progress-bar-success{style: "width: 34%"}
+            Available
+          %div.progress-bar.progress-bar-danger{style: "width: 33%"}
+            Unavailable
+
+%div.row
+  %div.col-sm-12
+    #accordion.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
+      - @season.games.order(:played_on).each_with_index do |game, index|
+        = render 'game_panel', index: index, game: game
+
+= link_to 'Back', season_path(@season), class: "btn btn-danger"

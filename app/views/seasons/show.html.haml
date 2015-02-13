@@ -1,7 +1,7 @@
 %div.jumbotron
   %h1
     = @season.name
-  %div.row
+  %div.row.bottom-spacer
     %div.col-sm-4
       %span.label.label-primary
         Start:
@@ -13,38 +13,52 @@
       = "&nbsp;".html_safe
       = @season.end.strftime("%B %e, %Y")
 
-- @season.sections.each do |section|
-  %div.row
-    %div.col-sm-12
-      %div.panel.panel-primary
-        %div.panel-heading
-          %div.panel-title
-            = link_to section.name, section_path(section)
-        %div.panel-body
-          %div.row
-            %div.col-sm-6
-              %ul.list-group
-                %li.list-group-item
-                  %span.badge
-                    = section.returning_members
-                  Returning
-            %div.col-sm-6
-              %ul.list-group
-                %li.list-group-item
-                  %span.badge
-                    = section.rookies
-                  Rookies
-          - if section.section_notes.size != 0
+%div.row.bottom-margin-large
+  %div.col-sm-12
+    %div.btn-group.btn-group-justified
+      = link_to "Recruitment", season_recruitment_path(@season), class: "btn btn-warning"
+      = link_to "Gigs", "#", class: "btn btn-info"
+      = link_to "GDS", season_gds_path(@season), class: "btn btn-danger"
+      = link_to 'Edit Season', edit_season_path(@season), class: "btn btn-success"
+
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-default
+      %div.panel-heading
+        %div.panel-title
+          Season Summary
+      %div.panel-body
+        %div.row
+          %div.col-sm-2
+            %strong
+              Games
+          %div.col-sm-10
             %ul.list-group
-              - section.section_notes.order('created_at DESC').each do |note|
-                %div.list-group-item
+              - @season.games.order(:played_on).each do |game|
+                %li.list-group-item
+                  = game.name
+                  on
+                  = game.played_on.strftime("%B %e, %Y")
+        %div.row
+          %div.col-sm-2
+            %strong
+              Sections
+          %div.col-sm-10
+            %ul.list-group
+              - @season.sections.order(:name).each do |section|
+                %li.list-group-item
                   %div.row
-                    %div.col-sm-2
+                    %div.col-sm-4
+                      = link_to section.name, section_path(section)
+                    %div.col-sm-4
+                      Returning Members:
                       %strong
-                        = note.created_at.strftime("%B %e, %Y")
-                    %div.col-sm-10
-                      = simple_format(note.content)
+                        = section.returning_members
+                    %div.col-sm-4
+                      Rookies:
+                      %strong
+                        = section.rookies
 
-
-= link_to 'Edit', edit_season_path(@season), class: "btn btn-success"
-= link_to 'Back', seasons_path, class: "btn btn-danger"
+%div.row
+  %div.col-sm-12
+    = link_to 'Back', seasons_path, class: "btn btn-danger"

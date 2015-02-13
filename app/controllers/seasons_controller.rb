@@ -12,6 +12,16 @@ class SeasonsController < ApplicationController
     respond_with(@season)
   end
 
+  def recruitment
+    @season = Season.find(params[:season_id])
+    respond_with(@season)
+  end
+
+  def gds
+    @season = Season.find(params[:season_id])
+    respond_with(@season)
+  end
+
   def new
     @season = Season.new
     3.times { @season.games.build(season_id: @season.id) }

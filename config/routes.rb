@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       get '/gigs/', to: 'gigs#student_view'
     end
     resources :gigs
+    get '/recruitment/', to: 'seasons#recruitment'
+    get '/gds/', to: 'seasons#gds'
   end
 
   resources :rank_members, only: [:index, :show, :update, :create]

@@ -1,0 +1,49 @@
+%div.jumbotron
+  %h1
+    = @season.name
+    |
+    Recruitment
+  %div.row
+    %div.col-sm-4
+      %span.label.label-primary
+        Start:
+      = "&nbsp;".html_safe
+      = @season.start.strftime("%B %e, %Y")
+    %div.col-sm-4
+      %span.label.label-primary
+        End
+      = "&nbsp;".html_safe
+      = @season.end.strftime("%B %e, %Y")
+
+- @season.sections.each do |section|
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %div.panel-title
+            = link_to section.name, section_path(section)
+        %div.panel-body
+          %div.row
+            %div.col-sm-6
+              %ul.list-group
+                %li.list-group-item
+                  %span.badge
+                    = section.returning_members
+                  Returning
+            %div.col-sm-6
+              %ul.list-group
+                %li.list-group-item
+                  %span.badge
+                    = section.rookies
+                  Rookies
+          - if section.section_notes.size != 0
+            %ul.list-group
+              - section.section_notes.order('created_at DESC').each do |note|
+                %div.list-group-item
+                  %div.row
+                    %div.col-sm-2
+                      %strong
+                        = note.created_at.strftime("%B %e, %Y")
+                    %div.col-sm-10
+                      = simple_format(note.content)
+= link_to 'Back', season_path(@season), class: "btn btn-danger"

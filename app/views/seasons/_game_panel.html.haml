@@ -1,0 +1,25 @@
+%div.panel.panel-default
+  %div.panel-heading{:role => "tab", id: "heading#{index}"}
+    %h4.panel-title
+      %a.collapsed{"aria-controls" => "collapse#{index}", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse#{index}"}
+        = game.name
+        on
+        = game.played_on.strftime("%B %e, %Y")
+  %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse#{index}"}
+    %div.panel-body
+      - gds_sorted = game.gds.sort { |a, b| a.student.full_name_reversed <=> b.student.full_name_reversed }
+      - if !gds_sorted.empty?
+        %div.row
+          %div.col-sm-12
+            %div.progress
+              %div.progress-bar.progress-bar-warning{style: "width: 50%"}
+                Pregame
+              %div.progress-bar.progress-bar-warning{style: "width: 50%"}
+                Halftime
+      - gds_sorted.each do |gds|
+        %div.row
+          %div.col-sm-12
+            %div.progress
+              %div.progress-bar{style: "width: #{gds.progress_bar_width}", class: "#{gds.progress_bar_float} #{gds.progress_bar_color}"}
+                %a{"data-container"=>"body", "data-toggle"=>"popover", "data-placement"=>"top", "data-content"=>"#{gds.section_name} | #{gds.rank_name}", "style"=>"color: inherit;"}
+                  = gds.student.full_name
