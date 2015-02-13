@@ -4,6 +4,8 @@ class GigsController < ApplicationController
   respond_to :html
 
   def index
+    @season = Season.find(params[:season_id])
+    @games = @season.games
     @gigs = Gig.all
     respond_with(@gigs)
   end

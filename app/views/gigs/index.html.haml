@@ -1,13 +1,19 @@
 %div.jumbotron
   %h1
-    = @student.full_name
-  %div.lead
     = @season.name
-    |
-    Gigs
+  %div.row.bottom-spacer
+    %div.col-sm-4
+      %span.label.label-primary
+        Start:
+      = "&nbsp;".html_safe
+      = @season.start.strftime("%B %e, %Y")
+    %div.col-sm-4
+      %span.label.label-primary
+        End
+      = "&nbsp;".html_safe
+      = @season.end.strftime("%B %e, %Y")
 
 - @games.each do |game|
-  - gigs = game.gigs.where(student_id: @student.id)
   %div.row
     %div.col-sm-12
       %div.panel.panel-primary
@@ -18,14 +24,3 @@
               on
               = game.played_on.to_time.strftime('%b %d, %Y')
         %div.panel-body
-          - if gigs.empty?
-            %div.row
-              %div.col-sm-12
-                No Gigs
-          - else
-            %ul.list-group
-              - gigs.each do |gig|
-                %li.list-group-item
-                  = gig.offense
-                  %span.badge
-                    = gig.value

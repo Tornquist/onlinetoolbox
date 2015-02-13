@@ -19,7 +19,6 @@ class SeasonsController < ApplicationController
 
   def gds
     @season = Season.find(params[:season_id])
-    respond_with(@season)
   end
 
   def new
