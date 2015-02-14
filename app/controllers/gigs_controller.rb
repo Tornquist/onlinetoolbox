@@ -10,32 +10,36 @@ class GigsController < ApplicationController
     respond_with(@gigs)
   end
 
-  def show
-    respond_with(@gig)
-  end
-
   def new
+    @season = Season.find(params[:season_id])
     @gig = Gig.new
+    if params[:student_id]
+      @gig.student_id = params[:student_id]
+    end
     respond_with(@gig)
   end
 
   def edit
+    @season = Season.find(params[:season_id])
   end
 
   def create
+    @season = Season.find(params[:season_id])
     @gig = Gig.new(gig_params)
     @gig.save
-    respond_with(@gig)
+    redirect_to season_gigs_path(@season)
   end
 
   def update
+    @season = Season.find(params[:season_id])
     @gig.update(gig_params)
-    respond_with(@gig)
+    redirect_to season_gigs_path(@season)
   end
 
   def destroy
+    @season = Season.find(params[:season_id])
     @gig.destroy
-    respond_with(@gig)
+    redirect_to season_gigs_path(@season)
   end
 
   def student_view

@@ -1,20 +1,10 @@
-%div.jumbotron
-  %h1
-    = @season.name
-    |
-    Recruitment
-  %div.row
-    %div.col-sm-4
-      %span.label.label-primary
-        Start:
-      = "&nbsp;".html_safe
-      = @season.start.strftime("%B %e, %Y")
-    %div.col-sm-4
-      %span.label.label-primary
-        End
-      = "&nbsp;".html_safe
-      = @season.end.strftime("%B %e, %Y")
-
+%div.row
+  %div.col-sm-12
+    %div.jumbotron
+      %h1
+        = @season.name
+      %div.lead
+        Recruitment
 - @season.sections.each do |section|
   %div.row
     %div.col-sm-12

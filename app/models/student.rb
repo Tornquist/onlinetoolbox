@@ -109,6 +109,49 @@ class Student < ActiveRecord::Base
     gdsGames.size
   end
 
+  def season_gigs(season)
+    gigs.where(game_id: season.games.map(&:id))
+  end
+
+  def season_rank_text(season)
+    begin
+      ranks.where(section_id: season.sections.map(&:id)).first.name
+    rescue
+      nil
+    end
+  end
+
+  def season_section_text(season)
+    begin
+      sections.where(season_id: season.id).first.name
+    rescue
+      nil
+    end
+  end
+
+  def season_gig_count(season)
+    score = 0
+    season.games.order(:played_on).each do |game|
+      game_gds = gds.where(game_id: game)
+      game_gigs = gigs.where(game_id: game)
+      if (!game_gds.empty?)
+        if game_gds.first.automatic
+          score = 0
+        end
+      end
+      if (!game_gigs.empty?)
+        game_gigs.each do |gig|
+          score = score + gig.value
+        end
+      end
+    end
+    score
+  end
+
+  def automatic_gds(season)
+    (season_gig_count(season) >= 4)
+  end
+
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = {}

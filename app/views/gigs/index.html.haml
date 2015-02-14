@@ -1,26 +1,53 @@
-%div.jumbotron
-  %h1
-    = @season.name
-  %div.row.bottom-spacer
-    %div.col-sm-4
-      %span.label.label-primary
-        Start:
-      = "&nbsp;".html_safe
-      = @season.start.strftime("%B %e, %Y")
-    %div.col-sm-4
-      %span.label.label-primary
-        End
-      = "&nbsp;".html_safe
-      = @season.end.strftime("%B %e, %Y")
+%div.row
+  %div.col-sm-12
+    %div.jumbotron
+      %h1
+        = @season.name
+      %div.lead
+        Gig Assignment
+      %p
+        =link_to "Assign Gigs", new_season_gig_path(@season), class: "btn btn-success btn-lg"
 
-- @games.each do |game|
-  %div.row
-    %div.col-sm-12
-      %div.panel.panel-primary
-        %div.panel-heading
-          %div.panel-title
-            %span
-              = game.name
-              on
-              = game.played_on.to_time.strftime('%b %d, %Y')
-        %div.panel-body
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Gigged Students
+      %div.panel-body
+        %div.row
+          %div.col-sm-12
+            %div.table-responsive
+              %table.table.table-hover.table-condensed
+                %thead
+                  %tr
+                    %th
+                      Name
+                    %th
+                      Gigs
+                    %th
+                      Instument
+                    %th
+                      Rank
+                    %th.text-center
+                      Details
+                    %th.text-center
+                      Assign Gigs
+                %tbody
+                  - @season.students.each do |student|
+                    - if !student.season_gigs(@season).empty?
+                      %tr{class: "#{student.automatic_gds(@season) ? "danger" : ""}"}
+                        %td
+                          = link_to student.full_name_reversed, season_student_gigs_path(@season, student)
+                        %td
+                          = student.season_gig_count(@season)
+                        %td
+                          = student.season_section_text(@season)
+                        %td
+                          = student.season_rank_text(@season)
+                        %td.text-center
+                          = link_to (fa_icon "desktop"), season_student_gigs_path(@season, student), class: "btn btn-success"
+                        %td.text-center
+                          = link_to (fa_icon "thumbs-down"), new_season_gig_path(@season, student_id: student.id), class: "btn btn-warning"
+
+= link_to 'Back', season_path(@season), class: "btn btn-danger"

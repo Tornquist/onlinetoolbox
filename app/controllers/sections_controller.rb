@@ -11,6 +11,7 @@ class SectionsController < ApplicationController
   def show
     @ranks = @section.ranks.order(:index)
     @unranked = students_without_rank
+    @autogds = @section.season.students.select { |s| s.automatic_gds(@section.season) }
     session[:return_to] ||= request.referer
     respond_with(@section)
   end

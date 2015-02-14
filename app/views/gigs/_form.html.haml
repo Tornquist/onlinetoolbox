@@ -1,0 +1,18 @@
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Gig Details
+      %div.panel-body
+        = form_for([@season, @gig]) do |f|
+          = f.label :student_id
+          = f.collection_select(:student_id, @season.students, :id, :full_name_reversed, {}, {class: "form-control"})
+          = f.hidden_field :user_id, value: current_user.id
+          = f.label :game_id
+          = f.collection_select(:game_id, @season.games, :id, :name, {}, {class: "form-control"})
+          = f.label :offense
+          = f.text_area :offense, class: "form-control"
+          = f.label :value
+          = f.number_field :value, class: "form-control bottom-margin"
+          = f.submit class: "btn btn-success"

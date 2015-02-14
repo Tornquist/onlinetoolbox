@@ -4,6 +4,12 @@
     |
     = @section.name
 
+- if !@autogds.empty?
+  %div.alert.alert-danger
+    %strong
+      Automatic GDS:
+    = @autogds.map(&:full_name).join(", ")
+
 - @ranks.each do |rank|
   %div.row
     %div.col-sm-12

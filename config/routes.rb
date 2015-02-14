@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       resources :gds, except: :show
       get '/gigs/', to: 'gigs#student_view'
     end
-    resources :gigs
+    resources :gigs, except: :show
     get '/recruitment/', to: 'seasons#recruitment'
     get '/gds/', to: 'seasons#gds'
   end

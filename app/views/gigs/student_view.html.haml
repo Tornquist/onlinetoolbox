@@ -5,30 +5,75 @@
     = @season.name
     |
     Gigs
+  %p
+    = link_to "Assign Gigs", new_season_gig_path(@season, student_id: @student.id), class: "btn btn-success"
 
-- @games.each do |game|
-  - gigs = game.gigs.where(student_id: @student.id)
-  %div.row
-    %div.col-sm-12
-      %div.panel.panel-primary
-        %div.panel-heading
-          %div.panel-title
-            %span
-              = game.name
-              on
-              = game.played_on.to_time.strftime('%b %d, %Y')
-        %div.panel-body
-          - if gigs.empty?
-            %div.row
-              %div.col-sm-12
-                No Gigs
-          - else
-            %ul.list-group
-              - gigs.each do |gig|
-                %li.list-group-item
-                  = gig.offense
-                  %span.badge
-                    = gig.value
 %div.row
   %div.col-sm-12
-    = link_to "Back", section_path(@season.sections.where(id: @student.section_members.map { |s| s.section_id }).first), class: "btn btn-danger"
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Gig History
+      %div.panel-body
+        %div.row
+          %div.col-sm-12
+            %div.table-responsive
+              %table.table.table-hover.table-condensed
+                %thead
+                  %tr
+                    %th
+                      Game
+                    %th
+                      Type
+                    %th
+                      Description
+                    %th.text-center
+                      Edit
+                    %th.text-center
+                      Delete
+                    %th
+                      Value
+                    %th
+                      Total
+                %tbody
+                  - score = 0
+                  - @games.each do |game|
+                    - game_gds = @student.gds.where(game_id: game)
+                    - game_gigs = @student.gigs.where(game_id: game)
+                    - if !game_gds.empty?
+                      - if game_gds.first.automatic
+                        -score = 0
+                        %tr.success
+                          %td
+                            = game.name
+                          %td
+                            GDS
+                          %td
+                            Automatic
+                          %td.text-center
+                          %td.text-center
+                          %td
+                            N/A
+                          %th.row
+                            = score
+                    - if (!game_gigs.empty?)
+                      - game_gigs.each do |gig|
+                        - score = score + gig.value
+                        %tr{class: "#{ (score >= 4) ? "danger" : ""}"}
+                          %td
+                            = game.name
+                          %td
+                            Gig
+                          %td
+                            = gig.offense
+                          %td.text-center
+                            = link_to (fa_icon "pencil"), edit_season_gig_path(@season, gig), class: "btn btn-success btn-sm"
+                          %td.text-center
+                            = link_to (fa_icon "close"), season_gig_path(@season, gig), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }, class: "btn btn-danger btn-sm"
+                          %td
+                            = gig.value
+                          %th.row
+                            = score
+%div.row
+  %div.col-sm-12
+    = link_to "Back", :back, class: "btn btn-danger"
