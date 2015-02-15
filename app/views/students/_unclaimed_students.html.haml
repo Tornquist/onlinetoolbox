@@ -20,7 +20,7 @@
             Claim
       %tbody
         - @unclaimed_students.each_with_index do |student, i|
-          %tr
+          %tr{ class: "#{student.column_color}"}
             %th.row
               = i + 1
             %td

@@ -1,0 +1,52 @@
+%div.jumbotron
+  %h1
+    = @section.season.name
+    |
+    = @section.name
+  %div.lead
+    Transfer Students
+
+= render 'transfer_faq'
+
+= form_tag section_transfer_students_path, method: :post do
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            %span
+              Transfer Settings
+        %div.panel-body
+          %div.row
+            %div.col-sm-12
+              %strong
+                Destination
+          %div.row
+            %div.col-sm-12
+              %div.input-group{style: "width: 100%"}
+                = collection_select(:destination, :id, Section.all.sort_by {|section| section.season.start}.reverse, :id, :display_name, {}, {class: "form-control dependent-collection fifty-percent-width"})
+          %div.row
+            %div.col-sm-12
+              %div.checkbox
+                %label
+                  = check_box_tag :upgrade_students, '1', false
+                  Check to Upgrade All Transferred Students to Returning Members
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3.panel-title
+            %span
+              Students
+        %div.panel-body
+          - @section.students.sort { |a, b| a.full_name_reversed.downcase <=> b.full_name_reversed.downcase }.each do |student|
+            %div.checkbox
+              %label
+                = check_box_tag 'students[]', student.id, false
+                = student.full_name_reversed
+  %div.row.bottom-margin
+    %div.col-sm-12
+      = submit_tag "Transfer Students", class: "btn btn-success"
+%div.row
+  %div.col-sm-12
+    = link_to "Back", section_path(@section), class: "btn btn-danger"

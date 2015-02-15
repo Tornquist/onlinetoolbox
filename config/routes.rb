@@ -22,7 +22,10 @@ Rails.application.routes.draw do
   get 'sections/:id/notes', to: 'section_notes#notes', as: 'section_notes'
   post 'sections/:id/notes', to: 'section_notes#create'
 
-  resources :sections, except: [:index, :destroy]
+  resources :sections, except: [:index, :destroy] do
+    get '/transfer/', to: 'sections#transfer'
+    post '/transfer_students/', to: 'sections#transfer_students'
+  end
 
   #resources :games
 

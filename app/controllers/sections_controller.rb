@@ -41,6 +41,18 @@ class SectionsController < ApplicationController
     respond_with(@section)
   end
 
+  def transfer
+    @section = Section.find(params[:section_id])
+  end
+
+  def transfer_students
+    destination = params[:destination][:id]
+    upgrade = !params[:upgrade_students].nil?
+    students = params[:students]
+    binding.pry
+    a = 1
+  end
+
   private
     def students_without_rank
       rankless = @section.students.where(:archive => false).order(:last_name, :first_name)

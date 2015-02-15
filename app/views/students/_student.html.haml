@@ -6,15 +6,20 @@
           Student Profile
       %div.panel-body
         %div.row
-          %div.col-sm-4
+          %div.col-sm-3
             = f.label :first_name
             %br
             = f.text_field :first_name, class: "form-control"
-          %div.col-sm-4
+          %div.col-sm-3
             = f.label :last_name
             %br
             = f.text_field :last_name, class: "form-control"
-          %div.col-sm-4
+          %div.col-sm-3
             = f.label :email
             %br
             = f.text_field :email, class: "form-control"
+          %div.col-sm-3
+            = f.label :recruit
+            %br
+            = f.check_box :recruit
+            (Check for Incoming Students)

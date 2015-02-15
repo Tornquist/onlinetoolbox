@@ -1,0 +1,54 @@
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %h3.panel-title
+          %span
+            Instructions/FAQ
+      %div.panel-body
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              What does this tool do?
+          %div.col-sm-8
+            This tool allows you to quickly select students in the current section
+            and add them to another section.
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              When should I use this?
+          %div.col-sm-9
+            Use this tool when moving a large number of students.  A common use case
+            is when you are adding returning members to band camp for the following year,
+            or moving all of the students selected from band camp into the normal season database.
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              Are students removed from the current section when transferred?
+          %div.col-sm-9
+            No.  To remove them, return to the main section
+            =link_to "view,", section_path(@section)
+            and select the check box by each students name.
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              What if I put one person in the wrong section?
+          %div.col-sm-9
+            Transfer them manually on the section's main page:
+            =link_to "here.", section_path(@section)
+            To modify the student, click the check box by their name.
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              What does upgrade recuits mean?
+          %div.col-sm-9
+            When a returning member is being moved to band camp for the next year,
+            you do not want each person to still be counted as a new recruit. Checking that
+            options marks all students as veterans.
+        %div.row.bottom-margin
+          %div.col-sm-3
+            %strong
+              Should I select upgrade recruits between band camp and the normal season?
+          %div.col-sm-9
+            No.
+
