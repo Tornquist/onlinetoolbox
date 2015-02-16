@@ -1,6 +1,8 @@
 %div.row
   %div.col-sm-2
     %div.form-group.text-center
+      - if student.recruit
+        %span.glyphicon.glyphicon-registration-mark
       = student.full_name_reversed
   %div.col-sm-2
     = form_for(student.rank(@section)) do |f|
