@@ -27,7 +27,6 @@ class GigsController < ApplicationController
     @season = Season.find(params[:season_id])
     gig_hash = gig_params
     gig_hash["value"] = gig_params["value"].to_i
-    binding.pry
     @gig = Gig.new(gig_hash)
     @gig.save
     redirect_to season_gigs_path(@season)
@@ -37,7 +36,6 @@ class GigsController < ApplicationController
     @season = Season.find(params[:season_id])
     gig_hash = gig_params
     gig_hash["value"] = gig_params["value"].to_i
-    binding.pry
     @gig.update(gig_hash)
     redirect_to season_gigs_path(@season)
   end
