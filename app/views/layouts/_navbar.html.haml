@@ -7,14 +7,18 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      =link_to "Online Toolbox", "#", class: "navbar-brand"
+      =link_to "Online Toolbox", root_path, class: "navbar-brand"
     %div.collapse.navbar-collapse#navbar
       %ul.nav.navbar-nav
         %li.active
-          %a{href: "#"} Home
+          = link_to "Home", root_path
         %li
-          %a{href: "#"} Recruitment
+          = link_to "Students", students_path
         %li
-          %a{href: "#"} GDS
+          = link_to "Seasons", seasons_path
+      %ul.nav.navbar-nav.navbar-right
         %li
-          %a{href: "#"} Gigs
+          - if user_signed_in?
+            = link_to "Sign Out", destroy_user_session_path, :method => :delete
+          - else
+            = link_to "Sign In", new_user_session_path
