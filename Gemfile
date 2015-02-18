@@ -39,7 +39,7 @@ gem 'font-awesome-rails'
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
+gem 'activerecord-session_store'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

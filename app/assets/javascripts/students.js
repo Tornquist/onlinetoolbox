@@ -1,14 +1,18 @@
 var student_ready;
 student_ready = function() {
-  $('#student_upload').click(function(e){
-    e.preventDefault();
-    $('#file').click();
+  $('#import_students_confirm_btn').click(function(e){
+    $("#import_students_confirm_btn").attr("disabled", true);
+    $("#import_students_confirm_btn").text("Importing");
+  });
+  $('#import_students_btn').click(function(e){
+    $("#import_students_btn").attr("disabled", true);
+    $("#import_students_btn").val("Uploading");
+    $("#import_students_btn").siblings("a").attr("disabled", true)
+    $("#import_students_form").submit();
   });
 
-  $('#file').change(function() {
-    $('#student_upload').prop('disabled', true);
-    $('#student_upload').text('Uploading');
-  });
+  $('input[type=file]').bootstrapFileInput();
+  $("#student_json").JSONView($("#student_json").text());
 };
 
 $(document).ready(student_ready);

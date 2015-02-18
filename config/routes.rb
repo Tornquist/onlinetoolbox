@@ -48,6 +48,8 @@ Rails.application.routes.draw do
   resources :instruments
 
   get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'
+  get 'students/import/', to: 'students#upload', as: 'import_students'
+  get 'students/import_finalize/', to: 'students#import_finalize', as: 'import_students_confirm'
   resources :students, except: :destroy do
     put :claim
     put :unclaim

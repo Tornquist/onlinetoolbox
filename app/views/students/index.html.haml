@@ -5,7 +5,7 @@
   %div.col-sm-6
     %div.btn-group.pull-right-cond
       = link_to 'New Student', new_student_path, class: "btn btn-success"
-      = button_tag 'Import Students', class: "btn btn-success", id: "student_upload"
+      = link_to 'Import Students', import_students_path, class: "btn btn-success"
 
 - if @claimed_students.size != 0
   = render 'claimed_students'

@@ -108,8 +108,26 @@ class StudentsController < ApplicationController
   end
 
   def import
-    Student.import(params[:file])
-    redirect_to students_path, notice: "Students Imported"
+    if params[:file]
+      @student_objects = StudentsHelper.import(params[:file])
+      session[:student_objects] = @student_objects
+      flash[:notice] = "Notice: Review Processed Student Data"
+      render :upload
+      #render import_students_path, notice: "Students Imported"
+    else
+      flash[:error] = "Error: No File Selected"
+      redirect_to import_students_path
+    end
+  end
+
+  def import_finalize
+    StudentsHelper.import_save_result(session[:student_objects])
+    session.delete(:student_objects)
+    flash[:notice] = "Info: Students Imported"
+    redirect_to students_path
+  end
+
+  def upload
   end
 
   private

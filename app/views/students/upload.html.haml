@@ -1,0 +1,44 @@
+= stylesheet_link_tag "application", params[:controller], :media => "all"
+
+%div.jumbotron
+  %h1
+    Import Students
+
+%div.row.bottom-margin
+  %div.col-sm-12
+    = form_tag import_students_path, id: "import_students_form", multipart: true do
+      = file_field_tag :file, { :accept => 'text/csv', label: "Import Students",
+        "data-filename-placement"=>"inside", title: "Select a File to Upload",
+        class: "btn-primary"}
+      = submit_tag "Upload File", class: "btn btn-success", id: "import_students_btn"
+
+- if !@student_objects.nil?
+  %div.row
+    %div.col-sm-12
+      %div.panel.panel-primary
+        %div.panel-heading
+          %div.panel-title
+            Processed File Information
+        %div.panel-body
+          %div.row.bottom-margin
+            %div.col-sm-12
+              %strong
+                Students Identified:
+              = @student_objects.count
+          %div.row.bottom-margin
+            %div.col-sm-12
+              = link_to "Import Identified Students", import_students_confirm_path, id: "import_students_confirm_btn", class: "btn btn-success"
+          %div.row
+            %div.col-sm-12
+              %strong
+                Student Data:
+          %div.row
+            %div.col-sm-12
+              %div.panel.panel-default
+                %div.panel-body.scrollable-420
+                  %div#student_json
+                    = JSON.pretty_generate(StudentsHelper.format_students(@student_objects))
+
+%div.row
+  %div.col-sm-12
+    = link_to "Back", students_path, class: "btn btn-danger"
