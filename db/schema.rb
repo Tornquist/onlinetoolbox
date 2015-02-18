@@ -108,9 +108,9 @@ ActiveRecord::Schema.define(version: 20150218002524) do
     t.integer  "user_id"
     t.integer  "game_id"
     t.string   "offense"
-    t.integer  "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "value",      default: 0, null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "groups", force: :cascade do |t|
