@@ -131,7 +131,7 @@ class StudentsController < ApplicationController
   end
 
   def search
-
+    @students = Student.all
   end
 
   private

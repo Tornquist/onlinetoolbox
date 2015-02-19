@@ -1,0 +1,62 @@
+//= require bootstrap.file-input
+//= require jquery.jsonview
+//= require dependent_select_initialize
+//= require jquery.dataTables
+//= require jquery.dataTables.tableTools
+//= require jquery.dataTables.bootstrap
+
+var student_ready;
+student_ready = function() {
+  $('#import_students_confirm_btn').click(function(e){
+    $("#import_students_confirm_btn").attr("disabled", true);
+    $("#import_students_confirm_btn").text("Importing");
+  });
+  $('#import_students_btn').click(function(e){
+    $("#import_students_btn").attr("disabled", true);
+    $("#import_students_btn").val("Uploading");
+    $("#import_students_btn").siblings("a").attr("disabled", true)
+    $("#import_students_form").submit();
+  });
+
+  $('input[type=file]').bootstrapFileInput();
+  if ( $("#student_json").length ) {
+    $("#student_json").JSONView($("#student_json").text());
+  }
+  if ( $("#dataTable").length ) {
+    var table = $('#dataTable').dataTable();
+    //Default set with erb in tabletools file
+    var tt = new $.fn.dataTable.TableTools( table, {
+      aButtons: [
+        {
+          sExtends: 'copy',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+      },
+
+        {
+          sExtends: 'csv',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+        },
+        {
+          sExtends: 'pdf',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+        }
+      ]
+    }
+                                          );
+    $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
+    $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+  }
+};
+
+$(document).ready(student_ready);
+$(document).on('page:load', student_ready);

@@ -33,7 +33,3 @@
       %h3
         = link_to "Error: No Students Found, change filter to find more.", user_favorite_instruments_path, class: "btn btn-danger"
 
-= form_tag import_students_path, multipart: true do
-  = file_field_tag :file, { onchange: "this.form.submit()",
-    :accept => 'text/csv', label: "Import Students",
-    style: "width: 0px; height: 0px"}
