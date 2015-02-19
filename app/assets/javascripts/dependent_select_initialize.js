@@ -1,5 +1,6 @@
-var student_combo_ready;
-student_combo_ready = function() {
+//= require jquery.dependent-selects
+var dependent_select_initialize;
+dependent_select_initialize = function() {
 
   $('body').on('cocoon:after-insert', function(e, insertedItem) {
     student_combo_format();
@@ -13,5 +14,5 @@ student_combo_format = function() {
 };
 
 
-$(document).ready(student_combo_ready);
-$(document).on('page:load', student_combo_ready);
+$(document).ready(dependent_select_initialize);
+$(document).on('page:load', dependent_select_initialize);

@@ -1,3 +1,7 @@
+//= require bootstrap.file-input
+//= require jquery.jsonview
+//= require dependent_select_initialize
+//= require jquery.dataTables
 var student_ready;
 student_ready = function() {
   $('#import_students_confirm_btn').click(function(e){
@@ -12,7 +16,9 @@ student_ready = function() {
   });
 
   $('input[type=file]').bootstrapFileInput();
-  $("#student_json").JSONView($("#student_json").text());
+  if ( $("#student_json").length ) {
+    $("#student_json").JSONView($("#student_json").text());
+  }
 };
 
 $(document).ready(student_ready);

@@ -17,7 +17,6 @@
 //= require cocoon
 //= require bootstrap-sprockets
 //= require bootstrap
-//= require_tree .
 var ready;
 ready = function() {
   $('#disabled-forms').find('input, textarea, button, select').attr('disabled','disabled');

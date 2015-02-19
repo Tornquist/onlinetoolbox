@@ -22,9 +22,6 @@ var fields_ready = function(){
       update: function(e,ui) {
         item_id = ui.item.data('item-id')
         position = ui.item.index()
-        console.log()
-        console.log(item_id)
-        console.log(position)
         $.ajax({
           type: 'POST',
           url: 'fields/update_row_order',
