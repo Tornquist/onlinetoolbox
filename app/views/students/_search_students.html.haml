@@ -1,36 +1,61 @@
-%div.table-responsive
-  %table.table.table-hover.table-condensed#dataTable
-    %thead
+%table.table.table-hover.table-condensed.table-striped#dataTable
+  %thead
+    %tr
+      %th
+      %th.selected
+        Name
+      %th.selected
+        Email
+      - @fields.each do |field|
+        - f = Field.find(field)
+        - case f.group_id
+        - when 1
+          %th.selected
+            = "#{f.name} Line 1"
+          %th.selected
+            = "#{f.name} Line 2"
+          %th.selected
+            = "#{f.name} City"
+          %th.selected
+            = "#{f.name} State"
+          %th.selected
+            = "#{f.name} Zip"
+        - when 2
+          %th.selected
+            = f.name
+        - when 3
+          %th.selected
+            = f.name
+      %th
+        Name
+  %tbody
+    - @students.each_with_index do |student, i|
       %tr
-        %th
-          :plain
-            #
-        %th.selected
-          Name
-        %th.selected
-          Hometown
-        %th.selected
-          Instuments
-        %th.selected
-          Ensembles
-        %th.text-center
-          Details
-        %th.text-center
-          Claim
-    %tbody
-      - @students.each_with_index do |student, i|
-        %tr{ class: "#{student.column_color}"}
-          %th.row
-            = i + 1
-          %td
-            = student.full_name_reversed
-          %td
-            = student.hometown
-          %td
-            = student.instrument_list
-          %td
-            = student.ensemble_list
-          %td.text-center
-            = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
-          %td.text-center
-            = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-warning"
+        %td
+          = link_to "Details", edit_student_path(student)
+          = link_to "Claim", student_claim_path(student), method: :put
+        %td
+          = student.full_name_reversed
+        %td
+          = student.email
+        - @fields.each do |field|
+          - case Field.find(field).group_id
+          - when 1
+            %td
+              = student.field(field).address_1
+            %td
+              = student.field(field).address_2
+            %td
+              = student.field(field).city
+            %td
+              = student.field(field).state.name
+            %td
+              = student.field(field).zip
+          - when 2
+            %td
+              = student.field(field).content
+          - when 3
+            %td
+              = student.field(field).choice
+        %td
+          = student.full_name_reversed

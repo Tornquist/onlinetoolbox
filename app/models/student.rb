@@ -29,11 +29,23 @@ class Student < ActiveRecord::Base
     f = Field.find(i)
     case f.group
     when Group.where(name: "Address").first
-      return addresses.where(field_id: i).first
+      retVal = addresses.where(field_id: i).first
+      if (retVal.nil?)
+        retVal = Address.create(student_id: id, field_id: i, state_id: 1)
+      end
+      return retVal
     when Group.where(name: "Text").first
-      return texts.where(field_id: i).first
+      retVal = texts.where(field_id: i).first
+      if (retVal.nil?)
+        retVal = Text.create(student_id: id, field_id: i)
+      end
+      return retVal
     when Group.where(name: "Option").first
-      return options.where(field_id: i).first
+      retVal = options.where(field_id: i).first
+      if (retVal.nil?)
+        retVal = Option.create(student_id: id, field_id: i)
+      end
+      return retVal
     end
   end
 

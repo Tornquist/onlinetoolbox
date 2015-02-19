@@ -122,4 +122,8 @@ module StudentsHelper
     end
     student_array
   end
+
+  def self.sort(student_list)
+    student_list.sort { |a, b| a.full_name_reversed.downcase <=> b.full_name_reversed.downcase }
+  end
 end

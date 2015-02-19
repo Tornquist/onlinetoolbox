@@ -1,6 +1,27 @@
-%div.jumbotron
-  %h1
-    Search Students
 %div.row
   %div.col-sm-12
-    = render 'search_students'
+    %div.jumbotron
+      %h1
+        Search Students
+
+
+= form_tag search_students_terms_path, method: :post do
+  %div.panel.panel-primary
+    %div.panel-heading{:role => "tab", id: "heading1"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapse1", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse1"}
+          Table Fields
+    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse1"}
+      %div.panel-body
+        %div.row
+          - Field.all.each do |field|
+            %div.col-sm-2
+              %div.checkbox
+                %label
+                  = check_box_tag 'fields[]', field.id, @fields.include?(field.id)
+                  = field.name
+        %div.row
+          %div.col-sm-12
+            = submit_tag "Apply Changes", class: "btn btn-success"
+
+= render 'search_students'

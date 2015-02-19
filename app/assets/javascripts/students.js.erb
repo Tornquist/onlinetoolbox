@@ -23,7 +23,7 @@ student_ready = function() {
     $("#student_json").JSONView($("#student_json").text());
   }
   if ( $("#dataTable").length ) {
-    var table = $('#dataTable').dataTable();
+    var table = $('#dataTable').dataTable( { "scrollX": true });
     //Default set with erb in tabletools file
     var tt = new $.fn.dataTable.TableTools( table, {
       aButtons: [
@@ -51,7 +51,8 @@ student_ready = function() {
         }
       ]
     }
-                                          );
+    );
+
     $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
 
     $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
