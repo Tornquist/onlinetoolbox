@@ -1,28 +1,11 @@
-== README
+== Online Toolbox
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+The online toolbox is a system designed by Nathan Tornquist to aid in the recruitment process in the band department at Purdue University.
 
-Things you may want to cover:
+This tool allows for dynamic tracking of student information, and a flexible database structure to store said information.  The core student database is organized by datatype instead of content type, which allows for flexible expansion without rewriting code.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Built with on ruby 2.1.2. 
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== License
+All Rights Reserved © Nathan Tornquist 2015
