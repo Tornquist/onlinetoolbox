@@ -80,6 +80,20 @@ class Student < ActiveRecord::Base
     ensembles.uniq.map { |i| i.name}.join(", ")
   end
 
+  def rank_list
+    rank_sections = ranks.map(&:section)
+    extra_sections = sections - rank_sections
+    result = []
+    ranks.each do |rank|
+      s = rank.section
+      result << (s.season.name + "/" + s.name + "/" + rank.name)
+    end
+    extra_sections.each do |section|
+      result << section.season.name + "/" + section.name
+    end
+    result.join(", ")
+  end
+
   def cell_phone
     f = field(Field.where(name: "Cell Phone").first.id)
     f.content

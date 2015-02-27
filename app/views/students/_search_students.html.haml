@@ -8,10 +8,13 @@
         Email
       - if @special_fields.include?("Instruments")
         %th.selected
-          Instruments
+          Instrument Interests
       - if @special_fields.include?("Ensembles")
         %th.selected
-          Ensembles
+          Ensemble Interests
+      - if @special_fields.include?("Sections")
+        %th.selected
+          Seasons/Section/Rank
       - @fields.each do |field|
         - f = Field.find(field)
         - case f.group_id
@@ -50,6 +53,9 @@
         - if @special_fields.include?("Ensembles")
           %td
             = student.ensemble_list
+        - if @special_fields.include?("Sections")
+          %td
+            = student.rank_list
         - @fields.each do |field|
           - case Field.find(field).group_id
           - when 1

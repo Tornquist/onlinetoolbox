@@ -134,12 +134,30 @@ class StudentsController < ApplicationController
     @students = StudentsHelper.sort(Student.all)
     @special_fields = ["Instruments", "Ensembles"]
     @fields = [2, 3, 5]
+    @large_filter = ['all']
   end
 
   def search_terms
-    @students = StudentsHelper.sort(Student.all)
-    @fields = params["fields"].map(&:to_i)
-    @special_fields = params["special_fields"]
+    @large_filter = params["large_filter"] ||= []
+    @students = nil
+    @large_filter.each do |search_item|
+      if search_item.starts_with?('all')
+        @students = @students.nil? ? Student.all : @students + Student.all
+      elsif search_item.starts_with?('season')
+        newStudents = Season.find(search_item.split[1].to_i).students
+        @students = @students.nil? ? newStudents : @students + newStudents
+      elsif search_item.starts_with?('section')
+        newStudents = Section.find(search_item.split[1].to_i).students
+        @students = @students.nil? ? newStudents : @students + newStudents
+      elsif search_item.starts_with?('rank')
+        newStudents = Rank.find(search_item.split[1].to_i).students
+        @students = @students.nil? ? newStudents : @students + newStudents
+      end
+    end
+    @students ||= []
+    @students = StudentsHelper.sort(@students.uniq)
+    @fields = (params["fields"] ||= []).map(&:to_i)
+    @special_fields = params["special_fields"] ||= []
     render 'search'
   end
 

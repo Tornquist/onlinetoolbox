@@ -12,4 +12,8 @@ class Field < ActiveRecord::Base
     end
     o.map { |a| [a,a] }
   end
+
+  def display_name
+    "Field - " + name
+  end
 end

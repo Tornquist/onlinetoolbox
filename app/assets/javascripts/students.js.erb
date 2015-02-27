@@ -4,9 +4,11 @@
 //= require jquery.dataTables
 //= require jquery.dataTables.tableTools
 //= require jquery.dataTables.bootstrap
+//= require select2.min
 
 var student_ready;
 student_ready = function() {
+
   $('#import_students_confirm_btn').click(function(e){
     $("#import_students_confirm_btn").attr("disabled", true);
     $("#import_students_confirm_btn").text("Importing");
@@ -56,6 +58,12 @@ student_ready = function() {
     $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
 
     $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+  }
+  $('#search-select').select2();
+  if ( $("#search-select-panel").length ) {
+    $( window ).resize( function(){
+      $('#search-select').select2();
+    });
   }
 };
 
