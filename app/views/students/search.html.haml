@@ -7,21 +7,46 @@
 
 = form_tag search_students_terms_path, method: :post do
   %div.panel.panel-primary
-    %div.panel-heading{:role => "tab", id: "heading1"}
+    %div.panel-heading{:role => "tab", id: "heading_search_parameters"}
       %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapse1", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse1"}
-          Table Fields
-    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse1"}
+        %a.collapsed{"aria-controls" => "collapse_search_parameters", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_search_parameters"}
+          Search Parameters
+    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_search_parameters"}
       %div.panel-body
         %div.row
+          %div.col-sm-12
+            %div.panel.panel-default
+              %div.panel-body
+                Content
+            %div.panel.panel-default
+              %div.panel-body
+                Content
+  %div.panel.panel-primary
+    %div.panel-heading{:role => "tab", id: "heading_table_fields"}
+      %h4.panel-title
+        %a.collapsed{"aria-controls" => "collapse_table_fields", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_table_fields"}
+          Table Fields
+    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_table_fields"}
+      %div.panel-body
+        %div.row
+          %div.col-sm-2
+            %div.checkbox
+              %label
+                = check_box_tag 'special_fields[]', 'Instruments', @special_fields.include?('Instruments')
+                Instruments
+          %div.col-sm-2
+            %div.checkbox
+              %label
+                = check_box_tag 'special_fields[]', 'Ensembles', @special_fields.include?('Ensembles')
+                Ensembles
           - Field.all.each do |field|
             %div.col-sm-2
               %div.checkbox
                 %label
                   = check_box_tag 'fields[]', field.id, @fields.include?(field.id)
                   = field.name
-        %div.row
-          %div.col-sm-12
-            = submit_tag "Apply Changes", class: "btn btn-success"
+  %div.row.bottom-margin
+    %div.col-sm-12
+      = submit_tag "Apply Changes", class: "btn btn-success btn-block"
 
 = render 'search_students'

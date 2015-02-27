@@ -132,12 +132,14 @@ class StudentsController < ApplicationController
 
   def search
     @students = StudentsHelper.sort(Student.all)
+    @special_fields = ["Instruments", "Ensembles"]
     @fields = [2, 3, 5]
   end
 
   def search_terms
     @students = StudentsHelper.sort(Student.all)
     @fields = params["fields"].map(&:to_i)
+    @special_fields = params["special_fields"]
     render 'search'
   end
 
