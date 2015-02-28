@@ -1,0 +1,37 @@
+%div.panel.panel-primary
+  %div.panel-heading{:role => "tab", id: "heading_table_fields"}
+    %h4.panel-title
+      %a.collapsed{"aria-controls" => "collapse_table_fields", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_table_fields"}
+        Table Fields
+  %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_table_fields"}
+    %div.panel-body
+      %div.row
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Instruments', @special_fields.include?('Instruments')
+              Instrument Interests
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Ensembles', @special_fields.include?('Ensembles')
+              Ensemble Interests
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Sections', @special_fields.include?('Sections')
+              Seasons/Section/Rank
+        - @fields_top.each do |field|
+          %div.col-sm-2
+            %div.checkbox
+              %label
+                = check_box_tag 'fields[]', field.id, @fields_all.include?(field.id)
+                = field.name
+      - @fields_bottom.each_slice(6) do |slice|
+        %div.row
+          - slice.each do |field|
+            %div.col-sm-2
+              %div.checkbox
+                %label
+                  = check_box_tag 'fields[]', field.id, @fields_all.include?(field.id)
+                  = field.name

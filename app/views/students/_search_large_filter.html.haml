@@ -1,0 +1,20 @@
+%div.panel.panel-primary#search-select-panel
+  %div.panel-heading
+    %h4.panel-title
+      Search Parameters
+  %div.panel-body
+    %div.row
+      %div.col-sm-12
+        %select.form-control{name: "large_filter[]", id: "search-select", multiple:"multiple"}
+          %option{value: "all", selected:@large_filter.include?('all')}
+            All Students
+          - Season.all.order(:start).reverse.each do |season|
+            %optgroup{label: season.name}
+              %option{value: "season #{season.id}", selected:@large_filter.include?("season #{season.id}") }
+                = "#{season.name} | All Sections"
+              - season.sections.order(:name).each do |section|
+                %option{value: "section #{section.id}", selected:@large_filter.include?("section #{section.id}") }
+                  = "#{season.name} | #{section.name} | All Ranks"
+                - section.ranks.order(:index).each do |rank|
+                  %option{value: "rank #{rank.id}", selected:@large_filter.include?("rank #{rank.id}") }
+                    = "#{season.name} | #{section.name} | #{rank.name}"

@@ -135,6 +135,11 @@ class StudentsController < ApplicationController
     @special_fields = ["Instruments", "Ensembles"]
     @fields = [2, 3, 5]
     @large_filter = ['all']
+
+    @fields_all = Field.where(hidden:false).order(:index)
+    @fields_top = @fields_all.limit(3)
+    @fields_bottom = @fields_all - @fields_top
+    @filters = {}
   end
 
   def search_terms
@@ -155,9 +160,47 @@ class StudentsController < ApplicationController
       end
     end
     @students ||= []
+    params["search"].each do |key, value|
+      if !value.empty?
+        field_id = key.to_i
+        type = Field.find(field_id).group_id
+        @students = @students.reject do |student|
+          case type
+          when 1 #address
+            !student.field(field_id).searchable.downcase.include?(value.downcase)
+          when 2 #text
+            !student.field(field_id).content.downcase.include?(value.downcase)
+          when 3 #option
+            !student.field(field_id).choice.downcase.include?(value.downcase)
+          end
+        end
+      end
+    end
+    if !params["search_instrument"].empty?
+      @students = @students.reject do |student|
+        !student.instrument_list.downcase.include?(params["search_instrument"].downcase)
+      end
+    end
+    if !params["search_ensemble"].empty?
+      @students = @students.reject do |student|
+        !student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+      end
+    end
+
     @students = StudentsHelper.sort(@students.uniq)
     @fields = (params["fields"] ||= []).map(&:to_i)
     @special_fields = params["special_fields"] ||= []
+
+    @fields_all = Field.where(hidden:false).order(:index)
+    @fields_top = @fields_all.limit(3)
+    @fields_bottom = @fields_all - @fields_top
+
+    @filters = {}
+    @filters["ensembles"] = params["search_ensemble"]
+    @filters["instruments"] = params["search_instrument"]
+    params["search"].each do |key, value|
+      @filters[key.to_i] = value
+    end
     render 'search'
   end
 

@@ -6,26 +6,8 @@
 
 
 = form_tag search_students_terms_path, method: :post do
-  %div.panel.panel-primary#search-select-panel
-    %div.panel-heading
-      %h4.panel-title
-        Search Parameters
-    %div.panel-body
-      %div.row
-        %div.col-sm-12
-          %select.form-control{name: "large_filter[]", id: "search-select", multiple:"multiple"}
-            %option{value: "all", selected:@large_filter.include?('all')}
-              All Students
-            - Season.all.order(:start).reverse.each do |season|
-              %optgroup{label: season.name}
-                %option{value: "season #{season.id}", selected:@large_filter.include?("season #{season.id}") }
-                  = "#{season.name} | All Sections"
-                - season.sections.order(:name).each do |section|
-                  %option{value: "section #{section.id}", selected:@large_filter.include?("section #{section.id}") }
-                    = "#{season.name} | #{section.name} | All Ranks"
-                  - section.ranks.order(:index).each do |rank|
-                    %option{value: "rank #{rank.id}", selected:@large_filter.include?("rank #{rank.id}") }
-                      = "#{season.name} | #{section.name} | #{rank.name}"
+  = render 'search_large_filter'
+
   %div.panel.panel-primary
     %div.panel-heading{:role => "tab", id: "heading_search_parameters"}
       %h4.panel-title
@@ -33,36 +15,30 @@
           Detailed Search Parameters
     %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_search_parameters"}
       %div.panel-body
-
-  %div.panel.panel-primary
-    %div.panel-heading{:role => "tab", id: "heading_table_fields"}
-      %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapse_table_fields", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_table_fields"}
-          Table Fields
-    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_table_fields"}
-      %div.panel-body
-        %div.row
-          %div.col-sm-2
-            %div.checkbox
-              %label
-                = check_box_tag 'special_fields[]', 'Instruments', @special_fields.include?('Instruments')
+        %div.row.bottom-margin
+          %div.col-sm-12
+            %div.input-group
+              %span.input-group-addon
                 Instrument Interests
-          %div.col-sm-2
-            %div.checkbox
-              %label
-                = check_box_tag 'special_fields[]', 'Ensembles', @special_fields.include?('Ensembles')
+              = text_field_tag 'search_instrument', @filters["instruments"].to_s, {class: "form-control"}
+        %div.row.bottom-margin
+          %div.col-sm-12
+            %div.input-group
+              %span.input-group-addon
                 Ensemble Interests
-          %div.col-sm-2
-            %div.checkbox
-              %label
-                = check_box_tag 'special_fields[]', 'Sections', @special_fields.include?('Sections')
-                Seasons/Section/Rank
-          - Field.all.order(:index).each do |field|
-            %div.col-sm-2
-              %div.checkbox
-                %label
-                  = check_box_tag 'fields[]', field.id, @fields.include?(field.id)
+              = text_field_tag 'search_ensemble', @filters["ensembles"].to_s, {class: "form-control"}
+
+        - @fields_all.each do |field|
+          %div.row.bottom-margin
+            %div.col-sm-12
+              %div.input-group
+                %span.input-group-addon
                   = field.name
+                = text_field_tag "search[#{field.id}]", @filters[field.id].to_s, {class: "form-control"}
+
+
+  = render 'search_table_columns'
+
   %div.row.bottom-margin
     %div.col-sm-12
       = submit_tag "Apply Changes", class: "btn btn-success btn-block"
