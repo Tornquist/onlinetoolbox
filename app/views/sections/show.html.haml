@@ -3,6 +3,10 @@
     = @section.season.name
     |
     = @section.name
+  %div.lead
+    = link_to "Section Breakdown", search_students_terms_path("large_filter"=>["section #{@section.id}"], "fields"=>[3, 5]), method: :post
+    |
+    = link_to "Section Notes", section_notes_path(@section)
 
 - if !@autogds.empty?
   %div.alert.alert-danger
@@ -19,6 +23,8 @@
             %span
               Rank:
               = rank.name
+            %span.pull-right
+              = link_to "Rank Breakdown", search_students_terms_path("large_filter"=>["rank #{rank.id}"], "fields"=>[3, 5]), method: :post, class: "btn btn-success btn-xs"
         %div.panel-body
           - rank.students.where(:archive => false).order(:last_name, :first_name).each do |student|
             = render 'student_row', student: student

@@ -7,36 +7,7 @@
 
 = form_tag search_students_terms_path, method: :post do
   = render 'search_large_filter'
-
-  %div.panel.panel-primary
-    %div.panel-heading{:role => "tab", id: "heading_search_parameters"}
-      %h4.panel-title
-        %a.collapsed{"aria-controls" => "collapse_search_parameters", "aria-expanded" => "false", "data-parent" => "#accordion", "data-toggle" => "collapse", :href => "#collapse_search_parameters"}
-          Detailed Search Parameters
-    %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse_search_parameters"}
-      %div.panel-body
-        %div.row.bottom-margin
-          %div.col-sm-12
-            %div.input-group
-              %span.input-group-addon
-                Instrument Interests
-              = text_field_tag 'search_instrument', @filters["instruments"].to_s, {class: "form-control"}
-        %div.row.bottom-margin
-          %div.col-sm-12
-            %div.input-group
-              %span.input-group-addon
-                Ensemble Interests
-              = text_field_tag 'search_ensemble', @filters["ensembles"].to_s, {class: "form-control"}
-
-        - @fields_all.each do |field|
-          %div.row.bottom-margin
-            %div.col-sm-12
-              %div.input-group
-                %span.input-group-addon
-                  = field.name
-                = text_field_tag "search[#{field.id}]", @filters[field.id].to_s, {class: "form-control"}
-
-
+  = render 'search_detailed_filter'
   = render 'search_table_columns'
 
   %div.row.bottom-margin

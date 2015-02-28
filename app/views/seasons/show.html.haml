@@ -48,16 +48,18 @@
               - @season.sections.order(:name).each do |section|
                 %li.list-group-item
                   %div.row
-                    %div.col-sm-4
+                    %div.col-sm-3
                       = link_to section.name, section_path(section)
-                    %div.col-sm-4
+                    %div.col-sm-3
                       Returning Members:
                       %strong
                         = section.returning_members
-                    %div.col-sm-4
+                    %div.col-sm-3
                       Rookies:
                       %strong
                         = section.rookies
+                    %div.col-sm-3
+                      = link_to "Section Breakdown", search_students_terms_path("large_filter"=>["section #{section.id}"], "fields"=>[3, 5]), method: :post
 
 %div.row
   %div.col-sm-12

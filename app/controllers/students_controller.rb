@@ -160,30 +160,36 @@ class StudentsController < ApplicationController
       end
     end
     @students ||= []
-    params["search"].each do |key, value|
-      if !value.empty?
-        field_id = key.to_i
-        type = Field.find(field_id).group_id
-        @students = @students.reject do |student|
-          case type
-          when 1 #address
-            !student.field(field_id).searchable.downcase.include?(value.downcase)
-          when 2 #text
-            !student.field(field_id).content.downcase.include?(value.downcase)
-          when 3 #option
-            !student.field(field_id).choice.downcase.include?(value.downcase)
+    if params["search"]
+      params["search"].each do |key, value|
+        if !value.empty?
+          field_id = key.to_i
+          type = Field.find(field_id).group_id
+          @students = @students.reject do |student|
+            case type
+            when 1 #address
+              !student.field(field_id).searchable.downcase.include?(value.downcase)
+            when 2 #text
+              !student.field(field_id).content.downcase.include?(value.downcase)
+            when 3 #option
+              !student.field(field_id).choice.downcase.include?(value.downcase)
+            end
           end
         end
       end
     end
-    if !params["search_instrument"].empty?
-      @students = @students.reject do |student|
-        !student.instrument_list.downcase.include?(params["search_instrument"].downcase)
+    if params["search_instrument"]
+      if !params["search_instrument"].empty?
+        @students = @students.reject do |student|
+          !student.instrument_list.downcase.include?(params["search_instrument"].downcase)
+        end
       end
     end
-    if !params["search_ensemble"].empty?
-      @students = @students.reject do |student|
-        !student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+    if params["search_ensemble"]
+      if !params["search_ensemble"].empty?
+        @students = @students.reject do |student|
+          !student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+        end
       end
     end
 
@@ -196,10 +202,12 @@ class StudentsController < ApplicationController
     @fields_bottom = @fields_all - @fields_top
 
     @filters = {}
-    @filters["ensembles"] = params["search_ensemble"]
-    @filters["instruments"] = params["search_instrument"]
-    params["search"].each do |key, value|
-      @filters[key.to_i] = value
+    @filters["ensembles"] = params["search_ensemble"] ||= ""
+    @filters["instruments"] = params["search_instrument"] ||= ""
+    if params["search"]
+      params["search"].each do |key, value|
+        @filters[key.to_i] = value
+      end
     end
     render 'search'
   end

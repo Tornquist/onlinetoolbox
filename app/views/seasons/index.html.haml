@@ -24,8 +24,10 @@
               Show
             %th
               Edit
+            %th.center
+              Breakdown
 
-        %tbody>
+        %tbody
           - @seasons.order(:start).reverse.each do |season|
             %tr
               %td
@@ -40,4 +42,5 @@
                 = link_to (fa_icon "desktop"), season, class: "btn btn-primary"
               %td
                 = link_to (fa_icon "edit"), edit_season_path(season), class: "btn btn-success"
-                =# link_to 'Destroy', season, method: :delete, data: { confirm: 'Are you sure?' }
+              %td.center
+                = link_to (fa_icon "info-circle"), search_students_terms_path("large_filter"=>["season #{season.id}"], "fields"=>[3, 5]), method: :post, class: "btn btn-warning"
