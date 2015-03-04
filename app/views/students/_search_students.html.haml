@@ -43,6 +43,11 @@
         %td
           = link_to "Details", edit_student_path(student)
           = link_to "Claim", student_claim_path(student), method: :put
+          - if student.archive
+            = link_to "Unarchive", student_unarchive_path(student), method: :put, data: { confirm: 'Are you sure you wish to unarchive this student?' }
+          - else
+            = link_to "Archive", student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }
+
         %td
           = student.full_name_reversed
         %td

@@ -107,6 +107,11 @@ class StudentsController < ApplicationController
     redirect_to session.delete(:return_to)
   end
 
+  def unarchive
+    Student.update(params["student_id"], archive: false)
+    redirect_to students_path
+  end
+
   def import
     if params[:file]
       @student_objects = StudentsHelper.import(params[:file])
@@ -131,7 +136,7 @@ class StudentsController < ApplicationController
   end
 
   def search
-    @students = StudentsHelper.sort(Student.all)
+    @students = StudentsHelper.sort(Student.where(archive: false))
     @special_fields = ["Instruments", "Ensembles"]
     @fields = [2, 3, 5]
     @large_filter = ['all']
@@ -189,6 +194,15 @@ class StudentsController < ApplicationController
       if !params["search_ensemble"].empty?
         @students = @students.reject do |student|
           !student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+        end
+      end
+    end
+    if params["special_fields"]
+      if !params["special_fields"].empty?
+        if !params["special_fields"].include?("Archive")
+          @students = @students.reject do |student|
+            student.archive
+          end
         end
       end
     end

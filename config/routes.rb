@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     put :claim
     put :unclaim
     delete :archive
+    put :unarchive
     collection { post :import }
     get :sections, on: :member
   end

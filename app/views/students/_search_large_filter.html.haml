@@ -4,7 +4,7 @@
       Search Parameters
   %div.panel-body
     %div.row
-      %div.col-sm-12
+      %div.col-sm-10
         %select.form-control{name: "large_filter[]", id: "search-select", multiple:"multiple"}
           %option{value: "all", selected:@large_filter.include?('all')}
             All Students
@@ -18,3 +18,8 @@
                 - section.ranks.order(:index).each do |rank|
                   %option{value: "rank #{rank.id}", selected:@large_filter.include?("rank #{rank.id}") }
                     = "#{season.name} | #{section.name} | #{rank.name}"
+      %div.col-sm-2
+        %div.checkbox
+          %label
+            = check_box_tag 'special_fields[]', 'Archive', @special_fields.include?('Archive')
+            Include Archived?
