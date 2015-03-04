@@ -17,4 +17,6 @@
         %button{ type: "button", class: "close", "data-dismiss" => "alert", "aria-label" => "Close" }
           = fa_icon "close"
         = value
+    %ol.breadcrumb
+      = render_breadcrumbs tag: "li", separator: ""
     = yield

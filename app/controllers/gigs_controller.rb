@@ -3,8 +3,12 @@ class GigsController < ApplicationController
 
   respond_to :html
 
+  add_breadcrumb "Seasons", :seasons_path
   def index
     @season = Season.find(params[:season_id])
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Gigs", season_gigs_path(@season.id)
+
     @games = @season.games
     @gigs = Gig.all
     respond_with(@gigs)
@@ -12,6 +16,11 @@ class GigsController < ApplicationController
 
   def new
     @season = Season.find(params[:season_id])
+
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Gigs", season_gigs_path(@season.id)
+    add_breadcrumb "New", new_season_gig_path(@season.id)
+
     @gig = Gig.new
     if params[:student_id]
       @gig.student_id = params[:student_id]
@@ -21,6 +30,9 @@ class GigsController < ApplicationController
 
   def edit
     @season = Season.find(params[:season_id])
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Gigs", season_gigs_path(@season.id)
+    add_breadcrumb "Edit", edit_season_gig_path(@season.id, @gig.id)
   end
 
   def create
@@ -50,6 +62,9 @@ class GigsController < ApplicationController
     @student = Student.find(params[:student_id])
     @season = Season.find(params[:season_id])
     @games = @season.games.order(:played_on)
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Gigs", season_gigs_path(@season.id)
+    add_breadcrumb "#{@student.full_name}", season_student_gigs_path(@season.id, @student.id)
   end
 
   private

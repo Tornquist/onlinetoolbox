@@ -2,6 +2,7 @@ class SeasonsController < ApplicationController
   before_action :set_season, only: [:show, :edit, :update, :destroy, :sections]
 
   respond_to :html
+  add_breadcrumb "Seasons", :seasons_path
 
   def index
     @seasons = Season.all
@@ -9,16 +10,21 @@ class SeasonsController < ApplicationController
   end
 
   def show
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
     respond_with(@season)
   end
 
   def recruitment
     @season = Season.find(params[:season_id])
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Recruitment", season_recruitment_path(@season.id)
     respond_with(@season)
   end
 
   def gds
     @season = Season.find(params[:season_id])
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "GDS", season_gds_path(@season.id)
   end
 
   def new
@@ -30,6 +36,8 @@ class SeasonsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "Edit", :edit_season_path, id: @season.id
   end
 
   def create

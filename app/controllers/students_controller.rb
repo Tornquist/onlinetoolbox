@@ -2,6 +2,8 @@ class StudentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_student, only: [:show, :edit, :update, :destroy, :sections]
 
+  add_breadcrumb "Students", :students_path
+
   # GET /students
   # GET /students.json
   def index
@@ -11,6 +13,7 @@ class StudentsController < ApplicationController
   end
 
   def unclaimed
+    add_breadcrumb "Unclaimed Students", :unclaimed_students_path
     @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true))
   end
 
@@ -22,6 +25,7 @@ class StudentsController < ApplicationController
 
   # GET /students/new
   def new
+    add_breadcrumb "New", :new_student_path
     @student = Student.new
     1.times { @student.student_instruments.build }
     Field.where(group_id: Group.where(name: "Text").first).each do |f|
@@ -39,6 +43,9 @@ class StudentsController < ApplicationController
 
   # GET /students/1/edit
   def edit
+    add_breadcrumb "#{@student.full_name}", edit_student_path(@student.id)
+    add_breadcrumb "Edit", edit_student_path(@student.id)
+
     Field.where(group_id: Group.where(name: "Text").first).each do |f|
       if !@student.fields.include?(f)
         @student.texts.build(field_id: f.id)
@@ -89,6 +96,8 @@ class StudentsController < ApplicationController
   end
 
   def sections
+    add_breadcrumb "#{@student.full_name}", edit_student_path(@student.id)
+    add_breadcrumb "Sections", :sections_student_path, :id => @student.id
   end
 
   def claim
@@ -136,6 +145,7 @@ class StudentsController < ApplicationController
   end
 
   def search
+    add_breadcrumb "Search", :search_students_path
     @students = StudentsHelper.sort(Student.where(archive: false))
     @special_fields = ["Instruments", "Ensembles"]
     @fields = [2, 3, 5]
@@ -148,6 +158,7 @@ class StudentsController < ApplicationController
   end
 
   def search_terms
+    add_breadcrumb "Search", :search_students_path
     @large_filter = params["large_filter"] ||= []
     @students = nil
     @large_filter.each do |search_item|

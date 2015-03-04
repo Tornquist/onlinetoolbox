@@ -1,8 +1,11 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  add_breadcrumb "Students", :students_path
+
   # GET /comments/new
   def new
+    add_breadcrumb "New Comment", :new_comment_path
     @comment = Comment.new
   end
 
