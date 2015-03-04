@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150218002524) do
+ActiveRecord::Schema.define(version: 20150304224326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,16 +159,16 @@ ActiveRecord::Schema.define(version: 20150218002524) do
     t.integer  "student_id"
     t.integer  "user_id"
     t.integer  "game_id"
-    t.integer  "memorization"
-    t.integer  "music_effort"
-    t.integer  "marching_fundamentals"
-    t.integer  "marching_precision"
-    t.integer  "marching_effort"
-    t.integer  "rehearsal_etiquette"
-    t.integer  "preparedness"
-    t.integer  "punctuality"
-    t.integer  "gameday_enthusiasm"
-    t.integer  "gameday_professionalism"
+    t.integer  "memorization",            null: false
+    t.integer  "music_effort",            null: false
+    t.integer  "marching_fundamentals",   null: false
+    t.integer  "marching_precision",      null: false
+    t.integer  "marching_effort",         null: false
+    t.integer  "rehearsal_etiquette",     null: false
+    t.integer  "preparedness",            null: false
+    t.integer  "punctuality",             null: false
+    t.integer  "gameday_enthusiasm",      null: false
+    t.integer  "gameday_professionalism", null: false
     t.string   "comment"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false

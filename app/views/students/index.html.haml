@@ -6,6 +6,7 @@
     %div.btn-group.pull-right-cond
       = link_to 'New Student', new_student_path, class: "btn btn-success"
       = link_to 'Import Students', import_students_path, class: "btn btn-success"
+      = link_to (fa_icon 'search') + " Search", search_students_path, class: "btn btn-success"
 
 - if @claimed_students.size != 0
   = render 'claimed_students'

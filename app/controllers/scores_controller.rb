@@ -63,8 +63,13 @@ class ScoresController < ApplicationController
     @season = Season.find(params[:season_id])
     @student = Student.find(params[:student_id])
     @score = Score.new(score_params)
-    @score.save
-    redirect_to season_student_scores_path(@season, @student)
+    begin
+      @score.save
+      redirect_to season_student_scores_path(@season, @student)
+    rescue => errors
+      flash[:error] = "Error: Record did not save properly.  Make sure all fields are filled out."
+      redirect_to season_student_scores_path(@season, @student)
+    end
   end
 
   def update
