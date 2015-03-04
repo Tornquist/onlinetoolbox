@@ -6,6 +6,11 @@ class SectionNotesController < ApplicationController
   def notes
     @section = Section.find(params[:id])
     @section_note = SectionNote.new
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@section.season.name}", season_path(@section.season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "Notes", section_notes_path(@section.id)
   end
 
   def create

@@ -3,16 +3,17 @@ class SectionsController < ApplicationController
 
   respond_to :html
 
-  def index
-    @sections = Section.all
-    respond_with(@sections)
-  end
 
   def show
     @ranks = @section.ranks.order(:index)
     @unranked = students_without_rank
     @autogds = @section.season.students.select { |s| s.automatic_gds(@section.season) }
     session[:return_to] ||= request.referer
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@section.season.name}", season_path(@section.season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+
     respond_with(@section)
   end
 

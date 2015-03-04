@@ -147,9 +147,17 @@ class Student < ActiveRecord::Base
     end
   end
 
+  def season_section(season)
+    begin
+      sections.where(season_id: season.id).first
+    rescue
+      nil
+    end
+  end
+
   def season_section_text(season)
     begin
-      sections.where(season_id: season.id).first.name
+      season_section.name
     rescue
       nil
     end

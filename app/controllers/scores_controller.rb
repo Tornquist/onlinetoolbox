@@ -5,6 +5,12 @@ class ScoresController < ApplicationController
     @season = Season.find(params[:season_id])
     @games = @season.games.order(:played_on)
     @student = Student.find(params[:student_id])
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS Scores", season_student_scores_path(@season.id, @student)
   end
 
   def show
@@ -17,6 +23,14 @@ class ScoresController < ApplicationController
     @score = Score.new
     @score.user_id = current_user.id
     @score.student_id = @student.id
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS Scores", season_student_scores_path(@season.id, @student)
+    add_breadcrumb "New", new_season_student_score_path(@season.id, @student)
+
     if (params[:game_id])
       @score.game_id = params[:game_id]
       score = Score.where(:student_id => @student.id,
@@ -36,6 +50,13 @@ class ScoresController < ApplicationController
     @season = Season.find(params[:season_id])
     @student = Student.find(params[:student_id])
     @score = Score.find(params[:id])
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS Scores", season_student_scores_path(@season.id, @student)
+    add_breadcrumb "Edit", edit_season_student_score_path(@season.id, @student, @score)
   end
 
   def create

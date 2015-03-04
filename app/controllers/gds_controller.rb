@@ -5,6 +5,12 @@ class GdsController < ApplicationController
     @student = Student.find(params[:student_id])
     @season = Season.find(params[:season_id])
     @games = @season.games.order(:played_on)
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS", season_student_gds_index_path(@season.id, @student)
   end
 
   def new
@@ -13,6 +19,14 @@ class GdsController < ApplicationController
     @gds = Gds.new
     @gds.user_id = current_user.id
     @gds.student_id = @student.id
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS", season_student_gds_index_path(@season.id, @student)
+    add_breadcrumb "New", new_season_student_gds_path(@season.id, @student)
+
     if (params[:game_id])
       @gds.game_id = params[:game_id]
       gds = Gds.where(:student_id => @student.id,
@@ -32,6 +46,13 @@ class GdsController < ApplicationController
     @season = Season.find(params[:season_id])
     @student = Student.find(params[:student_id])
     @gds = Gds.find(params[:id])
+    @section = @student.season_section(@season)
+
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@season.name}", season_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "GDS", season_student_gds_index_path(@season.id, @student)
+    add_breadcrumb "Edit", edit_season_student_gds_path(@season.id, @student, @gds)
   end
 
   def create

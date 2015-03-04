@@ -62,8 +62,10 @@ class GigsController < ApplicationController
     @student = Student.find(params[:student_id])
     @season = Season.find(params[:season_id])
     @games = @season.games.order(:played_on)
+    @section = @student.season_section(@season)
     add_breadcrumb "#{@season.name}", season_path(@season.id)
     add_breadcrumb "Gigs", season_gigs_path(@season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
     add_breadcrumb "#{@student.full_name}", season_student_gigs_path(@season.id, @student.id)
   end
 
