@@ -122,6 +122,8 @@ class StudentsController < ApplicationController
   end
 
   def import
+    add_breadcrumb "Import", :import_students_path
+    add_breadcrumb "Confirm", :import_students_path
     if params[:file]
       @student_objects = StudentsHelper.import(params[:file])
       session[:student_objects] = @student_objects
@@ -142,6 +144,7 @@ class StudentsController < ApplicationController
   end
 
   def upload
+    add_breadcrumb "Import", :import_students_path
   end
 
   def search
@@ -236,6 +239,11 @@ class StudentsController < ApplicationController
     end
     render 'search'
   end
+
+  def upload_template
+    send_data StudentsHelper.import_template, :filename => 'online_toolbox_template.csv'
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

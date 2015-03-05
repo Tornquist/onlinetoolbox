@@ -56,6 +56,12 @@ module StudentsHelper
     end
   end
 
+  def self.import_template
+    CSV.generate do |csv|
+      csv << [0,1,2]
+    end
+  end
+
   def self.import(file)
     student_array = []
     CSV.foreach(file.path, headers: true) do |row|
