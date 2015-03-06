@@ -58,7 +58,15 @@ module StudentsHelper
 
   def self.import_template
     CSV.generate do |csv|
-      csv << [0,1,2]
+      header = []
+      header += ["first_name", "last_name", "email"]
+      (1..3).each do |num|
+        header += ["instrument_#{num}", "ensemble_#{num}"]
+      end
+      Field.where(:hidden => false).order(:index).each do |field|
+        header += field.csv_columns
+      end
+      csv << header
     end
   end
 

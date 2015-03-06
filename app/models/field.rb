@@ -16,4 +16,12 @@ class Field < ActiveRecord::Base
   def display_name
     "Field - " + name
   end
+
+  def csv_columns
+    if (group_id == 1) #Address
+      ["#{name}_address_1", "#{name}_address_2", "#{name}_city", "#{name}_state", "#{name}_zip"]
+    else
+      [name]
+    end
+  end
 end
