@@ -9,14 +9,26 @@
     = javascript_include_tag params[:controller]
     = csrf_meta_tags
     %meta{name:"viewport",content:"width=device-width, initial-scale=1"}
-  %body
-    = render 'layouts/navbar'
-  %div.container.bottom-spacer#main-container
-    - flash.each do |key, value|
-      %div{ :class => flash_class(key) + " alert-dismissible", role: "alert"}
-        %button{ type: "button", class: "close", "data-dismiss" => "alert", "aria-label" => "Close" }
-          = fa_icon "close"
-        = value
-    %ol.breadcrumb
-      = render_breadcrumbs tag: "li", separator: ""
-    = yield
+  %div#wrap
+    %body
+      = render 'layouts/navbar'
+    %div.container.bottom-spacer#main-container
+      - flash.each do |key, value|
+        %div{ :class => flash_class(key) + " alert-dismissible", role: "alert"}
+          %button{ type: "button", class: "close", "data-dismiss" => "alert", "aria-label" => "Close" }
+            = fa_icon "close"
+          = value
+      %ol.breadcrumb
+        = render_breadcrumbs tag: "li", separator: ""
+      = yield
+  %div#footer
+    .container.center
+      %span
+        = fa_icon "copyright"
+        = Time.now.year
+        = link_to "Nathan Tornquist", "http://www.nathantornquist.com"
+        |
+        = link_to fa_icon("github") + " Fork", "http://www.github.com/Tornquist/onlinetoolbox/", class: "btn btn-xs btn-default"
+        = link_to fa_icon("github") + " Issues", "http://www.github.com/Tornquist/onlinetoolbox/issues/", class: "btn btn-xs btn-default"
+
+

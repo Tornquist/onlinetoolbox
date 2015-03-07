@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :scores
   has_many :gds
   has_many :gigs
+  has_many :announcements
 
   def full_name
     first_name.to_s + " " + last_name.to_s

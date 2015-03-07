@@ -7,7 +7,7 @@ class CreateGds < ActiveRecord::Migration
       t.integer :gds_type_id
       t.boolean :available, default: true
       t.boolean :automatic, default: false
-      t.string :comment
+      t.text :comment
 
       t.timestamps null: false
     end

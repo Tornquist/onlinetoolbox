@@ -14,7 +14,7 @@ class CreateScores < ActiveRecord::Migration
       t.integer :punctuality
       t.integer :gameday_enthusiasm
       t.integer :gameday_professionalism
-      t.string :comment
+      t.text :comment
 
       t.timestamps null: false
     end

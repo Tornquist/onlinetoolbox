@@ -1,1 +1,24 @@
-This is the homepage for now, please go to /students
+%div.jumbotron
+  %h1
+    Online Toolbox
+  %div.lead
+    Purdue University Bands
+%div.row
+  %div.col-sm-6
+    %div.panel.panel-default
+      %div.panel-heading
+        %div.panel-title
+          Announcements
+      %div.panel-body
+        - @announcements.each do |announcement|
+          %div.row
+            %div.col-sm-12
+              %div.panel.panel-default
+                %div.panel-body
+                  %span
+                    = announcement.user.full_name
+                    |
+                    = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+                  = announcement.content
+
+  %div.col-sm-6

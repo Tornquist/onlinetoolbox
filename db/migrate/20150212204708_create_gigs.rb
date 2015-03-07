@@ -4,7 +4,7 @@ class CreateGigs < ActiveRecord::Migration
       t.integer :student_id
       t.integer :user_id
       t.integer :game_id
-      t.string :offense
+      t.text :offense
       t.integer :value, :null => false, default: 0
 
       t.timestamps null: false

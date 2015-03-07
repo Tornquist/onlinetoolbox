@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150304224326) do
+ActiveRecord::Schema.define(version: 20150307162237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(version: 20150304224326) do
     t.datetime "updated_at"
   end
 
+  create_table "announcements", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "claimed_students", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "user_id"
@@ -38,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150304224326) do
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "student_id"
-    t.string   "content"
+    t.text     "content"
     t.integer  "contact_type_id"
     t.integer  "recruit_status_id"
     t.datetime "created_at"
@@ -92,7 +99,7 @@ ActiveRecord::Schema.define(version: 20150304224326) do
     t.integer  "gds_type_id"
     t.boolean  "available",   default: true
     t.boolean  "automatic",   default: false
-    t.string   "comment"
+    t.text     "comment"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
@@ -107,7 +114,7 @@ ActiveRecord::Schema.define(version: 20150304224326) do
     t.integer  "student_id"
     t.integer  "user_id"
     t.integer  "game_id"
-    t.string   "offense"
+    t.text     "offense"
     t.integer  "value",      default: 0, null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
@@ -169,7 +176,7 @@ ActiveRecord::Schema.define(version: 20150304224326) do
     t.integer  "punctuality",             null: false
     t.integer  "gameday_enthusiasm",      null: false
     t.integer  "gameday_professionalism", null: false
-    t.string   "comment"
+    t.text     "comment"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -191,7 +198,7 @@ ActiveRecord::Schema.define(version: 20150304224326) do
 
   create_table "section_notes", force: :cascade do |t|
     t.integer  "section_id"
-    t.string   "content"
+    t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
