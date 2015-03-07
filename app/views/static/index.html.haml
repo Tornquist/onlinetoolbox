@@ -15,10 +15,14 @@
             %div.col-sm-12
               %div.panel.panel-default
                 %div.panel-body
-                  %span
-                    = announcement.user.full_name
-                    |
-                    = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
-                  = announcement.content
+                  %div.row
+                    %div.col-sm-12
+                      %strong
+                        = announcement.user.full_name
+                        |
+                        = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+                  %div.row
+                    %div.col-sm-12
+                      = announcement.content
 
   %div.col-sm-6
