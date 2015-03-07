@@ -1,0 +1,15 @@
+%div.bottom-margin
+  - season = Season.find(favorite.dest_id)
+  %div.row
+    %div.col-sm-12
+      %strong
+        = season.name
+  %div.row
+    %div.col-sm-12
+      %div.btn-group.btn-group-justified
+        = link_to fa_icon("desktop"), season_path(season), class: "btn btn-sm btn-default", title: "Show Season"
+        = link_to fa_icon("users"), season_recruitment_path(season), class: "btn btn-sm btn-default", title: "Recruitment"
+        = link_to "Gigs", season_gigs_path(season), class: "btn btn-sm btn-default", title: "Gigs"
+        = link_to "GDS", season_gds_path(season), class: "btn btn-sm btn-default", title: "GDS"
+        = link_to fa_icon("pencil"), edit_season_path(season), class: "btn btn-sm btn-default", title: "Edit"
+        = link_to fa_icon("close"), favorite, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", title: "Remove Favorite"

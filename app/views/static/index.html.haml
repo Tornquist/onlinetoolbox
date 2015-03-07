@@ -11,6 +11,12 @@
           %div.panel-title
             Favorites
         %div.panel-body
+          - @favorites.each do |favorite|
+            - case favorite.dest_type
+            - when 0
+              = render 'favorite_season', favorite: favorite
+            - when 1
+              = render 'favorite_section', favorite: favorite
     %div.row.col-sm-12
       %div.panel.panel-default
         %div.panel-heading
