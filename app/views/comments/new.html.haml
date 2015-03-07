@@ -6,7 +6,7 @@
         = Student.find(params[:student_id]).first_name
     - else
       Contacting Recruit
-  - if params.has_key? :student_id
+  - if !@student.nil?
     %p
       %div.row
         %div.col-sm-4
@@ -15,22 +15,37 @@
           %span
             :plain
               &nbsp;
-            = Student.find(params[:student_id]).email
+            = @student.email
         %div.col-sm-4
           %span.label.label-primary
             Home Phone:
           %span
             :plain
               &nbsp;
-          = Student.find(params[:student_id]).home_phone
+          = @student.home_phone
         %div.col-sm-4
           %span.label.label-primary
             Cell Phone:
           %span
             :plain
               &nbsp;
-          = Student.find(params[:student_id]).cell_phone
+          = @student.cell_phone
 
+      %div.row
+        %div.col-sm-4
+          %span.label.label-primary
+            Instrument Interests:
+          %span
+            :plain
+              &nbsp;
+            = @student.instrument_list
+        %div.col-sm-4
+          %span.label.label-primary
+            Ensemble Interests:
+          %span
+            :plain
+              &nbsp;
+          = @student.ensemble_list
 
 = render 'form'
 - if params.has_key? :student_id

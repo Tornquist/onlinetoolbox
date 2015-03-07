@@ -5,6 +5,20 @@
     Purdue University Bands
 %div.row
   %div.col-sm-6
+    %div.row.col-sm-12
+      %div.panel.panel-default
+        %div.panel-heading
+          %div.panel-title
+            Favorites
+        %div.panel-body
+    %div.row.col-sm-12
+      %div.panel.panel-default
+        %div.panel-heading
+          %div.panel-title
+            Help
+        %div.panel-body
+          No help documents available.
+  %div.col-sm-6
     %div.panel.panel-default
       %div.panel-heading
         %div.panel-title
@@ -23,6 +37,6 @@
                         = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
                   %div.row
                     %div.col-sm-12
-                      = announcement.content
+                      %div.announcement_text
+                        = announcement.content
 
-  %div.col-sm-6

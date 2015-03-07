@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :favorites
+
   resources :announcements
 
   resources :seasons, except: [:destroy] do

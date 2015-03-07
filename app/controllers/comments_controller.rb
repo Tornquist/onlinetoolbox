@@ -6,6 +6,10 @@ class CommentsController < ApplicationController
   # GET /comments/new
   def new
     add_breadcrumb "New Comment", :new_comment_path
+    @student = nil
+    if params.has_key? :student_id
+      @student = Student.find(params[:student_id])
+    end
     @comment = Comment.new
   end
 
