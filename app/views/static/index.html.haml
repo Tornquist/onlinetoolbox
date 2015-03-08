@@ -23,7 +23,16 @@
           %div.panel-title
             Help
         %div.panel-body
-          No help documents available.
+          - if @helps.size == 0
+            No help documents available.
+          - else
+            - @helps.each do |help|
+              %div.row
+                %div.col-sm-12
+                  - if help.url.starts_with?('http://', 'https://')
+                    = link_to help.name, help.url
+                  - else
+                    = link_to help.name, 'http://' + help.url
   %div.col-sm-6
     %div.panel.panel-default
       %div.panel-heading
