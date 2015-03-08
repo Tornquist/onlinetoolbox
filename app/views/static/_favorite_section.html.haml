@@ -3,4 +3,15 @@
   %div.row
     %div.col-sm-12
       %strong
+        = section.season.name
+        |
         = section.name
+  %div.row
+    %div.col-sm-12
+      %div.btn-group.btn-group-justified
+        = link_to fa_icon("desktop"), section_path(section), class: "btn btn-sm btn-default", title: "Show Section"
+        = link_to fa_icon("users"), search_students_terms_path("large_filter"=>["section #{section.id}"], "fields"=>[3, 5]), method: :post, class: "btn btn-sm btn-default", title: "Section Breakdown"
+        = link_to "#{section.rookies}/#{section.returning_members}", "#", class: "btn btn-sm btn-default", title: "Section Ratio", disabled: "disabled"
+        = link_to fa_icon("comment"), section_notes_path(section), class: "btn btn-sm btn-default", title: "Notes"
+        = link_to fa_icon("pencil"), edit_section_path(section), class: "btn btn-sm btn-default", title: "Edit"
+        = link_to fa_icon("close"), favorite, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger", title: "Remove Favorite"
