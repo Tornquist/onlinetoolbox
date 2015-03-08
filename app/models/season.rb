@@ -5,7 +5,7 @@ class Season < ActiveRecord::Base
   accepts_nested_attributes_for :sections, :allow_destroy => true
 
   def members
-    sections.map{|s| s.section_members.count}.reduce(:+)
+    sections.map{|s| s.section_members.reject{ |i| i.student.archive}.size }.reduce(:+)
   end
 
   def students

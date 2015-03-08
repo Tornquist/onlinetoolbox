@@ -17,4 +17,8 @@ class Section < ActiveRecord::Base
   def rookies
     section_members.reject{ |i| !i.student.recruit || i.student.archive }.size
   end
+
+  def members
+    section_members.reject{ |i| i.student.archive }.size
+  end
 end

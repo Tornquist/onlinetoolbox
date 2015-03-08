@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :favorites
+  put '/favorites/toggle', to: 'favorites#toggle_favorite', as: 'favorite_toggle'
+  resources :favorites do
+  end
 
   resources :announcements
 

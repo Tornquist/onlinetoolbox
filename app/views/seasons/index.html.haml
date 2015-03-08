@@ -8,39 +8,41 @@
 
 %div.bottom-spacer
   %div.row
-    %div.table-responsive
-      %table.table.table-hover.table-condensed
-        %thead
-          %tr
-            %th
-              Name
-            %th
-              Start
-            %th
-              End
-            %th
-              Members
-            %th
-              Show
-            %th
-              Edit
-            %th.center
-              Breakdown
-
-        %tbody
-          - @seasons.order(:start).reverse.each do |season|
+    %div.col-sm-12
+      %div.table-responsive
+        %table.table.table-hover.table-condensed
+          %thead
             %tr
-              %td
-                = season.name
-              %td
-                = season.start.strftime("%B %e, %Y")
-              %td
-                = season.end.strftime("%B %e, %Y")
-              %td
-                = season.members
-              %td
-                = link_to (fa_icon "desktop"), season, class: "btn btn-primary"
-              %td
-                = link_to (fa_icon "edit"), edit_season_path(season), class: "btn btn-success"
-              %td.center
-                = link_to (fa_icon "info-circle"), search_students_terms_path("large_filter"=>["season #{season.id}"], "fields"=>[3, 5]), method: :post, class: "btn btn-warning"
+              %th
+                Name
+              %th
+                Start
+              %th
+                End
+              %th
+                Members
+              %th
+                Show
+              %th
+                Edit
+              %th.center
+                Breakdown
+
+          %tbody
+            - @seasons.order(:start).reverse.each do |season|
+              %tr
+                %td
+                  = FavoritesHelper.favorite_field(season_id: season.id, user_id: current_user.id)
+                  = season.name
+                %td
+                  = season.start.strftime("%B %e, %Y")
+                %td
+                  = season.end.strftime("%B %e, %Y")
+                %td
+                  = season.members
+                %td
+                  = link_to (fa_icon "desktop"), season, class: "btn btn-primary"
+                %td
+                  = link_to (fa_icon "edit"), edit_season_path(season), class: "btn btn-success"
+                %td.center
+                  = link_to (fa_icon "info-circle"), search_students_terms_path("large_filter"=>["season #{season.id}"], "fields"=>[3, 5]), method: :post, class: "btn btn-warning"

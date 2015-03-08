@@ -49,6 +49,7 @@
                 %li.list-group-item
                   %div.row
                     %div.col-sm-3
+                      = FavoritesHelper.favorite_field(section_id: section.id, user_id: current_user.id)
                       = link_to section.name, section_path(section)
                     %div.col-sm-3
                       Returning Members:

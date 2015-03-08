@@ -15,10 +15,14 @@
 //= require jquery-ui
 //= require cocoon
 //= require bootstrap-sprockets
-//= require bootstrap
 var ready;
 ready = function() {
   $('#disabled-forms').find('input, textarea, button, select').attr('disabled','disabled');
+
+  $('.favorite-icon').click(function() {
+    $(this).find('i').toggleClass('fa-star');
+    $(this).find('i').toggleClass('fa-star-o');
+  });
 };
 
 $(document).ready(ready);

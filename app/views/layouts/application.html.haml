@@ -23,12 +23,13 @@
       = yield
   %div#footer
     .container.center
-      %span
-        = fa_icon "copyright"
-        = Time.now.year
-        = link_to "Nathan Tornquist", "http://www.nathantornquist.com"
-        |
-        = link_to fa_icon("github") + " Fork", "http://www.github.com/Tornquist/onlinetoolbox/", class: "btn btn-xs btn-default"
-        = link_to fa_icon("github") + " Issues", "http://www.github.com/Tornquist/onlinetoolbox/issues/", class: "btn btn-xs btn-default"
+      %small
+        %span
+          = fa_icon "copyright"
+          = Time.now.year
+          = link_to "Nathan Tornquist", "http://www.nathantornquist.com"
+          |
+          = link_to fa_icon("github") + " Fork", "http://www.github.com/Tornquist/onlinetoolbox/", class: "btn btn-xs btn-default"
+          = link_to fa_icon("github") + " Issues", "http://www.github.com/Tornquist/onlinetoolbox/issues/", class: "btn btn-xs btn-default"
 
 
