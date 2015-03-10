@@ -1,6 +1,9 @@
 class FieldsController < ApplicationController
   before_action :set_field, only: [:show, :edit, :update, :destroy]
 
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Fields", :fields_path
+
   # GET /fields
   # GET /fields.json
   def index
@@ -14,11 +17,13 @@ class FieldsController < ApplicationController
 
   # GET /fields/new
   def new
+    add_breadcrumb "New", :new_field_path
     @field = Field.new
   end
 
   # GET /fields/1/edit
   def edit
+    add_breadcrumb "Edit", :edit_field_path
     if @field.locked
       flash[:error] = "That field is locked.  It cannot be modified"
       redirect_to request.referer

@@ -1,5 +1,5 @@
 %ul.nav.nav-pills.nav-stacked
-  %li{role:"presentation", class: (controller.class == Users::RegistrationsController and (controller.action_name == 'edit' || controller.action_name == 'update') ? 'active' : '')}
+  %li{role:"presentation", class: (controller.class == Users::RegistrationsController ? 'active' : '')}
     = link_to "User Profile", edit_user_registration_path
   %li{role:"presentation"}
     = link_to "Users", "#"
@@ -11,7 +11,7 @@
   %hr
   %li{role:"presentation"}
     = link_to "Contact Types", contact_types_path
-  %li{role:"presentation"}
+  %li{role:"presentation", class: (controller.class == FieldsController ? 'active' : '')}
     = link_to "Fields", fields_path
   %li{role:"presentation"}
     = link_to "Instruments", instruments_path

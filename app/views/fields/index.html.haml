@@ -1,44 +1,53 @@
-%h1
-  Listing Fields
+%div.jumbotron
+  %h1
+    Settings
 
-%div.table-responsive
-  %table.table#sortableFieldList
-    %thead
-      %tr
-        %th
-        %th.text-center
-          Name
-        %th.text-center
-          Group
-        %th.text-center
-          Description
-        %th.text-center
-          Options
-        %th.text-center
-          Edit
-        %th.text-center
-          Show/Hide
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1
+          Fields
 
-    %tbody
-      - @fields.each do |field|
-        %tr{ :class => "item text-center" + (field.hidden ? " danger" : ""), 'data-item-id' => field.id }
-          %td.bars
-            = fa_icon "bars"
-          %td
-            = field.name
-          %td
-            = field.group.name
-          %td
-            = field.description
-          %td
-            = field.options
-          %td
-            - if !field.locked
-              = link_to (fa_icon "pencil"), edit_field_path(field)
-          %td.eyecon
-            - if field.hidden
-              = link_to (fa_icon "eye"), field_toggle_hidden_path(field), method: :put, remote: true
-            - else
-              = link_to (fa_icon "eye-slash"), field_toggle_hidden_path(field), method: :put, remote: true
+        %div.table-responsive
+          %table.table#sortableFieldList
+            %thead
+              %tr
+                %th
+                %th.text-center
+                  Name
+                %th.text-center
+                  Group
+                %th.text-center
+                  Description
+                %th.text-center
+                  Options
+                %th.text-center
+                  Edit
+                %th.text-center
+                  Show/Hide
+            %tbody
+              - @fields.each do |field|
+                %tr{ :class => "item text-center" + (field.hidden ? " danger" : ""), 'data-item-id' => field.id }
+                  %td.bars
+                    = fa_icon "bars"
+                  %td
+                    = field.name
+                  %td
+                    = field.group.name
+                  %td
+                    = field.description
+                  %td
+                    = field.options
+                  %td
+                    - if !field.locked
+                      = link_to (fa_icon "pencil"), edit_field_path(field)
+                  %td.eyecon
+                    - if field.hidden
+                      = link_to (fa_icon "eye"), field_toggle_hidden_path(field), method: :put, remote: true
+                    - else
+                      = link_to (fa_icon "eye-slash"), field_toggle_hidden_path(field), method: :put, remote: true
 
-= link_to 'New Field', new_field_path, class: "btn btn-success"
+        = link_to 'New Field', new_field_path, class: "btn btn-success"
