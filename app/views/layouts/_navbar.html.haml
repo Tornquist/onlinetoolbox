@@ -18,7 +18,7 @@
           = link_to "Seasons", seasons_path
       %ul.nav.navbar-nav.navbar-right
         %li
-          = link_to "Settings", "#"
+          = link_to "Settings", edit_user_registration_path
         %li
           - if user_signed_in?
             = link_to "Sign Out", destroy_user_session_path, :method => :delete

@@ -68,7 +68,8 @@ Rails.application.routes.draw do
     get :sections, on: :member
   end
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: "users/sessions" }
+  #devise_for :users
   get 'users/favorite_instruments/', to: 'favorite_instruments#user', as: 'user_favorite_instruments'
   post 'users/favorite_instruments/', to: 'favorite_instruments#create_multiple', as: 'create_multiple_user_favorite_instruments'
 
