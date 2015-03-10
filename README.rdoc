@@ -4,7 +4,7 @@ The online toolbox is a system designed by Nathan Tornquist to aid in the recrui
 
 This tool allows for dynamic tracking of student information, and a flexible database structure to store said information.  The core student database is organized by datatype instead of content type, which allows for flexible expansion without rewriting code.
 
-Built with on ruby 2.1.2. 
+Built on ruby 2.1.2. 
 
 
 == License
