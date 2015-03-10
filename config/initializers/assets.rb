@@ -12,9 +12,9 @@ Rails.application.config.assets.precompile += %w( jquery.jsonview.css )
 
 Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'flash')
 
-%w( comments contact_types ensembles favorite_instruments fields gds gigs instuments
+%w( comments contact_types ensembles favorite_instruments fields gds gigs instruments
     rank_members recruit_statuses scores seasons section_notes sections static students
-    announcements favorites helps).each do |controller|
+    announcements favorites helps users/registrations).each do |controller|
 #  Rails.application.config.assets.precompile += ["#{controller}.css"]
   Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.css"]
 end

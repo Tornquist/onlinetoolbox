@@ -1,0 +1,76 @@
+= devise_error_messages!
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-7
+    %div.panel.panel-primary
+      %div.panel-body
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+          %div.form-group
+            = f.label :first_name
+            = f.text_field :first_name, autofocus: true, class: "form-control"
+
+          %div.form-group
+            = f.label :last_name
+            = f.text_field :last_name, class: "form-control"
+
+          %div.form-group
+            = f.label :email
+            = f.email_field :email, class: "form-control"
+          -#
+            - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+              %div
+                Currently waiting confirmation for:
+                = resource.unconfirmed_email
+          %div.form-group
+            = f.label :password
+            %i
+              (leave blank if you don't want to change it)
+            = f.password_field :password, autocomplete: "off", class: "form-control"
+
+          %div.form-group
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+
+          %div.form-group
+            = f.label :current_password
+            %i
+              (we need your current password to confirm your changes)
+            = f.password_field :current_password, autocomplete: "off", class: "form-control"
+
+          %div.actions
+            = f.submit "Update", class: "btn btn-default"
+
+  %div.col-sm-2
+    %div.panel.panel-primary
+      %div.panel-body
+        %strong
+          User Privileges
+        %ul
+          - if current_user.admin
+            %li
+              Admin
+          - if current_user.director
+            %li
+              Director
+          - if current_user.recruiter
+            %li
+              Recruiter
+          - if current_user.chief_of_staff
+            %li
+              Chief of Staff
+          - if current_user.student_leader
+            %li
+              Student Leader
+
+-#
+  %h3
+    Cancel my account
+
+  %p
+    Unhappy?
+    = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
