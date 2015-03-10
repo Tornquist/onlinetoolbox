@@ -1,41 +1,4 @@
 class FavoritesController < ApplicationController
-  before_action :set_favorite, only: [:show, :edit, :update, :destroy]
-
-  respond_to :html
-
-  def index
-    @favorites = Favorite.all
-    respond_with(@favorites)
-  end
-
-  def show
-    respond_with(@favorite)
-  end
-
-  def new
-    @favorite = Favorite.new
-    respond_with(@favorite)
-  end
-
-  def edit
-  end
-
-  def create
-    @favorite = Favorite.new(favorite_params)
-    @favorite.save
-    respond_with(@favorite)
-  end
-
-  def update
-    @favorite.update(favorite_params)
-    respond_with(@favorite)
-  end
-
-  def destroy
-    @favorite.destroy
-    respond_with(@favorite)
-  end
-
   def toggle_favorite
     dest_id = 0
     dest_type = 0
@@ -58,13 +21,4 @@ class FavoritesController < ApplicationController
     end
     render nothing: true
   end
-
-  private
-    def set_favorite
-      @favorite = Favorite.find(params[:id])
-    end
-
-    def favorite_params
-      params.require(:favorite).permit(:user_id, :dest_id, :dest_type)
-    end
 end
