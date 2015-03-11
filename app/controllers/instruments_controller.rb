@@ -1,64 +1,49 @@
 class InstrumentsController < ApplicationController
-  before_action :set_instrument, only: [:show, :edit, :update, :destroy]
+  before_action :set_instrument, only: [:edit, :update, :destroy]
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Instruments", :instruments_path
 
-  # GET /instruments
-  # GET /instruments.json
   def index
-    @instruments = Instrument.all
+    @instruments = Instrument.all.order(:name)
   end
 
-  # GET /instruments/1
-  # GET /instruments/1.json
-  def show
-  end
-
-  # GET /instruments/new
   def new
+    add_breadcrumb "New", :new_instrument_path
     @instrument = Instrument.new
   end
 
-  # GET /instruments/1/edit
   def edit
+    add_breadcrumb "Edit", :edit_instrument_path
   end
 
-  # POST /instruments
-  # POST /instruments.json
   def create
     @instrument = Instrument.new(instrument_params)
 
-    respond_to do |format|
-      if @instrument.save
-        format.html { redirect_to @instrument, notice: 'Instrument was successfully created.' }
-        format.json { render :show, status: :created, location: @instrument }
-      else
-        format.html { render :new }
-        format.json { render json: @instrument.errors, status: :unprocessable_entity }
-      end
+    if @instrument.save
+      flash[:notice] =  'Instrument was successfully created.'
+      redirect_to instruments_path
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /instruments/1
-  # PATCH/PUT /instruments/1.json
   def update
-    respond_to do |format|
-      if @instrument.update(instrument_params)
-        format.html { redirect_to @instrument, notice: 'Instrument was successfully updated.' }
-        format.json { render :show, status: :ok, location: @instrument }
-      else
-        format.html { render :edit }
-        format.json { render json: @instrument.errors, status: :unprocessable_entity }
-      end
+    if @instrument.update(instrument_params)
+      flash[:notice] = 'Instrument was successfully updated.'
+      redirect_to instruments_path
+    else
+      render :edit
     end
   end
 
-  # DELETE /instruments/1
-  # DELETE /instruments/1.json
   def destroy
-    @instrument.destroy
-    respond_to do |format|
-      format.html { redirect_to instruments_url, notice: 'Instrument was successfully destroyed.' }
-      format.json { head :no_content }
+    if @instrument.student_instruments.size > 0
+      flash[:error] = "Cannot delete instrument with associated students."
+    else
+      @instrument.destroy
+      flash[:notice] = 'Instrument was successfully destroyed.'
     end
+    redirect_to instruments_path
   end
 
   private

@@ -51,7 +51,7 @@ Rails.application.routes.draw do
 
   resources :ensembles
 
-  resources :instruments
+  resources :instruments, except: [:show]
 
   get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'
   get 'students/import/', to: 'students#upload', as: 'import_students'

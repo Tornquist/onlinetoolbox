@@ -1,0 +1,41 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Instruments
+
+        %div.alert.alert-danger
+          %strong
+            Warning!
+          Removing entries here will affect csv import and filtering of recruits
+
+        %table.table.table-hover
+          %thead
+            %tr
+              %th
+                Name
+              %th
+                :plain
+                  # Associations
+              %th
+              %th
+
+          %tbody
+            - @instruments.each do |instrument|
+              %tr
+                %td
+                  = instrument.name
+                %td
+                  = instrument.student_instruments.size
+                %td
+                  = link_to 'Edit', edit_instrument_path(instrument)
+                %td
+                  = link_to 'Destroy', instrument, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to 'New Instrument', new_instrument_path, class: "btn btn-success"

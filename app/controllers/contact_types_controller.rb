@@ -1,11 +1,11 @@
 class ContactTypesController < ApplicationController
-  before_action :set_contact_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_contact_type, only: [:edit, :update, :destroy]
 
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Contact Types", :contact_types_path
 
   def index
-    @contact_types = ContactType.all
+    @contact_types = ContactType.all.order(:name)
   end
 
   def new
