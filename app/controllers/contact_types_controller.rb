@@ -5,6 +5,9 @@ class ContactTypesController < ApplicationController
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Contact Types", :contact_types_path
 
+  def permissions_error
+  end
+
   def index
     @contact_types = ContactType.all.order(:name)
   end
