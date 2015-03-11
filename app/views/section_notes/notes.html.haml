@@ -4,7 +4,8 @@
     |
     = @section.name
 
-= render 'form'
+- if current_user.check_permissions(:create_section_notes)
+  = render 'form'
 
 - @section.section_notes.order('created_at DESC').each do |note|
   %div.panel.panel-primary

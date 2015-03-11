@@ -23,7 +23,12 @@ class SectionsController < ApplicationController
   end
 
   def edit
-    @ranks = @section.ranks.order(:index)
+    if current_user.check_permissions(:edit_section)
+      @ranks = @section.ranks.order(:index)
+    else
+      flash[:error] = "Student Leader permissions required"
+      redirect_to :back
+    end
   end
 
   def create
@@ -33,7 +38,11 @@ class SectionsController < ApplicationController
   end
 
   def update
-    @section.update(section_params)
+    if current_user.check_permissions(:edit_section)
+      @section.update(section_params)
+    else
+      flash[:error] = "Student Leader permissions required"
+    end
     respond_with(@section)
   end
 

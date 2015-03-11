@@ -31,4 +31,11 @@ module UsersHelper
     user.admin || user.director
   end
 
+  def self.create_section_notes user
+    user.admin || user.student_leader
+  end
+
+  def self.edit_section user
+    user.admin || user.student_leader
+  end
 end

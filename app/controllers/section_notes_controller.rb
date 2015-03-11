@@ -15,7 +15,11 @@ class SectionNotesController < ApplicationController
 
   def create
     @section_note = SectionNote.new(section_note_params)
-    @section_note.save
+    if current_user.check_permissions(:create_section_notes)
+      @section_note.save
+    else
+      flash[:notice] = "Student Leader permissions required to create notes"
+    end
     @section = @section_note.section
     redirect_to section_notes_path
   end
