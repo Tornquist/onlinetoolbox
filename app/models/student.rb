@@ -158,7 +158,7 @@ class Student < ActiveRecord::Base
 
   def season_section_text(season)
     begin
-      season_section.name
+      season_section(season).name
     rescue
       nil
     end

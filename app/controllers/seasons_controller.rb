@@ -28,26 +28,44 @@ class SeasonsController < ApplicationController
   end
 
   def new
-    @season = Season.new
-    3.times { @season.games.build(season_id: @season.id) }
-    default_section_names.each do |section|
-      @season.sections.build(name: section, season_id: @season.id)
+    if current_user.check_permissions(:modify_create_seasons)
+      @season = Season.new
+      3.times { @season.games.build(season_id: @season.id) }
+      default_section_names.each do |section|
+        @season.sections.build(name: section, season_id: @season.id)
+      end
+    else
+      flash[:error] = "Admin, Director, of Chief of Staff privileges required."
+      redirect_to seasons_path
     end
   end
 
   def edit
-    add_breadcrumb "#{@season.name}", season_path(@season.id)
-    add_breadcrumb "Edit", :edit_season_path, id: @season.id
+    if current_user.check_permissions(:modify_create_seasons)
+      add_breadcrumb "#{@season.name}", season_path(@season.id)
+      add_breadcrumb "Edit", :edit_season_path, id: @season.id
+    else
+      flash[:error] = "Admin, Director, of Chief of Staff privileges required."
+      redirect_to :back
+    end
   end
 
   def create
-    @season = Season.new(season_params)
-    @season.save
+    if current_user.check_permissions(:modify_create_seasons)
+      @season = Season.new(season_params)
+      @season.save
+    else
+      flash[:error] = "Admin, Director, of Chief of Staff privileges required."
+    end
     redirect_to seasons_path
   end
 
   def update
-    @season.update(season_params)
+    if current_user.check_permissions(:modify_create_seasons)
+      @season.update(season_params)
+    else
+      flash[:error] = "Admin, Director, of Chief of Staff privileges required."
+    end
     redirect_to seasons_path
   end
 

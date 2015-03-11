@@ -15,47 +15,67 @@ class GigsController < ApplicationController
   end
 
   def new
-    @season = Season.find(params[:season_id])
+    if current_user.check_permissions(:create_gigs)
+      @season = Season.find(params[:season_id])
 
-    add_breadcrumb "#{@season.name}", season_path(@season.id)
-    add_breadcrumb "Gigs", season_gigs_path(@season.id)
-    add_breadcrumb "New", new_season_gig_path(@season.id)
+      add_breadcrumb "#{@season.name}", season_path(@season.id)
+      add_breadcrumb "Gigs", season_gigs_path(@season.id)
+      add_breadcrumb "New", new_season_gig_path(@season.id)
 
-    @gig = Gig.new
-    if params[:student_id]
-      @gig.student_id = params[:student_id]
+      @gig = Gig.new
+      if params[:student_id]
+        @gig.student_id = params[:student_id]
+      end
+      respond_with(@gig)
+    else
+      flash[:error] = "Chief of Staff privileges required to create gigs"
+      redirect_to :back
     end
-    respond_with(@gig)
   end
 
   def edit
     @season = Season.find(params[:season_id])
-    add_breadcrumb "#{@season.name}", season_path(@season.id)
-    add_breadcrumb "Gigs", season_gigs_path(@season.id)
-    add_breadcrumb "Edit", edit_season_gig_path(@season.id, @gig.id)
+    if current_user.check_permissions(:edit_gigs)
+      add_breadcrumb "#{@season.name}", season_path(@season.id)
+      add_breadcrumb "Gigs", season_gigs_path(@season.id)
+      add_breadcrumb "Edit", edit_season_gig_path(@season.id, @gig.id)
+      respond_with(@gig)
+    else
+      flash[:error] = "Director privileges required to edit gigs"
+      redirect_to :back
+    end
   end
 
   def create
     @season = Season.find(params[:season_id])
-    gig_hash = gig_params
-    gig_hash["value"] = gig_params["value"].to_i
-    @gig = Gig.new(gig_hash)
-    @gig.save
+    if current_user.check_permissions(:create_gigs)
+      gig_hash = gig_params
+      gig_hash["value"] = gig_params["value"].to_i
+      @gig = Gig.new(gig_hash)
+      @gig.save
+    end
     redirect_to season_gigs_path(@season)
   end
 
   def update
     @season = Season.find(params[:season_id])
-    gig_hash = gig_params
-    gig_hash["value"] = gig_params["value"].to_i
-    @gig.update(gig_hash)
+    if current_user.check_permissions(:edit_gigs)
+      gig_hash = gig_params
+      gig_hash["value"] = gig_params["value"].to_i
+      @gig.update(gig_hash)
+    end
     redirect_to season_gigs_path(@season)
   end
 
   def destroy
     @season = Season.find(params[:season_id])
-    @gig.destroy
-    redirect_to season_gigs_path(@season)
+    if current_user.check_permissions(:delete_gigs)
+      @gig.destroy
+      redirect_to season_gigs_path(@season)
+    else
+      flash[:error] = "Director privileges required to remove gigs"
+      redirect_to :back
+    end
   end
 
   def student_view
