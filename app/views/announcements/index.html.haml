@@ -6,11 +6,12 @@
   %div.col-sm-3
     = render 'shared/settings_panel'
   %div.col-sm-9
-    %div.panel.panel-primary
-      %div.panel-body
-        %h1.no-top-margin
-          New Announcement
-        = render 'form'
+    - if current_user.check_permissions(:make_announcements)
+      %div.panel.panel-primary
+        %div.panel-body
+          %h1.no-top-margin
+            New Announcement
+          = render 'form'
     %div.panel.panel-primary
       %div.panel-body
         %h1.no-top-margin

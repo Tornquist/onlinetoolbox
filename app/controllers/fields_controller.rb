@@ -1,8 +1,12 @@
 class FieldsController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_field, only: [:show, :edit, :update, :destroy]
 
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Fields", :fields_path
+
+  def permissions_error
+  end
 
   # GET /fields
   # GET /fields.json
@@ -97,5 +101,12 @@ class FieldsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def field_params
       params.require(:field).permit(:name, :index, :group_id, :description, :options, :hidden, :locked)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_site_variables)
+      else
+        redirect_to fields_permissions_path
+      end
     end
 end

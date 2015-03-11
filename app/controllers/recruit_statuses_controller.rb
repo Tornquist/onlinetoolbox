@@ -1,8 +1,12 @@
 class RecruitStatusesController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_recruit_status, only: [:edit, :update, :destroy]
 
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Recruit Statuses", :recruit_statuses_path
+
+  def permissions_error
+  end
 
   def index
     @recruit_statuses = RecruitStatus.all.order(:name)
@@ -54,5 +58,12 @@ class RecruitStatusesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def recruit_status_params
       params.require(:recruit_status).permit(:name, :hidden)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_site_variables)
+      else
+        redirect_to recruit_statuses_permissions_path
+      end
     end
 end

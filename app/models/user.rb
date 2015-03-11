@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     first_name.to_s + " " + last_name.to_s
   end
 
+  def check_permissions level
+    UsersHelper.send(level, self)
+  end
+
   # check to see if a user is active or not and deny login if not
   def active_for_authentication?
     super && !banned

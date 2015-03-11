@@ -40,17 +40,22 @@ Rails.application.routes.draw do
   get '/comments/new', to: 'comments#new', as: 'new_comment'
   post '/comments/', to: 'comments#create', as: 'comments'
 
+  get '/contact_types/permissions_error', to: 'contact_types#permissions_error', as: 'contact_types_permissions'
   resources :contact_types, except: [:show]
 
+  get '/recruit_statuses/permissions_error', to: 'recruit_statuses#permissions_error', as: 'recruit_statuses_permissions'
   resources :recruit_statuses, except: [:show]
 
+  get '/fields/permissions_error', to: 'fields#permissions_error', as: 'fields_permissions'
   resources :fields do
     post :update_row_order, on: :collection
     put :toggle_hidden
   end
 
+  get '/ensembles/permissions_error', to: 'ensembles#permissions_error', as: 'ensembles_permissions'
   resources :ensembles, except: [:show]
 
+  get '/instruments/permissions_error', to: 'instruments#permissions_error', as: 'instruments_permissions'
   resources :instruments, except: [:show]
 
   get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'

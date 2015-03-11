@@ -1,7 +1,11 @@
 class InstrumentsController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_instrument, only: [:edit, :update, :destroy]
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Instruments", :instruments_path
+
+  def permissions_error
+  end
 
   def index
     @instruments = Instrument.all.order(:name)
@@ -55,5 +59,12 @@ class InstrumentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def instrument_params
       params.require(:instrument).permit(:name)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_site_variables)
+      else
+        redirect_to instruments_permissions_path
+      end
     end
 end

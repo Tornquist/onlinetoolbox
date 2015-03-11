@@ -11,8 +11,12 @@ class AnnouncementsController < ApplicationController
   end
 
   def create
-    @announcement = Announcement.new(announcement_params)
-    @announcement.save
+    if (current_user.check_permissions(:make_announcements))
+      @announcement = Announcement.new(announcement_params)
+      @announcement.save
+    else
+      flash[:error] = "Only directors and the chief of staff can make announcements"
+    end
     redirect_to announcements_path
   end
 

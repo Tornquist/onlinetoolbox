@@ -1,8 +1,12 @@
 class EnsemblesController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_ensemble, only: [:edit, :update, :destroy]
 
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Ensembles", :ensembles_path
+
+  def permissions_error
+  end
 
   def index
     @ensembles = Ensemble.all.order(:name)
@@ -54,5 +58,12 @@ class EnsemblesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def ensemble_params
       params.require(:ensemble).permit(:name)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_site_variables)
+      else
+        redirect_to ensembles_permissions_path
+      end
     end
 end

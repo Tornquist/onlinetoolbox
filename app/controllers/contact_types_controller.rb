@@ -1,4 +1,5 @@
 class ContactTypesController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_contact_type, only: [:edit, :update, :destroy]
 
   add_breadcrumb "Settings", :edit_user_registration_path
@@ -56,5 +57,12 @@ class ContactTypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_type_params
       params.require(:contact_type).permit(:name, :hidden)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_site_variables)
+      else
+        redirect_to contact_types_permissions_path
+      end
     end
 end

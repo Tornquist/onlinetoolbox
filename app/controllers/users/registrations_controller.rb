@@ -3,11 +3,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_filter :configure_account_update_params, only: [:update]
 
   def permission_requirements
-    if !(current_user.admin || current_user.director || current_user.chief_of_staff)
+    if current_user.check_permissions(:create_modify_users)
+      true
+    else
       redirect_to user_permission_error_path
-      return true
+      false
     end
-    false
   end
 
   def permission_error
@@ -16,23 +17,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def all_users
-    permission_requirements
-    add_breadcrumb "Settings", :edit_user_registration_path
-    add_breadcrumb "Users", :all_users_path
-    @users = User.all.order(:last_name, :first_name)
+    if permission_requirements
+      add_breadcrumb "Settings", :edit_user_registration_path
+      add_breadcrumb "Users", :all_users_path
+      @users = User.all.order(:last_name, :first_name)
+    end
   end
 
   def generate_new
-    permission_requirements
-    add_breadcrumb "Settings", :edit_user_registration_path
-    add_breadcrumb "Users", :all_users_path
-    add_breadcrumb "New", :new_custom_user_path
-    @user = User.new
+    if permission_requirements
+      add_breadcrumb "Settings", :edit_user_registration_path
+      add_breadcrumb "Users", :all_users_path
+      add_breadcrumb "New", :new_custom_user_path
+      @user = User.new
+    end
   end
 
   def create_new
     if permission_requirements
-    else
       user = params["user"].permit("first_name","last_name","email","password","password_confirmation","admin","recruiter","student_leader","chief_of_staff","director")
       u = User.create(user)
       flash[:notice] = "Please verify results"
@@ -42,7 +44,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def ban
     if permission_requirements
-    else
       user = User.find(params["id"])
       flash[:notice] = "Toggled User Ban for #{user.full_name}"
       user.update(banned: !user.banned)
@@ -51,16 +52,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit_permissions
-    permission_requirements
-    add_breadcrumb "Settings", :edit_user_registration_path
-    add_breadcrumb "Users", :all_users_path
-    add_breadcrumb "Permissions", :new_custom_user_path
-    @user = User.find(params["id"])
+    if permission_requirements
+      add_breadcrumb "Settings", :edit_user_registration_path
+      add_breadcrumb "Users", :all_users_path
+      add_breadcrumb "Permissions", :new_custom_user_path
+      @user = User.find(params["id"])
+    end
   end
 
   def save_permissions
     if permission_requirements
-    else
       user_params = params["user"].permit("admin","recruiter","student_leader","chief_of_staff","director")
       user = User.find(params["id"])
       user.update(user_params)
@@ -70,13 +71,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def reset_password
-    permission_requirements
-    add_breadcrumb "Settings", :edit_user_registration_path
-    add_breadcrumb "Users", :all_users_path
-    add_breadcrumb "Password Reset", :reset_user_password_path
-    @user = User.find(params["id"])
-    @newpass = rand(36**8).to_s(36)
-    @user.update(password: @newpass, password_confirmation: @newpass)
+    if permission_requirements
+      add_breadcrumb "Settings", :edit_user_registration_path
+      add_breadcrumb "Users", :all_users_path
+      add_breadcrumb "Password Reset", :reset_user_password_path
+      @user = User.find(params["id"])
+      @newpass = rand(36**8).to_s(36)
+      @user.update(password: @newpass, password_confirmation: @newpass)
+    end
   end
 
   # GET /resource/sign_up
