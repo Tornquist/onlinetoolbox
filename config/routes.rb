@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   resources :contact_types, except: [:show]
 
-  resources :recruit_statuses
+  resources :recruit_statuses, except: [:show]
 
   resources :fields do
     post :update_row_order, on: :collection

@@ -1,64 +1,48 @@
 class RecruitStatusesController < ApplicationController
-  before_action :set_recruit_status, only: [:show, :edit, :update, :destroy]
+  before_action :set_recruit_status, only: [:edit, :update, :destroy]
 
-  # GET /recruit_statuses
-  # GET /recruit_statuses.json
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Recruit Statuses", :recruit_statuses_path
+
   def index
-    @recruit_statuses = RecruitStatus.all
+    @recruit_statuses = RecruitStatus.all.order(:name)
   end
 
-  # GET /recruit_statuses/1
-  # GET /recruit_statuses/1.json
-  def show
-  end
-
-  # GET /recruit_statuses/new
   def new
+    add_breadcrumb "New", :new_recruit_status_path
     @recruit_status = RecruitStatus.new
   end
 
-  # GET /recruit_statuses/1/edit
   def edit
+    add_breadcrumb "Edit", :edit_recruit_status_path
   end
 
-  # POST /recruit_statuses
-  # POST /recruit_statuses.json
   def create
     @recruit_status = RecruitStatus.new(recruit_status_params)
 
-    respond_to do |format|
-      if @recruit_status.save
-        format.html { redirect_to @recruit_status, notice: 'Recruit status was successfully created.' }
-        format.json { render :show, status: :created, location: @recruit_status }
-      else
-        format.html { render :new }
-        format.json { render json: @recruit_status.errors, status: :unprocessable_entity }
-      end
+    if @recruit_status.save
+      redirect_to recruit_statuses_path, notice: 'Recruit status was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /recruit_statuses/1
-  # PATCH/PUT /recruit_statuses/1.json
   def update
-    respond_to do |format|
-      if @recruit_status.update(recruit_status_params)
-        format.html { redirect_to @recruit_status, notice: 'Recruit status was successfully updated.' }
-        format.json { render :show, status: :ok, location: @recruit_status }
-      else
-        format.html { render :edit }
-        format.json { render json: @recruit_status.errors, status: :unprocessable_entity }
-      end
+    if @recruit_status.update(recruit_status_params)
+      redirect_to recruit_statuses_path, notice: 'Recruit status was successfully updated.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /recruit_statuses/1
-  # DELETE /recruit_statuses/1.json
   def destroy
-    @recruit_status.destroy
-    respond_to do |format|
-      format.html { redirect_to recruit_statuses_url, notice: 'Recruit status was successfully destroyed.' }
-      format.json { head :no_content }
+    if @recruit_status.comments.size > 0
+      flash[:error] = "Cannot delete Recruit Statuses with associated comments. Delete comments, or hide status."
+    else
+      @recruit_status.destroy
+      flash[:notice] = "Recruit status was successfully destroyed"
     end
+    redirect_to recruit_statuses_path
   end
 
   private

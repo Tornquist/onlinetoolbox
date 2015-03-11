@@ -1,0 +1,8 @@
+= form_for(@recruit_status) do |f|
+  %div.form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  %div.form-group
+    = f.label :hidden
+    = f.check_box :hidden
+  = f.submit class: "btn btn-success"

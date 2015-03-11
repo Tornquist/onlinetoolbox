@@ -9,7 +9,7 @@
     %div.panel.panel-primary
       %div.panel-body
         %h1.no-top-margin
-          Contact Types
+          Recruit Statuses
 
         %div.alert.alert-danger
           %strong
@@ -28,18 +28,18 @@
                   # Contacts
               %th
               %th
-
           %tbody
-            - @contact_types.each do |contact_type|
+            - @recruit_statuses.each do |recruit_status|
               %tr
                 %td
-                  = contact_type.name
+                  = recruit_status.name
                 %td
-                  = contact_type.hidden
+                  = recruit_status.hidden
                 %td
-                  = contact_type.comments.size
+                  = recruit_status.comments.size
                 %td
-                  = link_to 'Edit', edit_contact_type_path(contact_type)
+                  = link_to 'Edit', edit_recruit_status_path(recruit_status)
                 %td
-                  = link_to 'Destroy', contact_type, method: :delete, data: { confirm: 'Are you sure?' }
-        = link_to 'New Contact type', new_contact_type_path, class: "btn btn-success"
+                  = link_to 'Destroy', recruit_status, method: :delete, data: { confirm: 'Are you sure?' }
+
+        = link_to 'New Recruit Status', new_recruit_status_path, class: "btn btn-success"
