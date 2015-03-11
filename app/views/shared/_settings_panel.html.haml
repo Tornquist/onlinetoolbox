@@ -6,7 +6,7 @@
   %hr
   %li{role:"presentation", class: (controller.class == AnnouncementsController ? 'active' : '')}
     = link_to "Announcements", announcements_path
-  %li{role:"presentation"}
+  %li{role:"presentation", class: (controller.class == HelpsController ? 'active' : '')}
     = link_to "Help Documentation", helps_path
   %hr
   %li{role:"presentation"}

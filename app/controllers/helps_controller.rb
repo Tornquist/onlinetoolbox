@@ -2,38 +2,39 @@ class HelpsController < ApplicationController
   before_action :set_help, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Help", :helps_path
 
   def index
     @helps = Help.all
     respond_with(@helps)
   end
 
-  def show
-    respond_with(@help)
-  end
 
   def new
+    add_breadcrumb "New", :new_help_path
     @help = Help.new
     respond_with(@help)
   end
 
   def edit
+    add_breadcrumb "Edit", :edit_help_path
   end
 
   def create
     @help = Help.new(help_params)
     @help.save
-    respond_with(@help)
+    redirect_to helps_path
   end
 
   def update
     @help.update(help_params)
-    respond_with(@help)
+    redirect_to helps_path
   end
 
   def destroy
     @help.destroy
-    respond_with(@help)
+    redirect_to helps_path
   end
 
   private

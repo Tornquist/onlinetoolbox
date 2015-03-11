@@ -1,0 +1,37 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Help Documentation
+
+        %table.table
+          %thead
+            %tr
+              %th
+                Name
+              %th
+                Url
+              %th
+              %th
+
+          %tbody
+            - @helps.each do |help|
+              %tr
+                %td
+                  = help.name
+                %td
+                  = help.url
+                %td
+                  = link_to (fa_icon "pencil"), edit_help_path(help), class: "btn btn-sm btn-success"
+                %td
+                  = link_to (fa_icon "close"), help, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger"
+
+        = link_to 'New Help', new_help_path, class: "btn btn-success"
+
