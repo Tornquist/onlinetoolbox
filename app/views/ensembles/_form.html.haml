@@ -1,0 +1,5 @@
+= form_for(@ensemble) do |f|
+  %div.form-group
+    = f.label :name
+    = f.text_field :name, class: "form-control"
+  = f.submit class: "btn btn-success"

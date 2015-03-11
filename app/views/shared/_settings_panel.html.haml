@@ -15,7 +15,7 @@
     = link_to "Fields", fields_path
   %li{role:"presentation", class: (controller.class == InstrumentsController ? 'active' : '')}
     = link_to "Instruments", instruments_path
-  %li{role:"presentation"}
+  %li{role:"presentation", class: (controller.class == EnsemblesController ? 'active' : '')}
     = link_to "Ensembles", ensembles_path
   %li{role:"presentation"}
     = link_to "Recruit Statuses", recruit_statuses_path

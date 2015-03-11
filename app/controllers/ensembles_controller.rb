@@ -1,64 +1,48 @@
 class EnsemblesController < ApplicationController
-  before_action :set_ensemble, only: [:show, :edit, :update, :destroy]
+  before_action :set_ensemble, only: [:edit, :update, :destroy]
 
-  # GET /ensembles
-  # GET /ensembles.json
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Ensembles", :ensembles_path
+
   def index
-    @ensembles = Ensemble.all
+    @ensembles = Ensemble.all.order(:name)
   end
 
-  # GET /ensembles/1
-  # GET /ensembles/1.json
-  def show
-  end
-
-  # GET /ensembles/new
   def new
+    add_breadcrumb "New", :new_ensemble_path
     @ensemble = Ensemble.new
   end
 
-  # GET /ensembles/1/edit
   def edit
+    add_breadcrumb "Edit", :edit_ensemble_path
   end
 
-  # POST /ensembles
-  # POST /ensembles.json
   def create
     @ensemble = Ensemble.new(ensemble_params)
 
-    respond_to do |format|
-      if @ensemble.save
-        format.html { redirect_to @ensemble, notice: 'Ensemble was successfully created.' }
-        format.json { render :show, status: :created, location: @ensemble }
-      else
-        format.html { render :new }
-        format.json { render json: @ensemble.errors, status: :unprocessable_entity }
-      end
+    if @ensemble.save
+      redirect_to ensembles_path, notice: 'Ensemble was successfully created.'
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /ensembles/1
-  # PATCH/PUT /ensembles/1.json
   def update
-    respond_to do |format|
-      if @ensemble.update(ensemble_params)
-        format.html { redirect_to @ensemble, notice: 'Ensemble was successfully updated.' }
-        format.json { render :show, status: :ok, location: @ensemble }
-      else
-        format.html { render :edit }
-        format.json { render json: @ensemble.errors, status: :unprocessable_entity }
-      end
+    if @ensemble.update(ensemble_params)
+      redirect_to ensembles_path, notice: 'Ensemble was successfully updated.'
+    else
+      render :edit
     end
   end
 
-  # DELETE /ensembles/1
-  # DELETE /ensembles/1.json
   def destroy
-    @ensemble.destroy
-    respond_to do |format|
-      format.html { redirect_to ensembles_url, notice: 'Ensemble was successfully destroyed.' }
-      format.json { head :no_content }
+    if @ensemble.student_instruments.size > 0
+      flash[:error] = "Cannot delete ensembles with associated student interests"
+    else
+      @ensemble.destroy
+      flash[:notice] = "Ensemble was successfully destroyed."
     end
+    redirect_to ensembles_path
   end
 
   private

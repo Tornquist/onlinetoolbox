@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     put :toggle_hidden
   end
 
-  resources :ensembles
+  resources :ensembles, except: [:show]
 
   resources :instruments, except: [:show]
 
