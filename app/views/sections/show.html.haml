@@ -7,6 +7,8 @@
     = link_to "Section Breakdown", search_students_terms_path("large_filter"=>["section #{@section.id}"], "fields"=>[3, 5]), method: :post
     |
     = link_to "Section Notes", section_notes_path(@section)
+    |
+    = link_to "Transfer Students", section_transfer_path(@section)
 
 - if !@autogds.empty?
   %div.alert.alert-danger

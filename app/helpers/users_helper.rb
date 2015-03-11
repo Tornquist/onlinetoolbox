@@ -38,4 +38,8 @@ module UsersHelper
   def self.edit_section user
     user.admin || user.student_leader
   end
+
+  def self.transfer_students user
+    user.admin || user.student_leader
+  end
 end

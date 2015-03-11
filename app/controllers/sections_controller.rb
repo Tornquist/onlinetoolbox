@@ -52,26 +52,36 @@ class SectionsController < ApplicationController
   end
 
   def transfer
-    @section = Section.find(params[:section_id])
+    if current_user.check_permissions(:transfer_students)
+      @section = Section.find(params[:section_id])
+    else
+      flash[:error] = "Student Leader permissions required"
+      redirect_to :back
+    end
   end
 
   def transfer_students
-    destination = params[:destination][:id].to_i
-    upgrade = !params[:upgrade_students].nil?
-    students = params[:students]
-    students.each do |student|
-      student_id = student.to_i
-      if SectionMember.where(student_id: student_id, section_id: destination).empty?
-        SectionMember.create(student_id: student_id, section_id: destination)
+    if current_user.check_permissions(:transfer_students)
+      destination = params[:destination][:id].to_i
+      upgrade = !params[:upgrade_students].nil?
+      students = params[:students]
+      students.each do |student|
+        student_id = student.to_i
+        if SectionMember.where(student_id: student_id, section_id: destination).empty?
+          SectionMember.create(student_id: student_id, section_id: destination)
+        end
+        if upgrade
+          student_object = Student.find(student_id)
+          student_object.recruit = false
+          student_object.save
+        end
       end
-      if upgrade
-        student_object = Student.find(student_id)
-        student_object.recruit = false
-        student_object.save
-      end
+      flash[:notice] = "Students Transferred"
+      redirect_to section_path(Section.find(destination))
+    else
+      flash[:error] = "Student Leader permissions required"
+      redirect_to root_path
     end
-    flash[:notice] = "Students Transferred"
-    redirect_to section_path(Section.find(destination))
   end
 
   private
