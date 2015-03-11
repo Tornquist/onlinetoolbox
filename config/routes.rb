@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   put '/favorites/toggle', to: 'favorites#toggle_favorite', as: 'favorite_toggle'
 
-  resources :announcements
+  resources :announcements, except: [:show, :edit, :new, :update]
 
   resources :seasons, except: [:destroy] do
     resources :students, only: [] do

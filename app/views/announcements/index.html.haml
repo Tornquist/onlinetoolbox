@@ -1,0 +1,34 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          New Announcement
+        = render 'form'
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Announcements
+
+        - @announcements.each do |announcement|
+          %div.row
+            %div.col-sm-12
+              %div.panel.panel-default
+                %div.panel-body
+                  %div.row
+                    %div.col-sm-12
+                      %strong
+                        = announcement.user.full_name
+                        |
+                        = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+                        = link_to (fa_icon "close"), announcement, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger pull-right"
+                  %div.row
+                    %div.col-sm-11
+                      %div.announcement_text
+                        = announcement.content

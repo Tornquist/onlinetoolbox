@@ -1,39 +1,29 @@
 class AnnouncementsController < ApplicationController
-  before_action :set_announcement, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_announcement, only: [:destroy]
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Announcements", :announcements_path
   respond_to :html
 
   def index
-    @announcements = Announcement.all
-    respond_with(@announcements)
-  end
-
-  def show
-    respond_with(@announcement)
-  end
-
-  def new
+    @announcements = Announcement.all.order(:created_at).reverse
     @announcement = Announcement.new
-    respond_with(@announcement)
-  end
-
-  def edit
+    respond_with(@announcements)
   end
 
   def create
     @announcement = Announcement.new(announcement_params)
     @announcement.save
-    respond_with(@announcement)
-  end
-
-  def update
-    @announcement.update(announcement_params)
-    respond_with(@announcement)
+    redirect_to announcements_path
   end
 
   def destroy
-    @announcement.destroy
-    respond_with(@announcement)
+    if (@announcement.user_id == current_user.id || current_user.director || current_user.admin)
+      @announcement.destroy
+      redirect_to announcements_path
+    else
+      flash[:error] = "You can only delete announcements you have created"
+      redirect_to announcements_path
+    end
   end
 
   private
