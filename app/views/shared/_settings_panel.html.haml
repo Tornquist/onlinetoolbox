@@ -1,7 +1,7 @@
 %ul.nav.nav-pills.nav-stacked
-  %li{role:"presentation", class: (controller.class == Users::RegistrationsController && !(current_page?(all_users_path) || current_page?(new_custom_user_path) || controller.action_name == "reset_password" || controller.action_name == "edit_permissions") ? 'active' : '')}
+  %li{role:"presentation", class: (controller.class == Users::RegistrationsController && !(current_page?(all_users_path) || controller.action_name == "permission_error" || current_page?(new_custom_user_path) || controller.action_name == "reset_password" || controller.action_name == "edit_permissions") ? 'active' : '')}
     = link_to "User Profile", edit_user_registration_path
-  %li{role:"presentation", class: (current_page?(all_users_path) || current_page?(new_custom_user_path) || controller.action_name == "reset_password" || controller.action_name == "edit_permissions"? 'active' : '')}
+  %li{role:"presentation", class: (current_page?(all_users_path) || current_page?(new_custom_user_path) || controller.action_name == "permission_error" || controller.action_name == "reset_password" || controller.action_name == "edit_permissions"? 'active' : '')}
     = link_to "Users", all_users_path
   %hr
   %li{role:"presentation", class: (controller.class == AnnouncementsController ? 'active' : '')}

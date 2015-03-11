@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     post 'users/:id/permissions', to: 'users/registrations#save_permissions', as: 'apply_custom_user_permissions'
 
     get 'users/:id/reset_password', to: 'users/registrations#reset_password', as: 'reset_user_password'
+    get 'users/permission_error', to: 'users/registrations#permission_error', as: 'user_permission_error'
   end
   #devise_for :users
   get 'users/favorite_instruments/', to: 'favorite_instruments#user', as: 'user_favorite_instruments'
