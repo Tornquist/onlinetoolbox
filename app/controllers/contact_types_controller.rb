@@ -1,64 +1,50 @@
 class ContactTypesController < ApplicationController
   before_action :set_contact_type, only: [:show, :edit, :update, :destroy]
 
-  # GET /contact_types
-  # GET /contact_types.json
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Contact Types", :contact_types_path
+
   def index
     @contact_types = ContactType.all
   end
 
-  # GET /contact_types/1
-  # GET /contact_types/1.json
-  def show
-  end
-
-  # GET /contact_types/new
   def new
     @contact_type = ContactType.new
+    add_breadcrumb "New", :new_contact_type_path
   end
 
-  # GET /contact_types/1/edit
   def edit
+    add_breadcrumb "Edit", :edit_contact_type_path
   end
 
-  # POST /contact_types
-  # POST /contact_types.json
   def create
     @contact_type = ContactType.new(contact_type_params)
 
-    respond_to do |format|
-      if @contact_type.save
-        format.html { redirect_to @contact_type, notice: 'Contact type was successfully created.' }
-        format.json { render :show, status: :created, location: @contact_type }
-      else
-        format.html { render :new }
-        format.json { render json: @contact_type.errors, status: :unprocessable_entity }
-      end
+    if @contact_type.save
+      flash[:notice] = "Contact type successfully created"
+      redirect_to contact_types_path
+    else
+      render :new
     end
   end
 
-  # PATCH/PUT /contact_types/1
-  # PATCH/PUT /contact_types/1.json
   def update
-    respond_to do |format|
-      if @contact_type.update(contact_type_params)
-        format.html { redirect_to @contact_type, notice: 'Contact type was successfully updated.' }
-        format.json { render :show, status: :ok, location: @contact_type }
-      else
-        format.html { render :edit }
-        format.json { render json: @contact_type.errors, status: :unprocessable_entity }
-      end
+    if @contact_type.update(contact_type_params)
+      flash[:notice] = "Contact type successfully updated"
+      redirect_to contact_types_path
+    else
+      render :edit
     end
   end
 
-  # DELETE /contact_types/1
-  # DELETE /contact_types/1.json
   def destroy
-    @contact_type.destroy
-    respond_to do |format|
-      format.html { redirect_to contact_types_url, notice: 'Contact type was successfully destroyed.' }
-      format.json { head :no_content }
+    if @contact_type.comments.size > 0
+      flash[:error] = "Cannot delete contact types with associated comments.  Delete comments, or hide contact type"
+    else
+      @contact_type.destroy
+      flash[:notice] = "Contact type successfully destroyed"
     end
+    redirect_to contact_types_url
   end
 
   private

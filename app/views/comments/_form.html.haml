@@ -30,10 +30,10 @@
               %div.row.form-group
                 %div.col-sm-6
                   = f.label :contact_type_id, "Contact Type:"
-                  = f.collection_select(:contact_type_id, ContactType.all, :id, :name, {}, {class: "form-control"})
+                  = f.collection_select(:contact_type_id, ContactType.where(hidden: false).order(:name), :id, :name, {}, {class: "form-control"})
                 %div.col-sm-6
                   = f.label :recruit_status_id, "Recruit Status:"
-                  = f.collection_select(:recruit_status_id, RecruitStatus.all, :id, :name, {}, {class: "form-control"})
+                  = f.collection_select(:recruit_status_id, RecruitStatus.where(hidden: false).order(:name), :id, :name, {}, {class: "form-control"})
               %div.row.form-group
                 %div.col-sm-12
                   = f.label :content

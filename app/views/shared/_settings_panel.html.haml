@@ -9,7 +9,7 @@
   %li{role:"presentation", class: (controller.class == HelpsController ? 'active' : '')}
     = link_to "Help Documentation", helps_path
   %hr
-  %li{role:"presentation"}
+  %li{role:"presentation", class: (controller.class == ContactTypesController ? 'active' : '')}
     = link_to "Contact Types", contact_types_path
   %li{role:"presentation", class: (controller.class == FieldsController ? 'active' : '')}
     = link_to "Fields", fields_path

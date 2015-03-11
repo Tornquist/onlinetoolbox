@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   get '/comments/new', to: 'comments#new', as: 'new_comment'
   post '/comments/', to: 'comments#create', as: 'comments'
 
-  resources :contact_types
+  resources :contact_types, except: [:show]
 
   resources :recruit_statuses
 

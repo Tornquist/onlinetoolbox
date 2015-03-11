@@ -1,0 +1,40 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Contact Types
+
+        %table.table
+          %thead
+            %tr
+              %th
+                Name
+              %th
+                Hidden
+              %th
+                :plain
+                  # Contacts
+              %th
+              %th
+
+          %tbody
+            - @contact_types.each do |contact_type|
+              %tr
+                %td
+                  = contact_type.name
+                %td
+                  = contact_type.hidden
+                %td
+                  = contact_type.comments.size
+                %td
+                  = link_to 'Edit', edit_contact_type_path(contact_type)
+                %td
+                  = link_to 'Destroy', contact_type, method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to 'New Contact type', new_contact_type_path, class: "btn btn-success"
