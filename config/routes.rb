@@ -69,9 +69,21 @@ Rails.application.routes.draw do
   end
 
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
+  devise_scope :user do
+    get 'users/all', to: 'users/registrations#all_users', as: 'all_users'
+    get 'users/new', to: 'users/registrations#generate_new', as: 'new_custom_user'
+    get 'users/:id/ban', to: 'users/registrations#ban', as: 'toggle_banned_user'
+    post 'users/new', to: 'users/registrations#create_new', as: 'save_custom_user'
+
+    get 'users/:id/permissions', to: 'users/registrations#edit_permissions', as: 'edit_user_permissions'
+    post 'users/:id/permissions', to: 'users/registrations#save_permissions', as: 'apply_custom_user_permissions'
+
+    get 'users/:id/reset_password', to: 'users/registrations#reset_password', as: 'reset_user_password'
+  end
   #devise_for :users
   get 'users/favorite_instruments/', to: 'favorite_instruments#user', as: 'user_favorite_instruments'
   post 'users/favorite_instruments/', to: 'favorite_instruments#create_multiple', as: 'create_multiple_user_favorite_instruments'
 
   root to: "static#index"
 end
+

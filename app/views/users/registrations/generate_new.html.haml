@@ -1,0 +1,55 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          New User
+        %div.bottom-margin
+          = form_for(@user, url: save_custom_user_path(@user), html: { method: :post }) do |f|
+            %div.form-group
+              = f.label :first_name
+              = f.text_field :first_name, class: "form-control"
+            %div.form-group
+              = f.label :last_name
+              = f.text_field :last_name, class: "form-control"
+            %div.form-group
+              = f.label :email
+              = f.email_field :email, class: "form-control"
+            %div.row
+              %div.col-sm-6
+                %div.form-group
+                  = f.label :password
+                  %i
+                    (8 characters minimum)j
+                  = f.text_field :password, class: "form-control"
+              %div.col-sm-6
+                %div.form-group
+                  = f.label :password_confirmation
+                  %i
+                    (8 characters minimum)j
+                  = f.text_field :password_confirmation, class: "form-control"
+            %div.form-group
+              = f.label :admin
+              = f.check_box :admin
+            %div.form-group
+              = f.label :director
+              = f.check_box :director
+            %div.form-group
+              = f.label :recruiter
+              = f.check_box :recruiter
+            %div.form-group
+              = f.label :student_leader
+              = f.check_box :student_leader
+            %div.form-group
+              = f.label :chief_of_staff
+              = f.check_box :chief_of_staff
+            = f.submit class: "btn btn-success"
+        = link_to "Back", all_users_path, class: "btn btn-danger"
+
+

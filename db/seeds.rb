@@ -1,3 +1,6 @@
+#Admin User
+User.create(first_name: "Admin", last_name: "Admin", password: "password", password_confirmation: "password", email: "admin@admin.com", admin: true)
+
 #Instrument Choices
 Instrument.create(name: "Unknown")
 Instrument.create(name: "Alto Sax")

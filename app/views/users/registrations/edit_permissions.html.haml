@@ -1,0 +1,33 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          = "Permissions for #{@user.full_name}"
+        %div.bottom-margin
+          = form_for(@user, url: apply_custom_user_permissions_path(@user), html: { method: :post }) do |f|
+            %div.form-group
+              = f.label :admin
+              = f.check_box :admin
+            %div.form-group
+              = f.label :director
+              = f.check_box :director
+            %div.form-group
+              = f.label :recruiter
+              = f.check_box :recruiter
+            %div.form-group
+              = f.label :student_leader
+              = f.check_box :student_leader
+            %div.form-group
+              = f.label :chief_of_staff
+              = f.check_box :chief_of_staff
+            = f.submit class: "btn btn-success"
+        = link_to "Back", all_users_path, class: "btn btn-danger"
+
+
