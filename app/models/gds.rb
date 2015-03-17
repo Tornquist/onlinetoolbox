@@ -34,7 +34,7 @@ class Gds < ActiveRecord::Base
     begin
       section_member.section.name
     rescue
-      "Unkown Section"
+      "Unknown Section"
     end
   end
 
