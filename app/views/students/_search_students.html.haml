@@ -41,13 +41,22 @@
     - @students.each_with_index do |student, i|
       %tr
         %td
-          = link_to "Details", edit_student_path(student)
-          = link_to "Claim", student_claim_path(student), method: :put
-          - if student.archive
-            = link_to "Unarchive", student_unarchive_path(student), method: :put, data: { confirm: 'Are you sure you wish to unarchive this student?' }
-          - else
-            = link_to "Archive", student_archive_path(student), method: :delete, data: { confirm: 'Are you sure you wish to archive this student?' }
-
+          %div.dropdown
+            %button.btn.btn-default.dropdown-toggle{'type'=>"button",'id'=>"dropdownMenu#{i}",'data-toggle'=>"dropdown",'aria-expanded'=>"true"}
+              = fa_icon "cog"
+              %span.caret
+            %ul.dropdown-menu{'role'=>"menu",'aria-labelledby'=>"dropdownMenu#{i}"}
+              %li{'role'=>"presentation"}
+                = link_to "Details", edit_student_path(student)
+              %li{'role'=>"presentation"}
+                = link_to "Claim", student_claim_path(student), method: :put
+              %li{'role'=>"presentation"}
+                = link_to "Sections", sections_student_path(student)
+              %li{'role'=>"presentation"}
+                - if student.archive
+                  = link_to "Unarchive", student_unarchive_path(student), method: :put, data: { confirm: "Are you sure you wish to unarchive #{student.full_name}?" }
+                - else
+                  = link_to "Archive", student_archive_path(student), method: :delete, data: { confirm: "Are you sure you wish to archive #{student.full_name}?" }
         %td
           = student.full_name_reversed
         %td

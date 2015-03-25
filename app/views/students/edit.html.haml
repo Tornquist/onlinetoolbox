@@ -1,6 +1,8 @@
 %div.jumbotron
   %h1
     Editing Student
+  %div.lead
+    = link_to "Manage Student Sections", sections_student_path(@student)
 
 = render 'form'
 
