@@ -45,8 +45,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def ban
     if permission_requirements
       user = User.find(params["id"])
-      flash[:notice] = "Toggled User Ban for #{user.full_name}"
-      user.update(banned: !user.banned)
+      if user.id == 1
+        flash[:error] = "Cannot ban root Admin"
+      else
+        flash[:notice] = "Toggled User Ban for #{user.full_name}"
+        user.update(banned: !user.banned)
+      end
       redirect_to all_users_path
     end
   end
@@ -64,8 +68,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if permission_requirements
       user_params = params["user"].permit("admin","recruiter","student_leader","chief_of_staff","director")
       user = User.find(params["id"])
-      user.update(user_params)
-      flash[:notice] = "Permissions for #{user.full_name} updated"
+      if user.id == 1
+        flash[:error] = "Cannot modify root Admin account"
+      else
+        user.update(user_params)
+        flash[:notice] = "Permissions for #{user.full_name} updated"
+      end
       redirect_to all_users_path
     end
   end
@@ -76,8 +84,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
       add_breadcrumb "Users", :all_users_path
       add_breadcrumb "Password Reset", :reset_user_password_path
       @user = User.find(params["id"])
-      @newpass = rand(36**8).to_s(36)
-      @user.update(password: @newpass, password_confirmation: @newpass)
+      if @user.id == 1
+        @newpass = "Cannot reset root Admin password"
+      else
+        @newpass = rand(36**8).to_s(36)
+        @user.update(password: @newpass, password_confirmation: @newpass)
+      end
     end
   end
 

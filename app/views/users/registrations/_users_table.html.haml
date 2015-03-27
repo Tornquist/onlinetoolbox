@@ -1,0 +1,63 @@
+%div.table-responsive
+  %table.table.table-hover
+    %thead
+      %tr
+        %th
+          Name
+        %th
+          Email
+        %th
+          Admin
+        %th
+          Director
+        %th
+          Recruiter
+        %th
+          SL
+        %th
+          CoS
+        %th
+          Edit
+        %th
+          Reset Password
+        %th
+          Block
+    %tbody
+      - user_list.each do |user|
+        %tr
+          %td
+            = user.full_name
+          %td
+            = user.email
+          %td.center
+            - if user.admin
+              = fa_icon "check"
+          %td.center
+            - if user.director
+              = fa_icon "check"
+          %td.center
+            - if user.recruiter
+              = fa_icon "check"
+          %td.center
+            - if user.student_leader
+              = fa_icon "check"
+          %td.center
+            - if user.chief_of_staff
+              = fa_icon "check"
+          - if user.id == 1
+            %td.center
+              = link_to (fa_icon "pencil"), "#", class: "btn btn-sm btn-success", disabled: "disabled"
+            %td.center
+              = link_to (fa_icon "key"), "#", class: "btn btn-sm btn-primary", data: { confirm: 'Are you sure? This is effective immediately.' }, disabled: "disabled"
+            %td.center
+              = link_to (fa_icon "close"), "#", class: "btn btn-sm btn-danger", disabled: "disabled"
+          - else
+            %td.center
+              = link_to (fa_icon "pencil"), edit_user_permissions_path(user), class: "btn btn-sm btn-success"
+            %td.center
+              = link_to (fa_icon "key"), reset_user_password_path(user), class: "btn btn-sm btn-primary", data: { confirm: "Are you sure you wish to reset #{user.full_name}'s password? This is effective immediately." }
+            %td.center
+              - if user.banned
+                = link_to (fa_icon "plus"), toggle_banned_user_path(user), class: "btn btn-sm btn-success"
+              - else
+                = link_to (fa_icon "close"), toggle_banned_user_path(user), class: "btn btn-sm btn-danger"
