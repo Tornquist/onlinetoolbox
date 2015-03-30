@@ -125,9 +125,14 @@ class StudentsController < ApplicationController
     add_breadcrumb "Confirm", :import_students_path
     if params[:file]
       @student_objects = StudentsHelper.import(params[:file])
-      session[:student_objects] = @student_objects
-      flash[:notice] = "Notice: Review Processed Student Data"
-      render :upload
+      if (@student_objects == "COUNT" || @student_objects.size > 100)
+        flash[:error] = "Error: More than 100 entries in CSV"
+        redirect_to :back
+      else
+        session[:student_objects] = @student_objects
+        flash[:notice] = "Notice: Review Processed Student Data"
+        render :upload
+      end
       #render import_students_path, notice: "Students Imported"
     else
       flash[:error] = "Error: No File Selected"

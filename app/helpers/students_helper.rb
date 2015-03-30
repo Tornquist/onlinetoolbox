@@ -72,6 +72,11 @@ module StudentsHelper
 
   def self.import(file)
     student_array = []
+    numrows = CSV.readlines(file.path).size
+    if numrows > 101
+      student_array = "COUNT"
+      return student_array
+    end
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = {}
       student_hash[:first_name] = row["first_name"].to_s
@@ -87,8 +92,8 @@ module StudentsHelper
           begin
             num = key.split("_").second
             temp = {}
-            temp["instrument_id"] = Instrument.where(name: row["instrument_#{num}"]).first.id.to_s
-            temp["ensemble_id"] = Ensemble.where(name: row["ensemble_#{num}"]).first.id.to_s
+            temp["instrument_id"] = Instrument.where("lower(name) = ?", row["instrument_#{num}"].downcase).first.id.to_s
+            temp["ensemble_id"] = Ensemble.where("lower(name) = ?", row["ensemble_#{num}"].downcase).first.id.to_s
             student_instruments_attributes[student_instruments_attributes.size.to_s] = temp
           rescue
             if student_instruments_attributes.size == 0

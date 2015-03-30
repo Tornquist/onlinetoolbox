@@ -40,6 +40,7 @@ Instrument.create(name: "Violin")
 
 #Ensemble Choices
 Ensemble.create(name: "Unknown")
+Ensemble.create(name: "All")
 Ensemble.create(name: "AAMB")
 Ensemble.create(name: "Big Ten Flags")
 Ensemble.create(name: "Concert")
