@@ -77,6 +77,12 @@ module StudentsHelper
       student_array = "COUNT"
       return student_array
     end
+
+    option_field_type = Group.where(name: "Option").first
+    text_field_type = Group.where(name: "Text").first
+    unknown_instrument = Instrument.where(name: "Unknown").first.id.to_s
+    unknown_ensemble = Ensemble.where(name: "Unknown").first.id.to_s
+
     CSV.foreach(file.path, headers: true) do |row|
       student_hash = {}
       student_hash[:first_name] = row["first_name"].to_s
@@ -98,8 +104,8 @@ module StudentsHelper
           rescue
             if student_instruments_attributes.size == 0
               temp = {}
-              temp["instrument_id"] = Instrument.where(name: "Unknown").first.id.to_s
-              temp["ensemble_id"] = Ensemble.where(name: "Unknown").first.id.to_s
+              temp["instrument_id"] = unknown_instrument
+              temp["ensemble_id"] = unknown_ensemble
               student_instruments_attributes[student_instruments_attributes.size.to_s] = temp
             end
           end
@@ -112,19 +118,19 @@ module StudentsHelper
           temp["address_2"] = row[name + "_address_2"].to_s
           temp["city"] = row[name + "_city"].to_s
           temp["zip"] = row[name + "_zip"].to_s
-          state = State.where(name: row[name + "_state"]) + State.where(abbreviation: row[name + "_state"])
+          state = State.where("lower(name) ?", row[name + "_state"].downcase) + State.where(abbreviation: row[name + "_state"])
           state = state.empty? ? State.where(name: "").first : state.first
           temp["state_id"] = state.id.to_s
           addresses_attributes[addresses_attributes.size.to_s] = temp
         else
           field = Field.where(name: key)
           if !field.empty?
-            if field.first.group == Group.where(name: "Option").first
+            if field.first.group == option_field_type
               temp = {}
               temp["field_id"] = field.first.id.to_s
               temp["choice"] = value.to_s
               options_attributes[options_attributes.size.to_s] = temp
-            elsif field.first.group == Group.where(name: "Text").first
+            elsif field.first.group == text_field_type
               temp = {}
               temp["field_id"] = field.first.id.to_s
               temp["content"] = value.to_s
