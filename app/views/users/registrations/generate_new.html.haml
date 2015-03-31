@@ -26,14 +26,14 @@
                 %div.form-group
                   = f.label :password
                   %i
-                    (8 characters minimum)j
-                  = f.text_field :password, class: "form-control"
+                    (8 characters minimum)
+                  = f.password_field :password, class: "form-control"
               %div.col-sm-6
                 %div.form-group
                   = f.label :password_confirmation
                   %i
-                    (8 characters minimum)j
-                  = f.text_field :password_confirmation, class: "form-control"
+                    (8 characters minimum)
+                  = f.password_field :password_confirmation, class: "form-control"
             %div.form-group
               = f.label :admin
               = f.check_box :admin
