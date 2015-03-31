@@ -118,7 +118,7 @@ module StudentsHelper
           temp["address_2"] = row[name + "_address_2"].to_s
           temp["city"] = row[name + "_city"].to_s
           temp["zip"] = row[name + "_zip"].to_s
-          state = State.where("lower(name) ?", row[name + "_state"].downcase) + State.where(abbreviation: row[name + "_state"])
+          state = State.where("lower(name) = ?", row[name + "_state"].to_s.downcase) + State.where("lower(abbreviation) = ?", row[name + "_state"].to_s.downcase)
           state = state.empty? ? State.where(name: "").first : state.first
           temp["state_id"] = state.id.to_s
           addresses_attributes[addresses_attributes.size.to_s] = temp
