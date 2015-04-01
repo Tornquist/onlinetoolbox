@@ -5,7 +5,19 @@
     %i
       Note: Only 100 Students may be uploaded at a time
   %div.lead
-    = link_to "Upload Template", upload_template_path, class: "btn btn-success"
+    = link_to "Download CSV Template", upload_template_path, class: "btn btn-success"
+  Additional Details: Each ensemble_id and instrument_id field are linked together.  You can find the available options by looking in the details
+  page for any existing student, or going to the "New Student" page and examining the Instrument Interests dropdown. These two fields are not case
+  sensitive, but if an instrument_id field is left blank for the accompanying ensemble_id field, the complete interest will be rejected. Or
+  vise-versa.
+  %br
+  %br
+  For state fields, the state code: "IA" or the name: "Iowa" would be accepted. Any dropdown box on the student information page will simply
+  display the text in the column provided when uploaded.  Slight differences in spelling or case will not affect the import, but would change
+  the consistency of searching for data.
+  %br
+  %br
+  All students are imported as recruits.
 
 %div.row.bottom-margin
   %div.col-sm-12

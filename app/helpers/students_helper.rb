@@ -30,6 +30,8 @@ module StudentsHelper
           Ensemble.find(v.to_i).name.to_s
         when "field_id"
           Field.find(v.to_i).name.to_s
+        when "state_id"
+          State.find(v.to_i).name.to_s
         else
           v
         end
