@@ -89,7 +89,7 @@ Field.create(name: "Address", index: 3, group_id: 1, description: "", options: "
 Field.create(name: "Major", index: 4, group_id: 2, description: "", options: "", hidden: false, locked: true)
 Field.create(name: "Engineer", index: 5, group_id: 3, description: "", options: "Yes\nNo", hidden: false)
 Field.create(name: "High School", index: 6, group_id: 2, description: "", options: "", hidden: false)
-Field.create(name: "High School Grad Year", index: 7, group_id: 2, description: "", options: "", hidden: false)
+Field.create(name: "High School Grad Year", index: 7, group_id: 2, description: "", options: "", hidden: false, locked: true)
 Field.create(name: "Contact", index: 8, group_id: 3, description: "", options: "Yes\nNo", hidden: false)
 Field.create(name: "Parent Names", index: 9, group_id: 2, description: "", options: "", hidden: false)
 Field.create(name: "Parent Address", index: 10, group_id: 1, description: "", options: "", hidden: false)

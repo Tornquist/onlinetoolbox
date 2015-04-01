@@ -105,6 +105,11 @@ class Student < ActiveRecord::Base
     f.content
   end
 
+  def grad_year
+    f = field(Field.where(name: "High School Grad Year").first.id)
+    f.content
+  end
+
   def status
     first = comments.order('created_at DESC').first
     first.nil? ? "Unknown" : first.recruit_status.name

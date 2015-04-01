@@ -47,6 +47,22 @@
               &nbsp;
           = @student.ensemble_list
 
+      %div.row
+        %div.col-sm-4
+          %span.label.label-primary
+            Hometown:
+          %span
+            :plain
+              &nbsp;
+            = @student.hometown
+        %div.col-sm-4
+          %span.label.label-primary
+            High School Grad Year:
+          %span
+            :plain
+              &nbsp;
+          = @student.grad_year
+
 = render 'form'
 - if params.has_key? :student_id
   = render 'comments'
