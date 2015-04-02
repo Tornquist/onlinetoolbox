@@ -16,6 +16,22 @@
           = link_to "Students", students_path
         %li
           = link_to "Seasons", seasons_path
+        - if !@favorites.empty?
+          %li.dropdown
+            %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
+              Favorites
+              %span.caret
+            %ul.dropdown-menu{'role'=>"menu"}
+              - @favorites.each do |favorite|
+                %li
+                  - case favorite.dest_type
+                  - when 0
+                    - season = Season.find(favorite.dest_id)
+                    = link_to season.name, season_path(season)
+                  - when 1
+                    - section = Section.find(favorite.dest_id)
+                    = link_to "#{section.season.name} | #{section.name}", section_path(section)
+
       %ul.nav.navbar-nav.navbar-right
         %li
           = link_to "Settings", edit_user_registration_path
