@@ -153,10 +153,10 @@ class StudentsController < ApplicationController
 
   def search
     add_breadcrumb "Search", :search_students_path
-    @students = StudentsHelper.sort(Student.where(archive: false))
+    @students = [] #StudentsHelper.sort(Student.where(archive: false))
     @special_fields = ["Instruments", "Ensembles"]
-    @fields = [2, 3, 5]
-    @large_filter = ['all']
+    @fields = [2, 3, 5].map { |f| Field.find(f) }
+    @large_filter = []
 
     @fields_all = Field.where(hidden:false).order(:index)
     @fields_top = @fields_all.limit(3)
@@ -226,7 +226,7 @@ class StudentsController < ApplicationController
     end
 
     @students = StudentsHelper.sort(@students.uniq)
-    @fields = (params["fields"] ||= []).map(&:to_i)
+    @fields = (params["fields"] ||= []).map(&:to_i).map { |f| Field.find(f) }
     @special_fields = params["special_fields"] ||= []
 
     @fields_all = Field.where(hidden:false).order(:index)

@@ -16,25 +16,24 @@
         %th.selected
           Seasons/Section/Rank
       - @fields.each do |field|
-        - f = Field.find(field)
-        - case f.group_id
+        - case field.group_id
         - when 1
           %th.selected
-            = "#{f.name} Line 1"
+            = "#{field.name} Line 1"
           %th.selected
-            = "#{f.name} Line 2"
+            = "#{field.name} Line 2"
           %th.selected
-            = "#{f.name} City"
+            = "#{field.name} City"
           %th.selected
-            = "#{f.name} State"
+            = "#{field.name} State"
           %th.selected
-            = "#{f.name} Zip"
+            = "#{field.name} Zip"
         - when 2
           %th.selected
-            = f.name
+            = field.name
         - when 3
           %th.selected
-            = f.name
+            = field.name
       %th
         Name
   %tbody
@@ -71,7 +70,7 @@
           %td
             = student.rank_list
         - @fields.each do |field|
-          - case Field.find(field).group_id
+          - case field.group_id
           - when 1
             %td
               = student.field(field).address_1
