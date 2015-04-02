@@ -4,6 +4,9 @@
       %div.panel-heading
         %div.panel-title
           Student Profile
+          - if @show_buttons
+            %span.pull-right
+              = f.submit class: "btn btn-success btn-xs"
       %div.panel-body
         %div.row
           %div.col-sm-3
