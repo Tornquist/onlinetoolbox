@@ -6,14 +6,15 @@ class StudentsController < ApplicationController
   # GET /students
   # GET /students.json
   def index
-    @claimed_students = current_user.students
+    @claimed_students = StudentsHelper.sort(current_user.students)
     @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true)).select { |student| (current_user.instruments - student.instruments).size != current_user.instruments.size }
+    @unclaimed_students = StudentsHelper.sort(@unclaimed_students)
     session[:return_to] ||= request.referer
   end
 
   def unclaimed
     add_breadcrumb "Unclaimed Students", :unclaimed_students_path
-    @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true))
+    @unclaimed_students = StudentsHelper.sort((StudentsHelper.UnclaimedRecruits - Student.where(archive: true)))
   end
 
   # GET /students/1
