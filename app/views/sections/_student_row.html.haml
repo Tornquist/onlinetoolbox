@@ -11,7 +11,7 @@
           %div.input-group-addon
             Rank
           = f.collection_select(:rank_id, @section.ranks.all.order(:index), :id, :name,
-            { include_blank: "Unnassigned" },
+            { include_blank: "Unassigned" },
             {class: "form-control", onchange: "this.form.submit()"})
         = f.hidden_field :student_id, value: student.id
   %div.col-sm-2
