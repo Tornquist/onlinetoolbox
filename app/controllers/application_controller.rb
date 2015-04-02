@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   add_breadcrumb "Home", :root_path
 
   def set_favorites
-    @favorites = Favorite.where(:user_id => current_user.id, :active => true).reverse
+    if user_signed_in?
+      @favorites = Favorite.where(:user_id => current_user.id, :active => true).reverse
+    else
+      @favorites = []
+    end
   end
 end
