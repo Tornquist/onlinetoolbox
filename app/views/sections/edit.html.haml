@@ -1,20 +1,22 @@
 %div.row
-  %div.jumbotron
-    %h1
-      Editing Section
+  %div.col-sm-12
+    %div.jumbotron
+      %h1
+        Editing Section
 
 %div.bottom-spacer
   = form_for(@section) do |f|
     %div.row
-      %div.panel.panel-primary
-        %div.panel-heading
-          %h3.panel-title
-            Sections
-        %div.panel-body
-          = f.fields_for :ranks, @ranks do |builder|
-            = render 'rank_fields', f: builder
-          %div.links
-            = link_to_add_association 'Add Rank', f, :ranks, class: "btn btn-success"
+      %div.col-sm-12
+        %div.panel.panel-primary
+          %div.panel-heading
+            %h3.panel-title
+              Sections
+          %div.panel-body
+            = f.fields_for :ranks, @ranks do |builder|
+              = render 'rank_fields', f: builder
+            %div.links
+              = link_to_add_association 'Add Rank', f, :ranks, class: "btn btn-success"
 
     = f.submit class: "btn btn-success"
 

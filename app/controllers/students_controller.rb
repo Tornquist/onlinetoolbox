@@ -83,14 +83,19 @@ class StudentsController < ApplicationController
   # PATCH/PUT /students/1
   # PATCH/PUT /students/1.json
   def update
-    respond_to do |format|
-      if @student.update(student_params)
-        format.html { redirect_to students_path, notice: 'Student was successfully updated.' }
-        format.json { render :show, status: :ok, location: @student }
-      else
-        format.html { render :edit }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+    begin
+      respond_to do |format|
+        if @student.update(student_params)
+          format.html { redirect_to students_path, notice: 'Student was successfully updated.' }
+          format.json { render :show, status: :ok, location: @student }
+        else
+          format.html { render :edit }
+          format.json { render json: @student.errors, status: :unprocessable_entity }
+        end
       end
+    rescue
+      flash[:error] = "Error: Unable to Update Student"
+      redirect_to :back
     end
   end
 

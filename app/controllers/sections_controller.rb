@@ -23,6 +23,10 @@ class SectionsController < ApplicationController
   end
 
   def edit
+    add_breadcrumb "Seasons", :seasons_path
+    add_breadcrumb "#{@section.season.name}", season_path(@section.season.id)
+    add_breadcrumb "#{@section.name}", section_path(@section.id)
+    add_breadcrumb "Edit", edit_section_path(@section.id)
     if current_user.check_permissions(:edit_section)
       @ranks = @section.ranks.order(:index)
     else
@@ -38,12 +42,17 @@ class SectionsController < ApplicationController
   end
 
   def update
-    if current_user.check_permissions(:edit_section)
-      @section.update(section_params)
-    else
-      flash[:error] = "Student Leader permissions required"
+    begin
+      if current_user.check_permissions(:edit_section)
+        @section.update(section_params)
+      else
+        flash[:error] = "Student Leader permissions required"
+      end
+      respond_with(@section)
+    rescue
+      flash[:error] = "Error: Unable to Update Section"
+      redirect_to :back
     end
-    respond_with(@section)
   end
 
   def destroy
