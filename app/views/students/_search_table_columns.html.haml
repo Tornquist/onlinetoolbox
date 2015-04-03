@@ -25,7 +25,7 @@
           %div.col-sm-2
             %div.checkbox
               %label
-                = check_box_tag 'fields[]', field.id, @fields.include?(field.id)
+                = check_box_tag 'fields[]', field.id, @fields.include?(field)
                 = field.name
       - @fields_bottom.each_slice(6) do |slice|
         %div.row
@@ -33,5 +33,5 @@
             %div.col-sm-2
               %div.checkbox
                 %label
-                  = check_box_tag 'fields[]', field.id, @fields.include?(field.id)
+                  = check_box_tag 'fields[]', field.id, @fields.include?(field)
                   = field.name
