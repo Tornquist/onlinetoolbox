@@ -40,7 +40,7 @@
     - @students.each_with_index do |student, i|
       %tr
         %td
-          %div.btn-group
+          %div.btn-group{style: "min-width: 93px"}
             = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success btn-xs", title: "Details"
             = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-info btn-xs", title: "Claim"
             = link_to (fa_icon "users"), sections_student_path(student), class: "btn btn-warning btn-xs", title: "Sections"
