@@ -40,7 +40,7 @@ module StudentsHelper
     end
   end
 
-  def self.import_save_result(student_array)
+  def self.import_save_result(student_array, autoclaim, user)
     student_array.each do |student_hash|
       s = Student.create(student_hash)
       Field.all.each do |f|
@@ -54,6 +54,9 @@ module StudentsHelper
             Option.create({field_id: f.id, student_id: s.id})
           end
         end
+      end
+      if autoclaim
+        ClaimedStudent.create(student_id: s.id, user_id: user.id)
       end
     end
   end

@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   get 'students/unclaimed/', to: 'students#unclaimed', as: 'unclaimed_students'
   get 'students/import/', to: 'students#upload', as: 'import_students'
-  get 'students/import_finalize/', to: 'students#import_finalize', as: 'import_students_confirm'
+  post 'students/import_finalize/', to: 'students#import_finalize', as: 'import_students_confirm'
   get 'students/import/template', to: 'students#upload_template', as: 'upload_template'
   get 'students/search/', to: 'students#search', as: 'search_students'
   post 'students/search/', to: 'students#search_terms', as: 'search_students_terms'

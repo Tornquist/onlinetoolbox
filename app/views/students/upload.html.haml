@@ -41,8 +41,16 @@
                 Students Identified:
               = @student_objects.count
           %div.row.bottom-margin
-            %div.col-sm-12
-              = link_to "Import Identified Students", import_students_confirm_path, id: "import_students_confirm_btn", class: "btn btn-success"
+            %div.col-sm-6
+              = form_tag import_students_confirm_path do
+                %div.input-group
+                  %span.input-group-addon
+                    = check_box_tag "autoclaim", "1", false, id: "autoclaim-checkbox"
+                    %label{'for'=> "autoclaim-checkbox"}
+                      Auto-Claim
+                  %span.input-group-btn
+                    = submit_tag "Import Identified Students", id: "import_students_confirm_btn", class: "btn btn-success"
+              =# link_to "Import Identified Students", import_students_confirm_path, id: "import_students_confirm_btn", class: "btn btn-success"
           %div.row
             %div.col-sm-12
               %strong

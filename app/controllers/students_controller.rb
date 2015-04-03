@@ -147,7 +147,7 @@ class StudentsController < ApplicationController
   end
 
   def import_finalize
-    StudentsHelper.import_save_result(session[:student_objects])
+    StudentsHelper.import_save_result(session[:student_objects], params.has_key?("autoclaim"), current_user)
     session.delete(:student_objects)
     flash[:notice] = "Info: Students Imported"
     redirect_to students_path

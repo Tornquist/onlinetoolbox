@@ -11,7 +11,10 @@ student_ready = function() {
 
   $('#import_students_confirm_btn').click(function(e){
     $("#import_students_confirm_btn").attr("disabled", true);
-    $("#import_students_confirm_btn").text("Importing");
+    //$("#import_students_confirm_btn").text("Importing");
+    $("#import_students_confirm_btn").val("Importing");
+    //$("#import_students_confirm_btn").parent().submit();
+    $("#import_students_confirm_btn").closest("form").submit();
   });
   $('#import_students_btn').click(function(e){
     $("#import_students_btn").attr("disabled", true);
