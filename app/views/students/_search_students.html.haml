@@ -40,22 +40,14 @@
     - @students.each_with_index do |student, i|
       %tr
         %td
-          %div.dropdown
-            %button.btn.btn-default.dropdown-toggle{'type'=>"button",'id'=>"dropdownMenu#{i}",'data-toggle'=>"dropdown",'aria-expanded'=>"true"}
-              = fa_icon "cog"
-              %span.caret
-            %ul.dropdown-menu{'role'=>"menu",'aria-labelledby'=>"dropdownMenu#{i}"}
-              %li{'role'=>"presentation"}
-                = link_to "Details", edit_student_path(student)
-              %li{'role'=>"presentation"}
-                = link_to "Claim", student_claim_path(student), method: :put
-              %li{'role'=>"presentation"}
-                = link_to "Sections", sections_student_path(student)
-              %li{'role'=>"presentation"}
-                - if student.archive
-                  = link_to "Unarchive", student_unarchive_path(student), method: :put, data: { confirm: "Are you sure you wish to unarchive #{student.full_name}?" }
-                - else
-                  = link_to "Archive", student_archive_path(student), method: :delete, data: { confirm: "Are you sure you wish to archive #{student.full_name}?" }
+          %div.btn-group
+            = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success btn-xs", title: "Details"
+            = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-info btn-xs", title: "Claim"
+            = link_to (fa_icon "users"), sections_student_path(student), class: "btn btn-warning btn-xs", title: "Sections"
+            - if student.archive
+              = link_to (fa_icon "archive"), student_unarchive_path(student), method: :put, data: { confirm: "Are you sure you wish to unarchive #{student.full_name}?" }, class: "btn btn-default btn-xs", title: "Unarchive"
+            - else
+              = link_to (fa_icon "archive"), student_archive_path(student), method: :delete, data: { confirm: "Are you sure you wish to archive #{student.full_name}?" }, class: "btn btn-danger btn-xs", title: "Archive"
         %td
           = student.full_name_reversed
         %td
