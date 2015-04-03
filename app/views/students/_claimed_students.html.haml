@@ -12,6 +12,8 @@
             %th
               Status
             %th
+              Last Contact
+            %th
               Email
             %th
               Hometown
@@ -34,8 +36,11 @@
                 = i + 1
               %td
                 = student.full_name_reversed
+              - contact_status = student.status
               %td
-                = student.status
+                = contact_status[0]
+              %td
+                = contact_status[1]
               %td
                 = student.email
               %td

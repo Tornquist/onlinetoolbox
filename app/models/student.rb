@@ -112,7 +112,9 @@ class Student < ActiveRecord::Base
 
   def status
     first = comments.order('created_at DESC').first
-    first.nil? ? "Unknown" : first.recruit_status.name
+    status = first.nil? ? "Unknown" : first.recruit_status.name
+    data = first.nil? ? "No Contact" : first.created_at.to_time.strftime("%B %e, %Y")
+    [status, data]
   end
 
   def column_color
