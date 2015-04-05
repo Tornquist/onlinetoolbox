@@ -104,7 +104,7 @@ class FieldsController < ApplicationController
     end
 
     def check_permissions
-      if current_user.check_permissions(:edit_site_variables)
+      if current_user.check_permissions(:edit_fields)
       else
         redirect_to fields_permissions_path
       end

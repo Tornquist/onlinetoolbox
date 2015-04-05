@@ -35,9 +35,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create_new
     if permission_requirements
-      user = params["user"].permit("first_name","last_name","email","password","password_confirmation","admin","recruiter","student_leader","chief_of_staff","director")
+      user = params["user"].permit("first_name","last_name","email","password","password_confirmation","admin","recruiter","student_leader","chief_of_staff","director", "recruitment_head")
       u = User.create(user)
-      flash[:notice] = "Please verify results"
+      flash[:notice] = "User Created: Please verify results"
       redirect_to all_users_path
     end
   end
@@ -66,7 +66,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def save_permissions
     if permission_requirements
-      user_params = params["user"].permit("admin","recruiter","student_leader","chief_of_staff","director")
+      user_params = params["user"].permit("admin","recruiter","student_leader","chief_of_staff","director","recruitment_head")
       user = User.find(params["id"])
       if user.id == 1
         flash[:error] = "Cannot modify root Admin account"

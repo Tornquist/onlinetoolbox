@@ -15,6 +15,10 @@ module UsersHelper
     user.admin
   end
 
+  def self.edit_fields user
+    user.admin || user.recruitment_head
+  end
+
   def self.modify_create_seasons user
     user.admin || user.director || user.chief_of_staff
   end

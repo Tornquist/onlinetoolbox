@@ -11,6 +11,8 @@
         %th
           Director
         %th
+          Recuitment Head
+        %th
           Recruiter
         %th
           SL
@@ -34,6 +36,9 @@
               = fa_icon "check"
           %td.center
             - if user.director
+              = fa_icon "check"
+          %td.center
+            - if user.recruitment_head
               = fa_icon "check"
           %td.center
             - if user.recruiter

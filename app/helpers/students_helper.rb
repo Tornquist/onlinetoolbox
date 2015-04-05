@@ -1,7 +1,6 @@
 module StudentsHelper
   def self.UnclaimedStudents
-    claimed = ClaimedStudent.first.nil? ? [] : ClaimedStudent.first.claimed
-    Student.all - claimed
+    Student.all - ClaimedStudent.claimed
   end
 
   def self.UnclaimedRecruits
