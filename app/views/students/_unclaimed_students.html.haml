@@ -1,42 +1,41 @@
 %div.row
   %div.col-sm-12
-    %div.table-responsive
-      %table.table.table-hover.table-condensed
-        %thead
-          %tr
-            %th
-              :plain
-                #
-            %th
-              Name
-            %th
-              Hometown
-            %th
-              Instuments
-            %th
-              Ensembles
-            %th
-              Grad Year
-            %th.text-center
-              Details
-            %th.text-center
-              Claim
-        %tbody
-          - @unclaimed_students.each_with_index do |student, i|
-            %tr{ class: "#{student.column_color}"}
-              %th.row
-                = i + 1
-              %td
-                = student.full_name_reversed
-              %td
-                = student.hometown
-              %td
-                = student.instrument_list
-              %td
-                = student.ensemble_list
-              %td
-                = student.grad_year
-              %td.text-center
-                = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
-              %td.text-center
-                = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-warning"
+    %table.table.table-hover.table-condensed#dataTable
+      %thead
+        %tr
+          %th
+            :plain
+              #
+          %th.selected
+            Name
+          %th.selected
+            Hometown
+          %th.selected
+            Instuments
+          %th.selected
+            Ensembles
+          %th.selected
+            Grad Year
+          %th.text-center
+            Details
+          %th.text-center
+            Claim
+      %tbody
+        - @unclaimed_students.each_with_index do |student, i|
+          %tr{ class: "#{student.column_color}"}
+            %th.row
+              = i + 1
+            %td
+              = student.full_name_reversed
+            %td
+              = student.hometown
+            %td
+              = student.instrument_list
+            %td
+              = student.ensemble_list
+            %td
+              = student.grad_year
+            %td.text-center
+              = link_to (fa_icon "desktop"), edit_student_path(student), class: "btn btn-success"
+            %td.text-center
+              = link_to (fa_icon "plus"), student_claim_path(student), method: :put, class: "btn btn-warning"
