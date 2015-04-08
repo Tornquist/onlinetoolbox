@@ -1,6 +1,6 @@
 module StudentsHelper
   def self.UnclaimedStudents
-    Student.all - ClaimedStudent.claimed
+    Student.includes(:texts, :options, :addresses).all - ClaimedStudent.claimed
   end
 
   def self.UnclaimedRecruits

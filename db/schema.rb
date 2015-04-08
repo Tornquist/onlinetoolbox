@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150405183333) do
+ActiveRecord::Schema.define(version: 20150408205056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -296,4 +296,42 @@ ActiveRecord::Schema.define(version: 20150405183333) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "addresses", "fields", name: "addresses_field_id_fk"
+  add_foreign_key "addresses", "states", name: "addresses_state_id_fk"
+  add_foreign_key "addresses", "students", name: "addresses_student_id_fk"
+  add_foreign_key "announcements", "users", name: "announcements_user_id_fk"
+  add_foreign_key "claimed_students", "students", name: "claimed_students_student_id_fk"
+  add_foreign_key "claimed_students", "users", name: "claimed_students_user_id_fk"
+  add_foreign_key "comments", "contact_types", name: "comments_contact_type_id_fk"
+  add_foreign_key "comments", "recruit_statuses", name: "comments_recruit_status_id_fk"
+  add_foreign_key "comments", "students", name: "comments_student_id_fk"
+  add_foreign_key "comments", "users", name: "comments_user_id_fk"
+  add_foreign_key "favorite_instruments", "instruments", name: "favorite_instruments_instrument_id_fk"
+  add_foreign_key "favorite_instruments", "users", name: "favorite_instruments_user_id_fk"
+  add_foreign_key "fields", "groups", name: "fields_group_id_fk"
+  add_foreign_key "games", "seasons", name: "games_season_id_fk"
+  add_foreign_key "gds", "games", name: "gds_game_id_fk"
+  add_foreign_key "gds", "gds_types", name: "gds_gds_type_id_fk"
+  add_foreign_key "gds", "students", name: "gds_student_id_fk"
+  add_foreign_key "gds", "users", name: "gds_user_id_fk"
+  add_foreign_key "gigs", "games", name: "gigs_game_id_fk"
+  add_foreign_key "gigs", "students", name: "gigs_student_id_fk"
+  add_foreign_key "gigs", "users", name: "gigs_user_id_fk"
+  add_foreign_key "options", "fields", name: "options_field_id_fk"
+  add_foreign_key "options", "students", name: "options_student_id_fk"
+  add_foreign_key "rank_members", "ranks", name: "rank_members_rank_id_fk"
+  add_foreign_key "rank_members", "students", name: "rank_members_student_id_fk"
+  add_foreign_key "ranks", "sections", name: "ranks_section_id_fk"
+  add_foreign_key "scores", "games", name: "scores_game_id_fk"
+  add_foreign_key "scores", "students", name: "scores_student_id_fk"
+  add_foreign_key "scores", "users", name: "scores_user_id_fk"
+  add_foreign_key "section_members", "sections", name: "section_members_section_id_fk"
+  add_foreign_key "section_members", "students", name: "section_members_student_id_fk"
+  add_foreign_key "section_notes", "sections", name: "section_notes_section_id_fk"
+  add_foreign_key "sections", "seasons", name: "sections_season_id_fk"
+  add_foreign_key "student_instruments", "ensembles", name: "student_instruments_ensemble_id_fk"
+  add_foreign_key "student_instruments", "instruments", name: "student_instruments_instrument_id_fk"
+  add_foreign_key "student_instruments", "students", name: "student_instruments_student_id_fk"
+  add_foreign_key "texts", "fields", name: "texts_field_id_fk"
+  add_foreign_key "texts", "students", name: "texts_student_id_fk"
 end

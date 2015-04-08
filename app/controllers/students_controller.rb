@@ -7,7 +7,9 @@ class StudentsController < ApplicationController
   # GET /students.json
   def index
     @claimed_students = StudentsHelper.sort(current_user.students)
-    @unclaimed_students = (StudentsHelper.UnclaimedRecruits - Student.where(archive: true)).select { |student| (current_user.instruments - student.instruments).size != current_user.instruments.size }
+    @unclaimed_students = Student.includes(:texts, :options, :addresses, :student_instruments).where(archive: false, recruit: true) - ClaimedStudent.claimed
+    instrument_ids = current_user.instruments.map(&:id)
+    @unclaimed_students = @unclaimed_students.select { |student| student.student_instruments.map{|a| instrument_ids.include?(a.instrument_id)}.any? }
     @unclaimed_students = StudentsHelper.sort(@unclaimed_students)
     session[:return_to] ||= request.referer
   end

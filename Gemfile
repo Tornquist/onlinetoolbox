@@ -5,6 +5,8 @@ ruby "2.1.2"
 gem 'rails', '4.2'
 # Use mysql as the database for Active Record
 gem 'pg'
+gem 'immigrant'
+
 # Use SCSS for stylesheets
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
