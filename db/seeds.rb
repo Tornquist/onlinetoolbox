@@ -1,6 +1,6 @@
 #Admin User
 User.create(first_name: "Admin", last_name: "", password: "password", password_confirmation: "password", email: "admin@admin.com",
-            admin: true, student_leader: true, recruiter: true, chief_of_staff: true, director: true)
+            admin: true, student_leader: true, recruiter: true, chief_of_staff: true, director: true, recruitment_head: true)
 
 #Instrument Choices
 Instrument.create(name: "Unknown")

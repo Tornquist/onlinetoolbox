@@ -4,7 +4,8 @@
       %h1
         = @season.name
       %div.lead
-        Gig Assignment
+        %i
+          Students with 4 or more gigs are flagged as automatic GDS
       %p
         =link_to "Assign Gigs", new_season_gig_path(@season), class: "btn btn-success btn-lg"
 

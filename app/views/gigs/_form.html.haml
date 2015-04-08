@@ -10,9 +10,18 @@
           = f.collection_select(:student_id, @season.students, :id, :full_name_reversed, {}, {class: "form-control"})
           = f.hidden_field :user_id, value: current_user.id
           = f.label :game_id
+          %div
+            %i
+              (Game of incident, or next performance)
           = f.collection_select(:game_id, @season.games, :id, :name, {}, {class: "form-control"})
-          = f.label :offense
+          = f.label :offense, "Description"
+          %div
+            %i
+              (What the offense was and who issued the gig)
           = f.text_area :offense, class: "form-control"
           = f.label :value
+          %div
+            %i
+              (Gigs should be entered as positive values.  To lower a student's current gig count, enter a negative value)
           = f.number_field :value, class: "form-control bottom-margin"
           = f.submit class: "btn btn-success"
