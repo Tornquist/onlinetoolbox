@@ -64,21 +64,39 @@
         - @fields.each do |field|
           - case field.group_id
           - when 1
-            %td
-              = student.field(field).address_1
-            %td
-              = student.field(field).address_2
-            %td
-              = student.field(field).city
-            %td
-              = student.field(field).state.name
-            %td
-              = student.field(field).zip
+            - add = nil
+            - student.addresses.each do |address|
+              - if address.field_id == field.id
+                - add = address
+                - break
+            - if !add.nil?
+              %td
+                = add.address_1
+              %td
+                = add.address_2
+              %td
+                = add.city
+              %td
+                = add.state.name
+              %td
+                = add.zip
+            - else
+              %td
+              %td
+              %td
+              %td
+              %td
           - when 2
             %td
-              = student.field(field).content
+              - student.texts.each do |text|
+                - if text.field_id == field.id
+                  = text.content
+                  - break
           - when 3
             %td
-              = student.field(field).choice
+              - student.options.each do |option|
+                - if option.field_id == field.id
+                  = option.choice
+                  - break
         %td
           = student.full_name_reversed

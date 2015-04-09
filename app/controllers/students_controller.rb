@@ -178,15 +178,15 @@ class StudentsController < ApplicationController
     @students = nil
     @large_filter.each do |search_item|
       if search_item.starts_with?('all')
-        @students = @students.nil? ? Student.all : @students + Student.all
+        @students = @students.nil? ? Student.all : @students + Student.all.includes(:texts, :options, :addresses, :student_instruments)
       elsif search_item.starts_with?('season')
-        newStudents = Season.find(search_item.split[1].to_i).students
+        newStudents = Season.find(search_item.split[1].to_i).students.includes(:texts, :options, :addresses, :student_instruments)
         @students = @students.nil? ? newStudents : @students + newStudents
       elsif search_item.starts_with?('section')
-        newStudents = Section.find(search_item.split[1].to_i).students
+        newStudents = Section.find(search_item.split[1].to_i).students.includes(:texts, :options, :addresses, :student_instruments)
         @students = @students.nil? ? newStudents : @students + newStudents
       elsif search_item.starts_with?('rank')
-        newStudents = Rank.find(search_item.split[1].to_i).students
+        newStudents = Rank.find(search_item.split[1].to_i).students.includes(:texts, :options, :addresses, :student_instruments)
         @students = @students.nil? ? newStudents : @students + newStudents
       end
     end
@@ -199,11 +199,32 @@ class StudentsController < ApplicationController
           @students = @students.reject do |student|
             case type
             when 1 #address
-              !student.field(field_id).searchable.downcase.include?(value.downcase)
+              val = true
+              student.addresses.each do |address|
+                if (address.field_id == field_id)
+                  val = !address.searchable.downcase.include?(value.downcase)
+                end
+              end
+              val
+              #!student.field(field_id).searchable.downcase.include?(value.downcase)
             when 2 #text
-              !student.field(field_id).content.downcase.include?(value.downcase)
+              val = true
+              student.texts.each do |text|
+                if (text.field_id == field_id)
+                  val = !text.content.downcase.include?(value.downcase)
+                end
+              end
+              val
+              #!student.field(field_id).content.downcase.include?(value.downcase)
             when 3 #option
-              !student.field(field_id).choice.downcase.include?(value.downcase)
+              val = true
+              student.options.each do |option|
+                if (option.field_id == field_id)
+                  val = !option.content.downcase.include?(value.downcase)
+                end
+              end
+              val
+              #!student.field(field_id).choice.downcase.include?(value.downcase)
             end
           end
         end
