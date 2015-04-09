@@ -16,7 +16,7 @@ class StudentsController < ApplicationController
 
   def unclaimed
     add_breadcrumb "Unclaimed Students", :unclaimed_students_path
-    @unclaimed_students = StudentsHelper.sort((StudentsHelper.UnclaimedRecruits - Student.where(archive: true)))
+    @unclaimed_students = StudentsHelper.sort(Student.includes(:texts, :options, :addresses, :student_instruments).where(archive: false, recruit: true) - ClaimedStudent.claimed)
   end
 
   # GET /students/1

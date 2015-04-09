@@ -28,10 +28,7 @@
             %td
               = student.full_name_reversed
             %td
-              - student.addresses.each do |address|
-                - if (address.id == Field.where(name: "Address").first.id)
-                  = [address.city, address.state.abbreviation].join(", ")
-                  - break
+              = student.hometown
             %td
               = student.instrument_list
             %td

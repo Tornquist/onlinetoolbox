@@ -67,18 +67,28 @@ class Student < ActiveRecord::Base
   end
 
   def hometown
-    f = field(Field.where(name: "Address").first.id)
-    arr = [f.city, f.state.abbreviation]
-    arr.reject! { |c| c.empty? }
-    arr.join(", ")
+    #f = field(Field.where(name: "Address").first.id)
+    #arr = [f.city, f.state.abbreviation]
+    #arr.reject! { |c| c.empty? }
+    #arr.join(", ")
+    ret = ""
+    addresses.each do |address|
+      if (address.field_id == Field.where(name: "Address").first.id)
+        ret = [address.city, address.state.abbreviation].reject{ |c| c.empty? }.join(", ")
+        break
+      end
+    end
+    ret
   end
 
   def instrument_list
-    instruments.uniq.map { |i| i.name}.join(", ")
+    #instruments.uniq.map { |i| i.name}.join(", ")
+    student_instruments.map(&:instrument_id).uniq.map{|x| Instrument.find(x)}.map{|x| x.name}.join(", ")
   end
 
   def ensemble_list
-    ensembles.uniq.map { |i| i.name}.join(", ")
+    #ensembles.uniq.map { |i| i.name}.join(", ")
+    student_instruments.map(&:ensemble_id).uniq.map{|x| Ensemble.find(x)}.map{|x| x.name}.join(", ")
   end
 
   def rank_list
@@ -106,8 +116,16 @@ class Student < ActiveRecord::Base
   end
 
   def grad_year
-    f = field(Field.where(name: "High School Grad Year").first.id)
-    f.content
+    #f = field(Field.where(name: "High School Grad Year").first.id)
+    #f.content
+    ret = ""
+    texts.each do |text|
+      if (text.field_id == Field.where(name: "High School Grad Year").first.id)
+        ret = text.content
+        break
+      end
+    end
+    ret
   end
 
   def status
