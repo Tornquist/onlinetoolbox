@@ -61,7 +61,17 @@ student_ready = function() {
     $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
 
     $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+
+
   }
+
+  if ( $("#dataTable-simple").length ) {
+    var table = $('#dataTable-simple').dataTable( { "scrollX": true });
+    //Default set with erb in tabletools file
+    $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+  }
+
+
   $('#search-select').select2();
   if ( $("#search-select-panel").length ) {
     $( window ).resize( function(){

@@ -11,11 +11,11 @@
     %div.collapse.navbar-collapse#navbar
       %ul.nav.navbar-nav
         %li
-          = link_to "Home", root_path
-        %li
           = link_to "Students", students_path
         %li
           = link_to "Seasons", seasons_path
+        %li
+          = link_to "Accountability", accountability_path
         - if !@favorites.empty?
           %li.dropdown
             %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}

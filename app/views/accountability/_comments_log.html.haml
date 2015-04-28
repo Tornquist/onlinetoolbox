@@ -1,0 +1,19 @@
+%ul.list-group
+  - @comments.each do |comment|
+    %li.list-group-item
+      %div.row
+        %div.col-sm-3
+          %strong
+            = comment.student.full_name
+        %div.col-sm-3
+          %strong
+            = comment.created_at.strftime('%b %d \'%y, at %l:%M %p')
+        %div.col-sm-3
+          %strong
+            = comment.recruit_status.name
+        %div.col-sm-3
+          %strong
+            = comment.contact_type.name
+      %div.row
+        %div.col-sm-12
+          = comment.content

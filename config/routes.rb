@@ -90,6 +90,9 @@ Rails.application.routes.draw do
   get 'users/favorite_instruments/', to: 'favorite_instruments#user', as: 'user_favorite_instruments'
   post 'users/favorite_instruments/', to: 'favorite_instruments#create_multiple', as: 'create_multiple_user_favorite_instruments'
 
+  get 'accountability', to: 'accountability#index', as: 'accountability'
+  get 'accountability/:id', to: 'accountability#details', as: 'accountability_details'
+
   root to: "static#index"
 end
 

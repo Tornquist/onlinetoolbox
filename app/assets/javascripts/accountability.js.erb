@@ -1,0 +1,21 @@
+//= require bootstrap.file-input
+//= require jquery.jsonview
+//= require dependent_select_initialize
+//= require jquery.dataTables
+//= require jquery.dataTables.tableTools
+//= require jquery.dataTables.bootstrap
+//= require select2.min
+
+var accountability_ready;
+accountability_ready = function() {
+
+  if ( $("#dataTable-simple").length ) {
+    var table = $('#dataTable-simple').dataTable( { "scrollX": true, responsive: true });
+    //Default set with erb in tabletools file
+    $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+  }
+
+};
+
+$(document).ready(accountability_ready);
+$(document).on('page:load', accountability_ready);
