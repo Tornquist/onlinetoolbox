@@ -1,0 +1,42 @@
+%div.jumbotron
+  %h1
+    Accountability
+
+%div.row
+  %div.col-sm-12
+    %div.table-responsive
+      %table.table.table-hover.table-condensed#dataTable-simple
+        %thead
+          %tr
+            %th
+              :plain
+                #
+            %th
+              Name
+            %th
+              Details
+            %th
+              Email
+            %th
+              Last Sign In
+            %th
+              Claimed Students
+            %th
+              Total Comments
+        %tbody
+          - @users.each_with_index do |user, i|
+            %tr
+              %th.row
+                = i + 1
+              %th.text-center
+                = link_to (fa_icon "desktop"), accountability_details_path(user), class: "btn btn-success btn-sm"
+              %td
+                = [user.last_name, user.first_name].reject {|u| u.empty?}.join(", ")
+              %td
+                = user.email
+              %td
+                = user.last_sign_in_at.strftime('%b %d \'%y, at %l:%M %p')
+              %td
+                = user.students.size
+              %td
+                = user.comments.size

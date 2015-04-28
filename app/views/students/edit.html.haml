@@ -3,6 +3,10 @@
     Editing Student
   %div.lead
     = link_to "Manage Student Sections", sections_student_path(@student)
+  - if @student.users.length > 0
+    %div.lead
+      - claimed = @student.users.map {|u| [u.first_name, u.last_name].reject {|l| l.empty? }.join(" ") }.join(", ")
+      = "Claimed By: #{claimed}"
 
 = render 'form'
 

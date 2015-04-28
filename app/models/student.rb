@@ -7,6 +7,7 @@ class Student < ActiveRecord::Base
   has_many :options
   has_many :comments
   has_many :claimed_students
+  has_many :users, through: :claimed_students
   has_many :section_members
   has_many :sections, through: :section_members
   has_many :rank_members
