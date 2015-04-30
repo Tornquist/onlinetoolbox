@@ -49,7 +49,7 @@
                       %strong
                         = announcement.user.full_name
                         |
-                        = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+                        = announcement.created_at.strftime('%a %b %d, at %l:%M %p')
                   %div.row
                     %div.col-sm-12
                       %div.announcement_text

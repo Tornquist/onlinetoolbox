@@ -27,7 +27,7 @@
                       %strong
                         = announcement.user.full_name
                         |
-                        = announcement.created_at.to_time.strftime('%a %b %d, at %l:%M %p')
+                        = announcement.created_at.strftime('%a %b %d, at %l:%M %p')
                         = link_to (fa_icon "close"), announcement, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-danger pull-right"
                   %div.row
                     %div.col-sm-11

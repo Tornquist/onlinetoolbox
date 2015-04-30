@@ -16,7 +16,7 @@
             %span
               = game.name
               on
-              = game.played_on.to_time.strftime('%b %d, %Y')
+              = game.played_on.strftime('%b %d, %Y')
             - if !gds.nil?
               %span.pull-right
                 = link_to "Edit", edit_season_student_gds_path(@season, @student, gds), class: "btn btn-success btn-xs"

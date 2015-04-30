@@ -132,7 +132,7 @@ class Student < ActiveRecord::Base
   def status
     first = comments.order('created_at DESC').first
     status = first.nil? ? "Unknown" : first.recruit_status.name
-    data = first.nil? ? "No Contact" : first.created_at.to_time.strftime("%B %e, %Y")
+    data = first.nil? ? "No Contact" : first.created_at.strftime("%B %e, %Y")
     [status, data]
   end
 
