@@ -15,7 +15,7 @@
           %div.col-sm-4
             %strong
               Last Sign In:
-            = @user.last_sign_in_at.try(:strftime, '%b %d \'%y, at %l:%M %p').to_s
+            = @user.last_sign_in_at.try(:to_time).try(:strftime, '%b %d \'%y, at %l:%M %p').to_s
           %div.col-sm-4
             %strong
               Claimed Students:

@@ -35,7 +35,7 @@
               %td
                 = user.email
               %td
-                = user.last_sign_in_at.try(:strftime, '%b %d \'%y, at %l:%M %p').to_s
+                = user.last_sign_in_at.try(:to_time).try(:strftime, '%b %d \'%y, at %l:%M %p').to_s
               %td
                 = user.students.size
               %td
