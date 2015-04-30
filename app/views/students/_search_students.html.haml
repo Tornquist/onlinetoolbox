@@ -15,6 +15,9 @@
       - if @special_fields.include?("Sections")
         %th.selected
           Seasons/Section/Rank
+      - if @special_fields.include?("Recruit")
+        %th.selected
+          Recruit
       - @fields.each do |field|
         - case field.group_id
         - when 1
@@ -61,6 +64,9 @@
         - if @special_fields.include?("Sections")
           %td
             = student.rank_list
+        - if @special_fields.include?("Recruit")
+          %td
+            = student.recruit.to_s.capitalize
         - @fields.each do |field|
           - case field.group_id
           - when 1

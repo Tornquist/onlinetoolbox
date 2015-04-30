@@ -21,6 +21,11 @@
             %label
               = check_box_tag 'special_fields[]', 'Sections', @special_fields.include?('Sections')
               Seasons/Section/Rank
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Recruit', @special_fields.include?('Recruit')
+              Recruit
         - @fields_top.each do |field|
           %div.col-sm-2
             %div.checkbox
