@@ -18,6 +18,9 @@
       - if @special_fields.include?("Recruit")
         %th.selected
           Recruit
+      - if @special_fields.include?("Claimed")
+        %th.selected
+          Claimed
       - @fields.each do |field|
         - case field.group_id
         - when 1
@@ -67,6 +70,9 @@
         - if @special_fields.include?("Recruit")
           %td
             = student.recruit.to_s.capitalize
+        - if @special_fields.include?("Claimed")
+          %td
+            = (student.claimed_students.size > 0).to_s.capitalize
         - @fields.each do |field|
           - case field.group_id
           - when 1
