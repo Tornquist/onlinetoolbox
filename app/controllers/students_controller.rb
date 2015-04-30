@@ -167,7 +167,7 @@ class StudentsController < ApplicationController
     @large_filter = []
 
     @fields_all = Field.where(hidden:false).order(:index)
-    @fields_top = @fields_all.limit(3)
+    @fields_top = @fields_all.limit(0)
     @fields_bottom = @fields_all - @fields_top
     @filters = {}
   end
@@ -233,14 +233,28 @@ class StudentsController < ApplicationController
     if params["search_instrument"]
       if !params["search_instrument"].empty?
         @students = @students.reject do |student|
-          !student.instrument_list.downcase.include?(params["search_instrument"].downcase)
+          reject = true
+          params["search_instrument"].downcase.split(",").each do |instrument|
+            if student.instrument_list.downcase.include?(instrument.strip)
+              reject = false
+            end
+          end
+          #!student.instrument_list.downcase.include?(params["search_instrument"].downcase)
+          reject
         end
       end
     end
     if params["search_ensemble"]
       if !params["search_ensemble"].empty?
         @students = @students.reject do |student|
-          !student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+          reject = true
+          params["search_ensemble"].downcase.split(",").each do |ensemble|
+            if student.ensemble_list.downcase.include?(ensemble.strip)
+              reject = false
+            end
+          end
+          #!student.ensemble_list.downcase.include?(params["search_ensemble"].downcase)
+          reject
         end
       end
     end
@@ -259,7 +273,7 @@ class StudentsController < ApplicationController
     @special_fields = params["special_fields"] ||= []
 
     @fields_all = Field.where(hidden:false).order(:index)
-    @fields_top = @fields_all.limit(3)
+    @fields_top = @fields_all.limit(0)
     @fields_bottom = @fields_all - @fields_top
 
     @filters = {}

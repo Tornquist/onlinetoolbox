@@ -21,6 +21,21 @@
             %label
               = check_box_tag 'special_fields[]', 'Sections', @special_fields.include?('Sections')
               Seasons/Section/Rank
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Recruit', @special_fields.include?('Recruit')
+              Recruit
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Claimed', @special_fields.include?('Claimed')
+              Claimed
+        %div.col-sm-2
+          %div.checkbox
+            %label
+              = check_box_tag 'special_fields[]', 'Hometown', @special_fields.include?('Hometown')
+              Hometown
         - @fields_top.each do |field|
           %div.col-sm-2
             %div.checkbox
