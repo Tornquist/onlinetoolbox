@@ -167,7 +167,7 @@ class StudentsController < ApplicationController
     @large_filter = []
 
     @fields_all = Field.where(hidden:false).order(:index)
-    @fields_top = @fields_all.limit(1)
+    @fields_top = @fields_all.limit(0)
     @fields_bottom = @fields_all - @fields_top
     @filters = {}
   end
@@ -273,7 +273,7 @@ class StudentsController < ApplicationController
     @special_fields = params["special_fields"] ||= []
 
     @fields_all = Field.where(hidden:false).order(:index)
-    @fields_top = @fields_all.limit(1)
+    @fields_top = @fields_all.limit(0)
     @fields_bottom = @fields_all - @fields_top
 
     @filters = {}

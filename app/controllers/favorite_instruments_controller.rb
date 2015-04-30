@@ -1,6 +1,8 @@
 class FavoriteInstrumentsController < ApplicationController
   respond_to :html
 
+  add_breadcrumb "Favorite Instruments", :user_favorite_instruments_path
+
   def user
     @instruments = Instrument.all
     @favorited = current_user.instruments

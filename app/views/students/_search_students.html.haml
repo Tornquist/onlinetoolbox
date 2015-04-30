@@ -21,6 +21,9 @@
       - if @special_fields.include?("Claimed")
         %th.selected
           Claimed
+      - if @special_fields.include?("Hometown")
+        %th.selected
+          Hometown
       - @fields.each do |field|
         - case field.group_id
         - when 1
@@ -73,6 +76,9 @@
         - if @special_fields.include?("Claimed")
           %td
             = (student.claimed_students.size > 0).to_s.capitalize
+        - if @special_fields.include?("Hometown")
+          %td
+            = student.hometown
         - @fields.each do |field|
           - case field.group_id
           - when 1
