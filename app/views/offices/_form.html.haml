@@ -1,0 +1,19 @@
+%div.row.bottom-spacer
+  %div.col-sm-12
+    = form_for(@office) do |f|
+      - if @office.errors.any?
+        %div.error_explanation
+          %h2
+            = pluralize(@office.errors.count, "error")
+            prohibited this ribbon from being saved:
+
+          %ul
+          - @office.errors.full_messages.each do |message|
+            %li
+              = message
+
+      %div.field.bottom-margin
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      %div.actions
+        = f.submit class: "btn btn-success"

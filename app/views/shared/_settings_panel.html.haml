@@ -22,3 +22,5 @@
   %hr
   %li{role:"presentation", class: (controller.class == RibbonsController ? 'active' : '')}
     = link_to "Ribbons", ribbons_path
+  %li{role:"presentation", class: (controller.class == OfficesController ? 'active' : '')}
+    = link_to "Offices", offices_path

@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :offices, except: [:show, :destroy] do
+    put :toggle_hidden
+  end
+
   resources :student_ribbons
 
   resources :ribbons, except: [:show, :destroy] do

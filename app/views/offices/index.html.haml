@@ -1,0 +1,37 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Offices
+
+        %div.table-responsive
+          %table.table
+            %thead
+              %tr
+                %th.text-center
+                  Name
+                %th.text-center
+                  Edit
+                %th.text-center
+                  Active/Inactive
+            %tbody
+              - @offices.each do |office|
+                %tr{ :class => "item text-center" + (office.hidden ? " danger" : ""), 'data-item-id' => office.id }
+                  %td
+                    = office.name
+                  %td
+                    = link_to (fa_icon "pencil"), edit_office_path(office)
+                  %td.eyecon
+                    - if office.hidden
+                      = link_to (fa_icon "eye"), office_toggle_hidden_path(office), method: :put, remote: true
+                    - else
+                      = link_to (fa_icon "eye-slash"), office_toggle_hidden_path(office), method: :put, remote: true
+
+        = link_to 'New Office', new_office_path, class: "btn btn-success"

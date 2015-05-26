@@ -23,7 +23,7 @@
                 %th.text-center
                   Edit
                 %th.text-center
-                  Show/Hide
+                  Active/Inactive
             %tbody
               - @ribbons.each do |ribbon|
                 %tr{ :class => "item text-center" + (ribbon.hidden ? " danger" : ""), 'data-item-id' => ribbon.id }
