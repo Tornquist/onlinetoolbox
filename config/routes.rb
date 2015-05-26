@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   resources :student_ribbons
 
-  resources :ribbons
+  resources :ribbons, except: [:show, :destroy] do
+    post :update_row_order, on: :collection
+    put :toggle_hidden
+  end
 
   resources :helps, except: [:show]
 
@@ -51,7 +54,7 @@ Rails.application.routes.draw do
   resources :recruit_statuses, except: [:show]
 
   get '/fields/permissions_error', to: 'fields#permissions_error', as: 'fields_permissions'
-  resources :fields do
+  resources :fields, except: [:show, :destroy] do
     post :update_row_order, on: :collection
     put :toggle_hidden
   end

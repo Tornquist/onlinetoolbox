@@ -1,0 +1,44 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Ribbons
+
+        %div.table-responsive
+          %table.table#sortableFieldList
+            %thead
+              %tr
+                %th
+                %th.text-center
+                  Name
+                %th.text-center
+                  Description
+                %th.text-center
+                  Edit
+                %th.text-center
+                  Show/Hide
+            %tbody
+              - @ribbons.each do |ribbon|
+                %tr{ :class => "item text-center" + (ribbon.hidden ? " danger" : ""), 'data-item-id' => ribbon.id }
+                  %td.bars
+                    = fa_icon "bars"
+                  %td
+                    = ribbon.name
+                  %td
+                    = ribbon.description
+                  %td
+                    = link_to (fa_icon "pencil"), edit_ribbon_path(ribbon)
+                  %td.eyecon
+                    - if ribbon.hidden
+                      = link_to (fa_icon "eye"), ribbon_toggle_hidden_path(ribbon), method: :put, remote: true
+                    - else
+                      = link_to (fa_icon "eye-slash"), ribbon_toggle_hidden_path(ribbon), method: :put, remote: true
+
+        = link_to 'New Ribbon', new_ribbon_path, class: "btn btn-success"

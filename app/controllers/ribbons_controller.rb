@@ -1,39 +1,49 @@
 class RibbonsController < ApplicationController
-  before_action :set_ribbon, only: [:show, :edit, :update, :destroy]
+  before_action :set_ribbon, only: [:edit, :update]
+
+  add_breadcrumb "Settings", :edit_user_registration_path
+  add_breadcrumb "Ribbons", :ribbons_path
 
   respond_to :html
 
   def index
-    @ribbons = Ribbon.all
+    @ribbons = Ribbon.rank(:index).all
     respond_with(@ribbons)
   end
 
-  def show
-    respond_with(@ribbon)
-  end
-
   def new
+    add_breadcrumb "New", :new_ribbon_path
     @ribbon = Ribbon.new
     respond_with(@ribbon)
   end
 
   def edit
+    add_breadcrumb "Edit", :edit_ribbon_path
   end
 
   def create
     @ribbon = Ribbon.new(ribbon_params)
+    @ribbon.update_attribute :index_position, :last
     @ribbon.save
-    respond_with(@ribbon)
+    redirect_to ribbons_path
   end
 
   def update
     @ribbon.update(ribbon_params)
-    respond_with(@ribbon)
+    redirect_to ribbons_path
   end
 
-  def destroy
-    @ribbon.destroy
-    respond_with(@ribbon)
+  def toggle_hidden
+    r = Ribbon.find(params["ribbon_id"])
+    r.hidden = !r.hidden
+    r.save
+    render :nothing => true
+  end
+
+  def update_row_order
+    r = Ribbon.find(params["ribbon"]["ribbon_id"])
+    r.update_attribute :index_position, params["ribbon"]["row_order_position"]
+    render nothing: true
   end
 
   private
