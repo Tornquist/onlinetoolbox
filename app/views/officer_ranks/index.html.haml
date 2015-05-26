@@ -1,0 +1,38 @@
+%div.jumbotron
+  %h1
+    Settings
+
+%div.row
+  %div.col-sm-3
+    = render 'shared/settings_panel'
+  %div.col-sm-9
+    %div.panel.panel-primary
+      %div.panel-body
+        %h1.no-top-margin
+          Officer Ranks
+
+        %div.table-responsive
+          %table.table
+            %thead
+              %tr
+                %th.text-center
+                  Name
+                %th.text-center
+                  Hours
+                %th.text-center
+                  Inventory
+                %th.text-center
+                  Edit
+            %tbody
+              - @officer_ranks.each do |officer_rank|
+                %tr.text-center
+                  %td
+                    = officer_rank.name
+                  %td
+                    = officer_rank.hours
+                  %td
+                    = officer_rank.inventory
+                  %td
+                    = link_to (fa_icon "pencil"), edit_officer_rank_path(officer_rank)
+
+        = link_to 'New Officer Rank', new_officer_rank_path, class: "btn btn-success"

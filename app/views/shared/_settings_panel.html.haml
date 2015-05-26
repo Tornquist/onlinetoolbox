@@ -24,3 +24,5 @@
     = link_to "Ribbons", ribbons_path
   %li{role:"presentation", class: (controller.class == OfficesController ? 'active' : '')}
     = link_to "Offices", offices_path
+  %li{role:"presentation", class: (controller.class == OfficerRanksController ? 'active' : '')}
+    = link_to "Officer Ranks", officer_ranks_path

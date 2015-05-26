@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :officer_ranks, except: [:show, :destroy]
+
   resources :offices, except: [:show, :destroy] do
     put :toggle_hidden
   end

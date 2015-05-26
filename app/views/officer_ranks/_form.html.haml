@@ -1,0 +1,25 @@
+%div.row.bottom-spacer
+  %div.col-sm-12
+    = form_for(@officer_rank) do |f|
+      - if @officer_rank.errors.any?
+        %div.error_explanation
+          %h2
+            = pluralize(@officer_rank.errors.count, "error")
+            prohibited this field from being saved:
+
+          %ul
+          - @officer_rank.errors.full_messages.each do |message|
+            %li
+              = message
+
+      %div.field
+        = f.label :name
+        = f.text_field :name, class: "form-control"
+      %div.field
+        = f.label :hours
+        = f.number_field :hours, class: "form-control"
+      %div.field.bottom-margin
+        = f.label :inventory, "Starting Inventory"
+        = f.number_field :inventory, class: "form-control"
+      %div.actions
+        = f.submit class: "btn btn-success"

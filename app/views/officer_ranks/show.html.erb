@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @officer_rank.name %>
+</p>
+
+<p>
+  <strong>Hours:</strong>
+  <%= @officer_rank.hours %>
+</p>
+
+<p>
+  <strong>Inventory:</strong>
+  <%= @officer_rank.inventory %>
+</p>
+
+<%= link_to 'Edit', edit_officer_rank_path(@officer_rank) %> |
+<%= link_to 'Back', officer_ranks_path %>

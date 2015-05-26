@@ -15,7 +15,7 @@ Rails.application.config.assets.paths << Rails.root.join('vendor', 'assets', 'fl
 %w( comments contact_types ensembles favorite_instruments fields gds gigs instruments
     rank_members recruit_statuses scores seasons section_notes sections static students
     announcements favorites helps users/registrations users/sessions accountability
-    ribbons student_ribbons offices).each do |controller|
+    ribbons student_ribbons offices officer_ranks).each do |controller|
 #  Rails.application.config.assets.precompile += ["#{controller}.css"]
   Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.css"]
 end
