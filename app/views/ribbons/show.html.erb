@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @ribbon.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @ribbon.description %>
+</p>
+
+<p>
+  <strong>Hidden:</strong>
+  <%= @ribbon.hidden %>
+</p>
+
+<p>
+  <strong>Index:</strong>
+  <%= @ribbon.index %>
+</p>
+
+<%= link_to 'Edit', edit_ribbon_path(@ribbon) %> |
+<%= link_to 'Back', ribbons_path %>

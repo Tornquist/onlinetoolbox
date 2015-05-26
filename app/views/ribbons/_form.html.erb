@@ -1,0 +1,33 @@
+<%= form_for(@ribbon) do |f| %>
+  <% if @ribbon.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ribbon.errors.count, "error") %> prohibited this ribbon from being saved:</h2>
+
+      <ul>
+      <% @ribbon.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :hidden %><br>
+    <%= f.check_box :hidden %>
+  </div>
+  <div class="field">
+    <%= f.label :index %><br>
+    <%= f.number_field :index %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

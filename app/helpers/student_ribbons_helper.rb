@@ -1,0 +1,2 @@
+module StudentRibbonsHelper
+end

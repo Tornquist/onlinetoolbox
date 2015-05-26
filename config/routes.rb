@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :student_ribbons
+
+  resources :ribbons
+
   resources :helps, except: [:show]
 
   put '/favorites/toggle', to: 'favorites#toggle_favorite', as: 'favorite_toggle'

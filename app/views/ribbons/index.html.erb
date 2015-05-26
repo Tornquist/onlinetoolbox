@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Ribbons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Hidden</th>
+      <th>Index</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ribbons.each do |ribbon| %>
+      <tr>
+        <td><%= ribbon.name %></td>
+        <td><%= ribbon.description %></td>
+        <td><%= ribbon.hidden %></td>
+        <td><%= ribbon.index %></td>
+        <td><%= link_to 'Show', ribbon %></td>
+        <td><%= link_to 'Edit', edit_ribbon_path(ribbon) %></td>
+        <td><%= link_to 'Destroy', ribbon, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ribbon', new_ribbon_path %>
