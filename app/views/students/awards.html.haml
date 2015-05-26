@@ -1,0 +1,66 @@
+%div.jumbotron
+  %h1
+    Awards for
+    = @student.full_name
+
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Office
+      %div.panel-body
+        = collection_select(:office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {}, {class: "form-control"})
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Ribbons
+      %div.panel-body
+        - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
+          %div.row
+            %div.col-sm-12
+              = check_box_tag("student_ribbon", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?)
+              %strong
+                = ribbon.name
+              - if !ribbon.description.empty?
+                :plain
+                  -
+                = ribbon.description
+
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Officer Ranks
+      %div.panel-body
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                Hours
+              %th
+                Rank
+              %th
+                Date Approved
+              %th
+                Date Issued
+              %th
+                Date Returned
+
+          %tbody
+            - OfficerRank.order(:hours).each do |rank|
+              %tr
+                %th
+                  = rank.hours
+                %td
+                  = rank.name
+                %td
+                  %div.btn.btn-success
+                    Approve
+                %td
+                  %div.btn.btn-success
+                    Issue
+                %td
+                  %div.btn.btn-success
+                    Return

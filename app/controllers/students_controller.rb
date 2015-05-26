@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-  before_action :set_student, only: [:show, :edit, :update, :destroy, :sections]
+  before_action :set_student, only: [:show, :edit, :update, :destroy, :sections, :awards]
 
   add_breadcrumb "Students", :students_path
 
@@ -291,6 +291,11 @@ class StudentsController < ApplicationController
     send_data StudentsHelper.import_template, :filename => 'online_toolbox_template.csv'
   end
 
+  def awards
+    add_breadcrumb @student.full_name, :edit_student_path
+    add_breadcrumb "Awards", :awards_student_path
+    @student_ribbons = StudentRibbon.where(student: @student)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     put :toggle_hidden
   end
 
-  resources :student_ribbons
+  #resources :student_ribbons, :path => "students/:student_id/ribbons/"
 
   resources :ribbons, except: [:show, :destroy] do
     post :update_row_order, on: :collection
@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     put :unarchive
     collection { post :import }
     get :sections, on: :member
+    get :awards, on: :member
   end
 
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
