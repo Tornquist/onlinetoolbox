@@ -78,6 +78,28 @@ student_ready = function() {
       $('#search-select').select2();
     });
   }
+
+  if ($(".student_ribbon_checkbox").length) {
+    $(".student_ribbon_checkbox").change( function() {
+      student_id = $('#student_id')[0].value;
+      ribbon_id = $(this).val();
+      $.ajax({
+        type: 'POST',
+        url: '/student_ribbons/create_destroy',
+        dataType: 'json',
+        data: { ribbon: {ribbon_id: ribbon_id, student_id: student_id } }
+      });
+    });
+  }
+
+  if ($("#office_office_id").length) {
+    $("#office_office_id")[0].change( function() {
+      student_id = $('#student_id')[0].value;
+      ribbon_id = $(this).val();
+      console.log("Combo box changed");
+    });
+  }
+
 };
 
 $(document).ready(student_ready);

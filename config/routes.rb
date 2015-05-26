@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
 
+  post 'student_ribbons/create_destroy', to: 'student_ribbons#create_destroy'
+
   resources :officer_ranks, except: [:show, :destroy]
 
   resources :offices, except: [:show, :destroy] do
     put :toggle_hidden
   end
-
-  #resources :student_ribbons, :path => "students/:student_id/ribbons/"
 
   resources :ribbons, except: [:show, :destroy] do
     post :update_row_order, on: :collection

@@ -3,6 +3,9 @@
     Awards for
     = @student.full_name
 
+%form
+  = hidden_field_tag "student_id", @student.id
+
 %div.row
   %div.col-sm-12
     %div.panel.panel-primary
@@ -10,7 +13,7 @@
         %div.panel-title
           Office
       %div.panel-body
-        = collection_select(:office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {}, {class: "form-control"})
+        = collection_select(:student_office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {}, {class: "form-control"})
   %div.col-sm-12
     %div.panel.panel-primary
       %div.panel-heading
@@ -20,7 +23,7 @@
         - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
           %div.row
             %div.col-sm-12
-              = check_box_tag("student_ribbon", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?)
+              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox"})
               %strong
                 = ribbon.name
               - if !ribbon.description.empty?
