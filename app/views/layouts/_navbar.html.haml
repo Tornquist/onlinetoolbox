@@ -12,7 +12,7 @@
       %ul.nav.navbar-nav
         %li.dropdown
           %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
-            Students
+            = fa_icon "users"
             %span.caret
           %ul.dropdown-menu{'role'=>"menu"}
             %li
@@ -22,11 +22,13 @@
             %li
               = link_to "Favorite Instruments", user_favorite_instruments_path
         %li
-          = link_to "Seasons", seasons_path
+          = link_to fa_icon("calendar"), seasons_path
+        %li
+          = link_to fa_icon("trophy"), awards_path
         - if !@favorites.empty?
           %li.dropdown
             %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
-              Favorites
+              = fa_icon "star"
               %span.caret
             %ul.dropdown-menu{'role'=>"menu"}
               - @favorites.each do |favorite|
@@ -42,7 +44,7 @@
       %ul.nav.navbar-nav.navbar-right
         %li.dropdown
           %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
-            User
+            = fa_icon "cog"
             %span.caret
           %ul.dropdown-menu{'role'=>"menu"}
             %li

@@ -1,0 +1,66 @@
+%div.jumbotron
+  %h1
+    Awards
+
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Search
+      %div.panel-body
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Offices
+      %div.panel-body
+        - Office.where(hidden: [false, nil], ).where.not(name: "-- No Office --").order(:name).each_slice(4) do |slice|
+          %div.row
+            - slice.each do |office|
+              %div.col-sm-3.bottom-margin
+                %div.btn.btn-success.btn-block
+                  = office.name
+
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Ribbons
+      %div.panel-body
+        - Ribbon.all.order(:index).each_slice(4) do |slice|
+          %div.row
+            - slice.each do |ribbon|
+              %div.col-sm-3.bottom-margin
+                %div.btn.btn-success.btn-block
+                  = ribbon.name
+
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Officer Ranks
+      %div.panel-body
+        %div.table-responsive
+          %table.table.table-striped.table-collapse
+            %thead
+              %tr
+                %th
+                  Hours
+                %th
+                  Rank
+                %th
+                  Inventory
+                %th
+                  List
+
+            %tbody
+              - OfficerRank.order(:hours).each do |rank|
+                %tr
+                  %th
+                    = rank.hours
+                  %td
+                    = rank.name
+                  %td
+                    = rank.inventory
+                  %td
+                    %div.btn.btn-success
+                      List
+
