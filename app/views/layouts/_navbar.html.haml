@@ -23,8 +23,6 @@
               = link_to "Favorite Instruments", user_favorite_instruments_path
         %li
           = link_to "Seasons", seasons_path
-        %li
-          = link_to "Accountability", accountability_path
         - if !@favorites.empty?
           %li.dropdown
             %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
@@ -42,8 +40,15 @@
                     = link_to "#{section.season.name} | #{section.name}", section_path(section)
 
       %ul.nav.navbar-nav.navbar-right
-        %li
-          = link_to "Settings", edit_user_registration_path
+        %li.dropdown
+          %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
+            User
+            %span.caret
+          %ul.dropdown-menu{'role'=>"menu"}
+            %li
+              = link_to "Settings", edit_user_registration_path
+            %li
+              = link_to "Accountability", accountability_path
         %li
           - if user_signed_in?
             = link_to "Sign Out", destroy_user_session_path, :method => :delete

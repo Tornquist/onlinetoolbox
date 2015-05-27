@@ -13,7 +13,7 @@
         %div.panel-title
           Office
       %div.panel-body
-        = collection_select(:student_office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {}, {class: "form-control"})
+        = collection_select(:student_office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {selected: @office_id}, {class: "form-control"})
   %div.col-sm-12
     %div.panel.panel-primary
       %div.panel-heading

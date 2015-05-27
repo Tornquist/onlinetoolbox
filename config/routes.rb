@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
+  #Awards Routes
+  get 'awards/:id', to: 'awards#student_view', as: 'awards_student'
   post 'student_ribbons/create_destroy', to: 'student_ribbons#create_destroy'
+  post 'student_offices/create_destroy', to: 'student_offices#create_destroy'
 
   resources :officer_ranks, except: [:show, :destroy]
 
@@ -84,7 +87,6 @@ Rails.application.routes.draw do
     put :unarchive
     collection { post :import }
     get :sections, on: :member
-    get :awards, on: :member
   end
 
   devise_for :users, controllers: { sessions: "users/sessions", registrations: "users/registrations" }
