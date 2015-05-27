@@ -11,4 +11,17 @@ class AwardsController < ApplicationController
     @student_ribbons = StudentRibbon.where(student: @student)
     @office_id = StudentOffice.where(student: @student).first.try(:office).try(:id)
   end
+
+  def inventory
+    add_breadcrumb "Inventory", :awards_inventory_path
+    @award = OfficerRank.find(params[:id])
+  end
+
+  def inventory_update
+    amount = params["amount"].to_i
+    rank = OfficerRank.find(params[:id])
+    rank.update(inventory: (rank.inventory+amount))
+    flash[:notice] = "Inventory Updated"
+    redirect_to awards_inventory_path
+  end
 end

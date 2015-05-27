@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   post 'student_offices/create_destroy', to: 'student_offices#create_destroy'
   post 'student_officer_ranks/create_update', to: 'student_officer_ranks#create_update'
 
+  get 'awards/inventory/:id', to: 'awards#inventory', as: 'awards_inventory'
+  post 'awards/inventory/:id', to: 'awards#inventory_update', as: 'awards_inventory_update'
+
   resources :officer_ranks, except: [:show, :destroy]
 
   resources :offices, except: [:show, :destroy] do

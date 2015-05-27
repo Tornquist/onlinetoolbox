@@ -77,6 +77,5 @@
                     %div.btn.btn-success
                       List
                   %td
-                    %div.btn.btn-primary
-                      = fa_icon "edit"
+                    = link_to (fa_icon("edit")), awards_inventory_path(rank.id), class: "btn btn-primary"
 
