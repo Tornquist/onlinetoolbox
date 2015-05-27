@@ -9,6 +9,17 @@
         %div.panel-title
           Search
       %div.panel-body
+        %form.form-inline
+          %div.form-group
+            = label_tag "first_name", "First Name"
+            = text_field_tag "first_name", nil, class: "form-control"
+          %div.form-group
+            = label_tag "last_name", "Last Name"
+            = text_field_tag "last_name", nil, class: "form-control"
+          %div.form-group
+            %div.btn.btn-success
+              Search
+
     %div.panel.panel-primary
       %div.panel-heading
         %div.panel-title
@@ -50,6 +61,8 @@
                   Inventory
                 %th
                   List
+                %th
+                  Edit
 
             %tbody
               - OfficerRank.order(:hours).each do |rank|
@@ -59,8 +72,11 @@
                   %td
                     = rank.name
                   %td
-                    = rank.inventory
+                    = rank.adjusted_inventory
                   %td
                     %div.btn.btn-success
                       List
+                  %td
+                    %div.btn.btn-primary
+                      = fa_icon "edit"
 

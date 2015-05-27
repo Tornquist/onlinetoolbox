@@ -20,6 +20,8 @@
                 %th.text-center
                   Hours
                 %th.text-center
+                  Starting Inventory
+                %th.text-center
                   Inventory
                 %th.text-center
                   Edit
@@ -32,6 +34,8 @@
                     = officer_rank.hours
                   %td
                     = officer_rank.inventory
+                  %td
+                    = officer_rank.adjusted_inventory
                   %td
                     = link_to (fa_icon "pencil"), edit_officer_rank_path(officer_rank)
 
