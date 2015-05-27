@@ -18,6 +18,7 @@ class Student < ActiveRecord::Base
   has_many :favorites
   has_many :student_ribbons
   has_many :student_offices
+  has_many :student_officer_ranks
 
   accepts_nested_attributes_for :student_instruments, :allow_destroy => true
   accepts_nested_attributes_for :texts#, :reject_if => lambda { |a| a[:content].blank? }

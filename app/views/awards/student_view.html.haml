@@ -3,8 +3,7 @@
     Awards for
     = @student.full_name
 
-%form
-  = hidden_field_tag "student_id", @student.id
+= hidden_field_tag "student_id", @student.id
 
 %div.row
   %div.col-sm-12
@@ -37,33 +36,45 @@
         %div.panel-title
           Officer Ranks
       %div.panel-body
-        %table.table.table-striped
-          %thead
-            %tr
-              %th
-                Hours
-              %th
-                Rank
-              %th
-                Date Approved
-              %th
-                Date Issued
-              %th
-                Date Returned
-
-          %tbody
-            - OfficerRank.order(:hours).each do |rank|
+        %div.table-responsive
+          %table.table.table-striped.table-collapse
+            %thead
               %tr
                 %th
-                  = rank.hours
-                %td
-                  = rank.name
-                %td
-                  %div.btn.btn-success
-                    Approve
-                %td
-                  %div.btn.btn-success
-                    Issue
-                %td
-                  %div.btn.btn-success
-                    Return
+                  Hours
+                %th
+                  Rank
+                %th
+                  Date Approved
+                %th
+                  Date Issued
+                %th
+                  Date Returned
+
+            %tbody
+              - OfficerRank.order(:hours).each do |rank|
+                %tr
+                  = hidden_field_tag "officer_rank_id", rank.id
+                  - student_officer_rank = StudentOfficerRank.where(student: @student, officer_rank: rank).first
+                  %th
+                    = rank.hours
+                  %td
+                    = rank.name
+                  %td
+                    - if !student_officer_rank.nil? && !student_officer_rank.date_approved.nil?
+                      = student_officer_rank.date_approved.to_formatted_s(:long)
+                    - else
+                      %div.btn.btn-success.approve.student_rank
+                        Approve
+                  %td
+                    - if !student_officer_rank.nil? && !student_officer_rank.date_issued.nil?
+                      = student_officer_rank.date_issued.to_formatted_s(:long)
+                    - else
+                      %div.btn.btn-success.issue.student_rank
+                        Issue
+                  %td
+                    - if !student_officer_rank.nil? && !student_officer_rank.date_returned.nil?
+                      = student_officer_rank.date_returned.to_formatted_s(:long)
+                    - else
+                      %div.btn.btn-success.return.student_rank
+                        Return

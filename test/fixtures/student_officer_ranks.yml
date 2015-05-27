@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rank_id: 1
+  student_id: 1
+  date_approved: 2015-05-27
+  date_issued: 2015-05-27
+  date_returned: 2015-05-27
+
+two:
+  rank_id: 1
+  student_id: 1
+  date_approved: 2015-05-27
+  date_issued: 2015-05-27
+  date_returned: 2015-05-27
