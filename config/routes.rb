@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'awards/inventory/:id', to: 'awards#inventory', as: 'awards_inventory'
   post 'awards/inventory/:id', to: 'awards#inventory_update', as: 'awards_inventory_update'
+  post 'awards', to: 'awards#search', as: 'awards_search'
 
   resources :officer_ranks, except: [:show, :destroy]
 

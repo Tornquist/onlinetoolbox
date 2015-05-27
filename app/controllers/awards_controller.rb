@@ -24,4 +24,10 @@ class AwardsController < ApplicationController
     flash[:notice] = "Inventory Updated"
     redirect_to awards_inventory_path
   end
+
+  def search
+    binding.pry
+    a = 1
+    render nothing: true, status: 200
+  end
 end

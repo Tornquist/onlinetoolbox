@@ -9,7 +9,8 @@
         %div.panel-title
           Search
       %div.panel-body
-        %form.form-inline
+        = form_tag({}, {class: "form-inline"}) do
+          = hidden_field_tag 'user_search'
           %div.form-group
             = label_tag "first_name", "First Name"
             = text_field_tag "first_name", nil, class: "form-control"
@@ -17,8 +18,7 @@
             = label_tag "last_name", "Last Name"
             = text_field_tag "last_name", nil, class: "form-control"
           %div.form-group
-            %div.btn.btn-success
-              Search
+            = submit_tag "Search", class: "btn btn-success"
 
     %div.panel.panel-primary
       %div.panel-heading
@@ -29,8 +29,9 @@
           %div.row
             - slice.each do |office|
               %div.col-sm-3.bottom-margin
-                %div.btn.btn-success.btn-block
-                  = office.name
+                = form_tag do
+                  = hidden_field_tag 'office_search', office.id
+                  = submit_tag office.name, class: "btn btn-success btn-block"
 
     %div.panel.panel-primary
       %div.panel-heading
@@ -41,8 +42,9 @@
           %div.row
             - slice.each do |ribbon|
               %div.col-sm-3.bottom-margin
-                %div.btn.btn-success.btn-block
-                  = ribbon.name
+                = form_tag do
+                  = hidden_field_tag 'ribbon_search', ribbon.id
+                  = submit_tag ribbon.name, class: "btn btn-success btn-block"
 
     %div.panel.panel-primary
       %div.panel-heading
@@ -74,8 +76,9 @@
                   %td
                     = rank.adjusted_inventory
                   %td
-                    %div.btn.btn-success
-                      List
+                    = form_tag do
+                      = hidden_field_tag 'rank_search', rank.id
+                      = submit_tag "List", class: "btn btn-success"
                   %td
                     = link_to (fa_icon("edit")), awards_inventory_path(rank.id), class: "btn btn-primary"
 
