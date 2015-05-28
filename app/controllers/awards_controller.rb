@@ -30,6 +30,9 @@ class AwardsController < ApplicationController
     @students = []
     @large_banner = ""
     @small_banner = ""
+    @rank_info = false
+    @office_info = false
+    @ribbon_info = false
     if params.has_key?("user_search")
       @large_banner = "Student Search"
       if !params["first_name"].to_s.empty?
@@ -62,6 +65,25 @@ class AwardsController < ApplicationController
       rank = OfficerRank.find(params["rank_search"])
       @small_banner = rank.name
       @students = StudentsHelper.sort(rank.real_students.reject { |c| c.archive })
+
+    elsif params.has_key?("full_rank_search")
+      @large_banner = "Rank Search"
+      @small_banner = "All Ranks"
+      @rank_info = true
+      @students = StudentsHelper.sort(StudentOfficerRank.all.map(&:student).uniq.reject { |c| c.archive })
+
+    elsif params.has_key?("full_officer_search")
+      @large_banner = "Office Search"
+      @small_banner = "All Offices"
+      @office_info = true
+      @students = StudentsHelper.sort(StudentOffice.all.map(&:student).uniq.reject {|c| c.archive })
+
+    elsif params.has_key?("full_ribbon_search")
+      @large_banner = "Ribbon Search"
+      @small_banner = "All Ribbons"
+      @ribbon_info = true
+      @students = StudentsHelper.sort(StudentRibbon.all.map(&:student).uniq.reject {|c| c.archive })
+
     end
   end
 end

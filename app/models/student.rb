@@ -17,6 +17,7 @@ class Student < ActiveRecord::Base
   has_many :gigs
   has_many :favorites
   has_many :student_ribbons
+  has_many :ribbons, through: :student_ribbons
   has_many :student_offices
   has_many :student_officer_ranks
 

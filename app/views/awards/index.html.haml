@@ -24,6 +24,10 @@
       %div.panel-heading
         %div.panel-title
           Offices
+          %span.pull-right
+            = form_tag do
+              = hidden_field_tag 'full_officer_search', ""
+              = submit_tag "Complete List", class: "btn btn-success btn-xs"
       %div.panel-body
         - Office.where(hidden: [false, nil], ).where.not(name: "-- No Office --").order(:name).each_slice(4) do |slice|
           %div.row
@@ -37,6 +41,10 @@
       %div.panel-heading
         %div.panel-title
           Ribbons
+          %span.pull-right
+            = form_tag do
+              = hidden_field_tag 'full_ribbon_search', ""
+              = submit_tag "Complete List", class: "btn btn-success btn-xs"
       %div.panel-body
         - Ribbon.all.order(:index).each_slice(4) do |slice|
           %div.row
@@ -50,6 +58,10 @@
       %div.panel-heading
         %div.panel-title
           Officer Ranks
+          %span.pull-right
+            = form_tag do
+              = hidden_field_tag 'full_rank_search', ""
+              = submit_tag "Complete List", class: "btn btn-success btn-xs"
       %div.panel-body
         %div.table-responsive
           %table.table.table-striped.table-collapse

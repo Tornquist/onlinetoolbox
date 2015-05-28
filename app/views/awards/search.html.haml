@@ -16,9 +16,21 @@
             Name
           %th.selected
             Email
-          %th
+          - if @rank_info
+            %th.selected
+              Rank
+            %th.selected
+              Hours
+          - if @office_info
+            %th.selected
+              Office
+          - if @ribbon_info
+            - Ribbon.order(:index).each do |ribbon|
+              %th.selected
+                = ribbon.name
+          %th.text-center
             Awards Details
-          %th
+          %th.text-center
             Student Details
       %tbody
         - @students.each_with_index do |student, i|
@@ -29,9 +41,25 @@
               = student.full_name_reversed
             %td
               = student.email
-            %td
+            - if @rank_info
+              - rank = student.student_officer_ranks.map(&:officer_rank).max_by(&:hours)
+              %td
+                = rank.name
+              %td
+                = rank.hours
+            - if @office_info
+              %td
+                = student.student_offices.first.try(:office).try(:name)
+            - if @ribbon_info
+              - Ribbon.order(:index).each do |ribbon|
+                - if !StudentRibbon.where(student: student, ribbon: ribbon).empty?
+                  %td.text-center
+                    = fa_icon "check"
+                - else
+                  %td
+            %td.text-center
               = link_to fa_icon("trophy"), awards_student_path(student), class: "btn btn-warning btn-xs"
-            %td
+            %td.text-center
               = link_to fa_icon("desktop"), student_path(student), class: "btn btn-success btn-xs"
 
 %div.row
