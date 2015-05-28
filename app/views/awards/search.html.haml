@@ -1,0 +1,39 @@
+%div.jumbotron
+  %h1
+    = @large_banner
+  %div.lead
+    = @small_banner
+
+%div.row
+  %div.col-sm-12
+    %table.table.table-hover.table-condensed#dataTable
+      %thead
+        %tr
+          %th
+            :plain
+              #
+          %th.selected
+            Name
+          %th.selected
+            Email
+          %th
+            Awards Details
+          %th
+            Student Details
+      %tbody
+        - @students.each_with_index do |student, i|
+          %tr
+            %th.row
+              = i + 1
+            %td
+              = student.full_name_reversed
+            %td
+              = student.email
+            %td
+              = link_to fa_icon("trophy"), awards_student_path(student), class: "btn btn-warning btn-xs"
+            %td
+              = link_to fa_icon("desktop"), student_path(student), class: "btn btn-success btn-xs"
+
+%div.row
+  %div.col-sm-12
+    = link_to "Back", awards_path, class: "btn btn-danger"

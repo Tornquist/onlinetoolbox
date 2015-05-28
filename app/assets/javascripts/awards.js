@@ -1,3 +1,7 @@
+//= require jquery.dataTables
+//= require jquery.dataTables.tableTools
+//= require jquery.dataTables.bootstrap
+
 var awards_ready;
 awards_ready = function() {
   if ($(".student_ribbon_checkbox").length) {
@@ -55,6 +59,43 @@ awards_ready = function() {
     });
   }
 
+  if ( $("#dataTable").length ) {
+    var table = $('#dataTable').dataTable( { "scrollX": true });
+    //Default set with erb in tabletools file
+    var tt = new $.fn.dataTable.TableTools( table, {
+      aButtons: [
+        {
+          sExtends: 'copy',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+      },
+
+        {
+          sExtends: 'csv',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+        },
+        {
+          sExtends: 'pdf',
+          mColumns: function ( ctx ) {
+            var api = new $.fn.dataTable.Api( ctx );
+            return api.columns( '.selected' ).indexes().toArray();
+          }
+        }
+      ]
+    }
+    );
+
+    $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
+
+    $('.dataTables_paginate').addClass('pull-right').removeClass('dataTables_paginate');
+
+
+  }
 };
 
 $(document).ready(awards_ready);

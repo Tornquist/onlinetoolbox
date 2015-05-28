@@ -26,8 +26,42 @@ class AwardsController < ApplicationController
   end
 
   def search
-    binding.pry
-    a = 1
-    render nothing: true, status: 200
+    add_breadcrumb "Search Results", :awards_search_path
+    @students = []
+    @large_banner = ""
+    @small_banner = ""
+    if params.has_key?("user_search")
+      @large_banner = "Student Search"
+      if !params["first_name"].to_s.empty?
+        @small_banner += "First Name: " + params["first_name"]
+      end
+      if !params["last_name"].to_s.empty?
+        if (@small_banner != "")
+          @small_banner += "  |  "
+        end
+        @small_banner += "Last Name: " + params["last_name"]
+      end
+      first_name = "%" + params["first_name"] + "%"
+      last_name = "%" + params["last_name"] + "%"
+      @students = StudentsHelper.sort(Student.where("first_name ILIKE :first_name AND last_name ILIKE :last_name", first_name: first_name, last_name: last_name).reject { |c| c.archive })
+
+    elsif params.has_key?("office_search")
+      @large_banner = "Office Search"
+      office = Office.find(params["office_search"])
+      @small_banner = office.name
+      @students = StudentsHelper.sort(office.students.reject { |c| c.archive })
+
+    elsif params.has_key?("ribbon_search")
+      @large_banner = "Ribbon Search"
+      ribbon = Ribbon.find(params["ribbon_search"])
+      @small_banner = ribbon.name
+      @students = StudentsHelper.sort(ribbon.students.reject { |c| c.archive })
+
+    elsif params.has_key?("rank_search")
+      @large_banner = "Rank Search"
+      rank = OfficerRank.find(params["rank_search"])
+      @small_banner = rank.name
+      @students = StudentsHelper.sort(rank.real_students.reject { |c| c.archive })
+    end
   end
 end
