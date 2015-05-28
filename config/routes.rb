@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   resources :officer_ranks, except: [:show, :destroy]
 
+  get 'officer_ranks/permissions_error', to: 'officer_ranks#permissions_error'
+  get 'offices/permissions_error', to: 'offices#permissions_error'
+  get 'ribbons/permissions_error', to: 'ribbons#permissions_error'
+
   resources :offices, except: [:show, :destroy] do
     put :toggle_hidden
   end

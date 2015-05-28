@@ -59,7 +59,10 @@
               Director
           - if current_user.recruitment_head
             %li
-              Recruitment Head
+              R&R Head
+          - if current_user.recruitment_officer
+            %li
+              R&R Officer
           - if current_user.recruiter
             %li
               Recruiter

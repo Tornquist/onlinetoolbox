@@ -1,4 +1,5 @@
 class OfficerRanksController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_officer_rank, only: [:edit, :update]
 
   add_breadcrumb "Settings", :edit_user_registration_path
@@ -50,5 +51,12 @@ class OfficerRanksController < ApplicationController
 
     def officer_rank_params
       params.require(:officer_rank).permit(:name, :hours, :inventory)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_records)
+      else
+        redirect_to officer_ranks_permissions_error_path
+      end
     end
 end

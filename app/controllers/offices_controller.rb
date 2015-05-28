@@ -1,4 +1,5 @@
 class OfficesController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_office, only: [:edit, :update]
 
   add_breadcrumb "Settings", :edit_user_registration_path
@@ -46,5 +47,12 @@ class OfficesController < ApplicationController
 
     def office_params
       params.require(:office).permit(:name, :hidden)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_records)
+      else
+        redirect_to offices_permissions_error_path
+      end
     end
 end

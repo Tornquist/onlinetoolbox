@@ -11,7 +11,9 @@
         %th
           Director
         %th
-          Recuitment Head
+          R&R Head
+        %th
+          R&R Officer
         %th
           Recruiter
         %th
@@ -39,6 +41,9 @@
               = fa_icon "check"
           %td.center
             - if user.recruitment_head
+              = fa_icon "check"
+          %td.center
+            - if user.recruitment_officer
               = fa_icon "check"
           %td.center
             - if user.recruiter

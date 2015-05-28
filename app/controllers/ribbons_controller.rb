@@ -1,10 +1,14 @@
 class RibbonsController < ApplicationController
+  before_action :check_permissions, except: [:permissions_error]
   before_action :set_ribbon, only: [:edit, :update]
 
   add_breadcrumb "Settings", :edit_user_registration_path
   add_breadcrumb "Ribbons", :ribbons_path
 
   respond_to :html
+
+  def permissions_error
+  end
 
   def index
     @ribbons = Ribbon.rank(:index).all
@@ -53,5 +57,12 @@ class RibbonsController < ApplicationController
 
     def ribbon_params
       params.require(:ribbon).permit(:name, :description, :hidden, :index)
+    end
+
+    def check_permissions
+      if current_user.check_permissions(:edit_records)
+      else
+        redirect_to ribbons_permissions_error_path
+      end
     end
 end
