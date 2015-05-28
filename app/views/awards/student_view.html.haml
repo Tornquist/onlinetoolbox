@@ -12,7 +12,7 @@
         %div.panel-title
           Office
       %div.panel-body
-        = collection_select(:student_office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {selected: @office_id}, {class: "form-control"})
+        = collection_select(:student_office, :office_id, Office.where(hidden: [false,nil]).order(:name), :id, :name, {selected: @office_id}, {class: "form-control", :disabled => !current_user.check_permissions(:edit_user_records)})
   %div.col-sm-12
     %div.panel.panel-primary
       %div.panel-heading
@@ -22,7 +22,7 @@
         - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
           %div.row
             %div.col-sm-12
-              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox"})
+              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox", :disabled => !current_user.check_permissions(:edit_user_records)})
               %strong
                 = ribbon.name
               - if !ribbon.description.empty?
@@ -64,20 +64,32 @@
                     - if !student_officer_rank.nil? && !student_officer_rank.date_approved.nil?
                       = student_officer_rank.date_approved.to_formatted_s(:long)
                     - else
-                      %div.btn.btn-success.approve.student_rank
-                        Approve
+                      - if current_user.check_permissions(:edit_user_records)
+                        %div.btn.btn-success.approve.student_rank
+                          Approve
+                      - else
+                        %div.btn.btn-default
+                          Approve
                   %td
                     - if !student_officer_rank.nil? && !student_officer_rank.date_issued.nil?
                       = student_officer_rank.date_issued.to_formatted_s(:long)
                     - else
-                      %div.btn.btn-success.issue.student_rank
-                        Issue
+                      - if current_user.check_permissions(:edit_user_records)
+                        %div.btn.btn-success.issue.student_rank
+                          Issue
+                      - else
+                        %div.btn.btn-default
+                          Issue
                   %td
                     - if !student_officer_rank.nil? && !student_officer_rank.date_returned.nil?
                       = student_officer_rank.date_returned.to_formatted_s(:long)
                     - else
-                      %div.btn.btn-success.return.student_rank
-                        Return
+                      - if current_user.check_permissions(:edit_user_records)
+                        %div.btn.btn-success.return.student_rank
+                          Return
+                      - else
+                        %div.btn.btn-default
+                          Return
 %div.row
   %div.col-sm-12
     = link_to "Back", awards_path, class: "btn btn-danger"

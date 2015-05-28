@@ -13,16 +13,26 @@ class AwardsController < ApplicationController
   end
 
   def inventory
-    add_breadcrumb "Inventory", :awards_inventory_path
-    @award = OfficerRank.find(params[:id])
+    if current_user.check_permissions(:edit_records)
+      add_breadcrumb "Inventory", :awards_inventory_path
+      @award = OfficerRank.find(params[:id])
+    else
+      flash[:error] = "Error: R&R Office Head Privileges Required to Update Inventory"
+      redirect_to awards_path
+    end
   end
 
   def inventory_update
-    amount = params["amount"].to_i
-    rank = OfficerRank.find(params[:id])
-    rank.update(inventory: (rank.inventory+amount))
-    flash[:notice] = "Inventory Updated"
-    redirect_to awards_inventory_path
+    if current_user.check_permissions(:edit_records)
+      amount = params["amount"].to_i
+      rank = OfficerRank.find(params[:id])
+      rank.update(inventory: (rank.inventory+amount))
+      flash[:notice] = "Inventory Updated"
+      redirect_to awards_inventory_path
+    else
+      flash[:error] = "Error: R&R Office Head Privileges Required to Update Inventory"
+      redirect_to awards_path
+    end
   end
 
   def search

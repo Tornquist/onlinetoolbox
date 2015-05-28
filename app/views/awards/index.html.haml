@@ -92,5 +92,9 @@
                       = hidden_field_tag 'rank_search', rank.id
                       = submit_tag "List", class: "btn btn-success"
                   %td
-                    = link_to (fa_icon("edit")), awards_inventory_path(rank.id), class: "btn btn-primary"
+                    - if current_user.check_permissions(:edit_records)
+                      = link_to (fa_icon("edit")), awards_inventory_path(rank.id), class: "btn btn-primary"
+                    - else
+                      %div.btn.btn-default
+                        = fa_icon "edit"
 
