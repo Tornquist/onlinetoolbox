@@ -17,23 +17,6 @@
     %div.panel.panel-primary
       %div.panel-heading
         %div.panel-title
-          Ribbons
-      %div.panel-body
-        - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
-          %div.row
-            %div.col-sm-12
-              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox", :disabled => !current_user.check_permissions(:edit_user_records)})
-              %strong
-                = ribbon.name
-              - if !ribbon.description.empty?
-                :plain
-                  -
-                = ribbon.description
-
-  %div.col-sm-12
-    %div.panel.panel-primary
-      %div.panel-heading
-        %div.panel-title
           Officer Ranks
       %div.panel-body
         %div.table-responsive
@@ -90,6 +73,23 @@
                       - else
                         %div.btn.btn-default
                           Return
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Ribbons
+      %div.panel-body
+        - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
+          %div.row
+            %div.col-sm-12
+              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox", :disabled => !current_user.check_permissions(:edit_user_records)})
+              %strong
+                = ribbon.name
+              - if !ribbon.description.empty?
+                :plain
+                  -
+                = ribbon.description
+
 %div.row
   %div.col-sm-12
     = link_to "Back", awards_path, class: "btn btn-danger"
