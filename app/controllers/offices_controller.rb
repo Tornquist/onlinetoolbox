@@ -8,7 +8,7 @@ class OfficesController < ApplicationController
   respond_to :html
 
   def index
-    @offices = Office.order(:name)
+    @offices = Office.all.to_a.sort_by{|a| a.name}
     respond_with(@offices)
   end
 
