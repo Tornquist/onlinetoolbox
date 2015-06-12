@@ -46,13 +46,17 @@
               = hidden_field_tag 'full_ribbon_search', ""
               = submit_tag "Complete List", class: "btn btn-success btn-xs"
       %div.panel-body
-        - Ribbon.all.order(:index).each_slice(4) do |slice|
+        - Ribbon.all.order(:index).each_slice(3) do |slice|
           %div.row
             - slice.each do |ribbon|
-              %div.col-sm-3.bottom-margin
+              %div.col-sm-4.bottom-margin
                 = form_tag do
                   = hidden_field_tag 'ribbon_search', ribbon.id
-                  = submit_tag ribbon.name, class: "btn btn-success btn-block"
+                  %div.btn-group.btn-group-justified
+                    %div.btn-group{style: "width: 70%"}
+                      = submit_tag ribbon.name, class: "btn btn-success"
+                    %div.btn.btn-default{style: "width: 30%"}
+                      125
 
     %div.panel.panel-primary
       %div.panel-heading

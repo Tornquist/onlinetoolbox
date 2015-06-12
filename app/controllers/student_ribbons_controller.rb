@@ -4,12 +4,13 @@ class StudentRibbonsController < ApplicationController
       ribbon = StudentRibbon.where(ribbon_id: params["ribbon"]["ribbon_id"],
                             student_id: params["ribbon"]["student_id"])
       if ribbon.empty?
-        StudentRibbon.create(ribbon_id: params["ribbon"]["ribbon_id"],
+        new = StudentRibbon.create(ribbon_id: params["ribbon"]["ribbon_id"],
                       student_id: params["ribbon"]["student_id"]);
+        render :json => {:message => new.created_at.strftime('%m/%d/%y')}, status: :ok
       else
         ribbon.destroy_all
+        render :json => {:message => 'XX/XX/XX'}, status: :ok
       end
     end
-    render :nothing => true, :status => 200
   end
 end

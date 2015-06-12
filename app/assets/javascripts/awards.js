@@ -8,11 +8,25 @@ awards_ready = function() {
     $(".student_ribbon_checkbox").change( function() {
       student_id = $('#student_id')[0].value;
       ribbon_id = $(this).val();
+      checkbox = $(this);
       $.ajax({
         type: 'POST',
         url: '/student_ribbons/create_destroy',
         dataType: 'json',
-        data: { ribbon: {ribbon_id: ribbon_id, student_id: student_id } }
+        data: { ribbon: {ribbon_id: ribbon_id, student_id: student_id } },
+        success: function(data, status, xhr){
+          $(checkbox.siblings('.earned_date')[0]).html(data.message);
+          if (data.message == "XX/XX/XX") {
+            checkbox.parent().next().children('.issued_date').html('XX/XX/XX')
+            checkbox.parent().next().children('.student_ribbon_checkbox_2').attr('disabled', true);
+            checkbox.parent().next().children('.student_ribbon_checkbox_2').attr('checked', false);
+          } else {
+            checkbox.parent().next().children('.student_ribbon_checkbox_2').attr('disabled', false);
+          }
+        },
+        error: function(xhr, status, error){
+          console.log("ERROR");
+        }
       });
     });
   }

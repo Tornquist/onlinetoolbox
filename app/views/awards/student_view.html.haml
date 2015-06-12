@@ -79,17 +79,38 @@
         %div.panel-title
           Ribbons
       %div.panel-body
-        - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
-          %div.row
-            %div.col-sm-12
-              = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !StudentRibbon.where(student: @student, ribbon: ribbon).empty?, {class: "student_ribbon_checkbox", :disabled => !current_user.check_permissions(:edit_user_records)})
-              %strong
-                = ribbon.name
-              - if !ribbon.description.empty?
-                :plain
-                  -
-                = ribbon.description
+        %div.table-responsive
+          %table.table.table-striped.table-collapse
+            %thead
+              %tr
+                %th
+                  Name
+                %th
+                  Description
+                %th
+                  Earned
+                %th
+                  Issued
 
+            %tbody
+              - Ribbon.where(hidden: [false, nil]).order(:index).each do |ribbon|
+                %tr
+                  - student_ribbon = StudentRibbon.where(student: @student, ribbon: ribbon).first
+                  %th
+                    = ribbon.name
+                  %td
+                    = ribbon.description
+                  %th
+                    = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !student_ribbon.nil?, {class: "student_ribbon_checkbox", :disabled => !current_user.check_permissions(:edit_user_records)})
+                    %span.earned_date
+                      - if !student_ribbon.nil?
+                        = student_ribbon.created_at.strftime('%m/%d/%y')
+                      - else
+                        XX/XX/XX
+                  %th
+                    = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !student_ribbon.try(:issued_at).nil?, {class: "student_ribbon_checkbox_2", :disabled => (!current_user.check_permissions(:edit_user_records) || student_ribbon.nil?)})
+                    %span.issued_date
+                      XX/XX/XX
 %div.row
   %div.col-sm-12
     = link_to "Back", awards_path, class: "btn btn-danger"
