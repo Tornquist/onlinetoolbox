@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'awards/:id', to: 'awards#student_view', as: 'awards_student'
   get 'awards', to: 'awards#index', as: 'awards'
   post 'student_ribbons/create_destroy', to: 'student_ribbons#create_destroy'
+  post 'student_ribbons/create_destroy_issued_at', to: 'student_ribbons#create_destroy_issued_at'
   post 'student_offices/create_destroy', to: 'student_offices#create_destroy'
   post 'student_officer_ranks/create_update', to: 'student_officer_ranks#create_update'
 

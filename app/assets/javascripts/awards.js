@@ -31,6 +31,26 @@ awards_ready = function() {
     });
   }
 
+  if ($(".student_ribbon_checkbox_2").length) {
+    $(".student_ribbon_checkbox_2").change( function() {
+      student_id = $('#student_id')[0].value;
+      ribbon_id = $(this).val();
+      checkbox = $(this);
+      $.ajax({
+        type: 'POST',
+        url: '/student_ribbons/create_destroy_issued_at',
+        dataType: 'json',
+        data: { ribbon: {ribbon_id: ribbon_id, student_id: student_id } },
+        success: function(data, status, xhr){
+          $(checkbox.siblings('.issued_date')[0]).html(data.message);
+        },
+        error: function(xhr, status, error){
+          console.log("ERROR");
+        }
+      });
+    });
+  }
+
   if ($("#student_office_office_id").length) {
     $('body').on('change', '#student_office_office_id', function() {
       student_id = $('#student_id')[0].value;
