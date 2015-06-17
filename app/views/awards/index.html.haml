@@ -55,8 +55,7 @@
                   %div.btn-group.btn-group-justified
                     %div.btn-group{style: "width: 70%"}
                       = submit_tag ribbon.name, class: "btn btn-success"
-                    %div.btn.btn-default{style: "width: 30%"}
-                      125
+                    = link_to (ribbon.adjusted_inventory), awards_inventory_ribbon_path(ribbon.id), class: "btn btn-default", style: "width: 30%"
 
     %div.panel.panel-primary
       %div.panel-heading
@@ -97,7 +96,7 @@
                       = submit_tag "List", class: "btn btn-success"
                   %td
                     - if current_user.check_permissions(:edit_records)
-                      = link_to (fa_icon("edit")), awards_inventory_path(rank.id), class: "btn btn-primary"
+                      = link_to (fa_icon("edit")), awards_inventory_rank_path(rank.id), class: "btn btn-primary"
                     - else
                       %div.btn.btn-default
                         = fa_icon "edit"

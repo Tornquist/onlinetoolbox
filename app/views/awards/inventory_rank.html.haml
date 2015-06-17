@@ -1,0 +1,30 @@
+%div.jumbotron
+  %h1
+    Rank Inventory
+  %div.lead
+    = @award.name
+
+%div.row
+  %div.col-sm-12
+    %div.panel.panel-primary
+      %div.panel-heading
+        %div.panel-title
+          Update Inventory
+      %div.panel-body
+        %div.row.bottom-margin
+          %div.col-sm-12
+            %strong
+              Current Inventory:
+            = @award.adjusted_inventory
+        %div.row
+          %div.col-sm-12
+            = form_tag({}, {class: "form-inline"}) do
+              %div.form-group
+                = label_tag :amount, "Additional Ranks"
+                = text_field_tag :amount, nil, class: "form-control"
+              %div.form-group
+                = submit_tag "Submit", class: "btn btn-success"
+
+%div.row
+  %div.col-sm-12
+    = link_to "Back", awards_path, class: "btn btn-danger"

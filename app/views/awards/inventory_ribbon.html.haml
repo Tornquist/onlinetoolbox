@@ -1,6 +1,6 @@
 %div.jumbotron
   %h1
-    Inventory
+    Ribbon Inventory
   %div.lead
     = @award.name
 
@@ -20,7 +20,7 @@
           %div.col-sm-12
             = form_tag({}, {class: "form-inline"}) do
               %div.form-group
-                = label_tag :amount, "Additional Ranks"
+                = label_tag :amount, "Additional Ribbons"
                 = text_field_tag :amount, nil, class: "form-control"
               %div.form-group
                 = submit_tag "Submit", class: "btn btn-success"

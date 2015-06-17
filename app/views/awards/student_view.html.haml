@@ -110,7 +110,10 @@
                   %th
                     = check_box_tag("student_ribbon[#{@student.id}][#{ribbon.id}]", ribbon.id, !student_ribbon.try(:issued_at).nil?, {class: "student_ribbon_checkbox_2", :disabled => (!current_user.check_permissions(:edit_user_records) || student_ribbon.nil?)})
                     %span.issued_date
-                      XX/XX/XX
+                      - if !student_ribbon.nil? && !student_ribbon.issued_at.nil?
+                        = student_ribbon.issued_at.strftime('%m/%d/%y')
+                      - else
+                        XX/XX/XX
 %div.row
   %div.col-sm-12
     = link_to "Back", awards_path, class: "btn btn-danger"

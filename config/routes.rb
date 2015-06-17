@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   post 'student_offices/create_destroy', to: 'student_offices#create_destroy'
   post 'student_officer_ranks/create_update', to: 'student_officer_ranks#create_update'
 
-  get 'awards/inventory/:id', to: 'awards#inventory', as: 'awards_inventory'
-  post 'awards/inventory/:id', to: 'awards#inventory_update', as: 'awards_inventory_update'
+  get 'awards/inventory/ribbon/:id', to: 'awards#inventory_ribbon', as: 'awards_inventory_ribbon'
+  post 'awards/inventory/ribbon/:id', to: 'awards#inventory_ribbon_update', as: 'awards_inventory_ribbon_update'
+  get 'awards/inventory/rank/:id', to: 'awards#inventory_rank', as: 'awards_inventory_rank'
+  post 'awards/inventory/rank/:id', to: 'awards#inventory_rank_update', as: 'awards_inventory_rank_update'
   post 'awards', to: 'awards#search', as: 'awards_search'
 
   resources :officer_ranks, except: [:show, :destroy]
