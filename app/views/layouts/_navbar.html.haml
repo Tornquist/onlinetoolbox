@@ -42,6 +42,8 @@
                     = link_to "#{section.season.name} | #{section.name}", section_path(section)
 
       %ul.nav.navbar-nav.navbar-right
+        %li
+          = link_to fa_icon("search"), search_students_path
         %li.dropdown
           %a.dropdown-toggle{'href'=>"#", 'data-toggle'=>"dropdown", "id"=>"dropdownNavBar", 'role'=>"button", 'aria-expanded'=>"false", 'aria-labelledby'=>"dropdownNavBar"}
             = fa_icon "cog"
