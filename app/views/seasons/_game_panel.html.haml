@@ -28,3 +28,13 @@
           %div.col-sm-12
             =label_tag :emails
             =text_field :emails, { },:value => gds_sorted.map(&:student).map(&:email).join(", "), class: "form-control"
+        - reported_sections = gds_sorted.map(&:section_name).uniq().sort_by{|word| word.downcase}
+        - all_sections = game.season.sections.map(&:name)
+        %div.row
+          %div.col-sm-12
+            =label_tag :reported_sections, "Reported Sections"
+            =text_field :reported_sections, { },:value => reported_sections.join(", "), class: "form-control"
+        %div.row
+          %div.col-sm-12
+            =label_tag :unreported_sections, "Unreported Sections"
+            =text_field :unreported_sections, { },:value => (all_sections - reported_sections).join(", "), class: "form-control"
