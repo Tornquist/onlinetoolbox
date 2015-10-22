@@ -5,9 +5,10 @@ class SectionsController < ApplicationController
 
 
   def show
+    students = @section.students
     @ranks = @section.ranks.order(:index)
-    @unranked = students_without_rank
-    @autogds = @section.season.students.select { |s| s.automatic_gds(@section.season) }
+    @unranked = students - @ranks.map(&:students).flatten
+    @autogds = students.select { |s| s.automatic_gds(@section.season) }
     session[:return_to] ||= request.referer
 
     add_breadcrumb "Seasons", :seasons_path
@@ -94,12 +95,6 @@ class SectionsController < ApplicationController
   end
 
   private
-    def students_without_rank
-      rankless = @section.students.where(:archive => false).order(:last_name, :first_name)
-      @section.ranks.each { |rank| rankless -= rank.students }
-      rankless
-    end
-
     def set_section
       @section = Section.find(params[:id])
     end
