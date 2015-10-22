@@ -7,7 +7,9 @@
         = game.played_on.strftime("%B %e, %Y")
   %div.panel-collapse.collapse{"aria-labelledby" => "headingOne", :role => "tabpanel", id: "collapse#{index}"}
     %div.panel-body
-      - gds_sorted = game.gds.sort { |a, b| a.student.full_name_reversed <=> b.student.full_name_reversed }
+      - gds_sorted = game.gds.sort { |a, b| a.student.full_name_reversed <=> b.student.full_name_reversed }.group_by { |a| a.gds_type_id }
+      - temp = gds_sorted[2].to_a + gds_sorted[1].to_a + gds_sorted[3].to_a
+      - gds_sorted = temp + (gds_sorted.values.flatten - temp)
       - if !gds_sorted.empty?
         %div.row
           %div.col-sm-12
